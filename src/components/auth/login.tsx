@@ -64,7 +64,7 @@ export function LoginForm({
         <div className="w-full max-w-md">
           {/* Logo */}
           <div className="flex justify-center mb-8">
-            <div className="w-8 h-8 bg-black rounded flex items-center justify-center">
+            <div className="w-8 h-8 bg-black rounded flex items-center justify-center cursor-pointer">
               <span className="text-white font-bold text-sm">H</span>
             </div>
           </div>
@@ -114,7 +114,7 @@ export function LoginForm({
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="flex justify-center mb-8">
-          <div className="w-8 h-8 bg-black rounded flex items-center justify-center">
+          <div className="w-8 h-8 bg-black rounded flex items-center justify-center cursor-pointer">
             <span className="text-white font-bold text-sm">H</span>
           </div>
         </div>
@@ -131,11 +131,11 @@ export function LoginForm({
         )}
 
         {/* Social Login Buttons */}
-        <div className="space-y-3">
+        <div className="space-y-3 flex flex-col items-center">
           <Button
             onClick={handleGoogleSignIn}
             disabled={isLoading}
-            className="w-full bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 rounded-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2 border border-gray-300 shadow-sm"
+            className="max-w-xs sm:max-w-sm bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 rounded-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2 border border-gray-300 shadow-sm"
           >
             <GoogleIcon className="w-5 h-5" />
             Continue with Google
@@ -144,7 +144,7 @@ export function LoginForm({
           <Button
             onClick={handleGitHubSignIn}
             disabled={isLoading}
-            className="w-full bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 rounded-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2 border border-gray-300 shadow-sm"
+            className="max-w-xs sm:max-w-sm bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 rounded-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2 border border-gray-300 shadow-sm"
           >
             <GitHubIcon className="w-5 h-5" />
             Continue with GitHub
@@ -156,6 +156,16 @@ export function LoginForm({
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-400"></div>
           </div>
         )}
+        
+        {/* Privacy Disclaimer */}
+        <div className="mt-10 text-center text-xs text-gray-500">
+          <p>
+            By clicking "Continue with Google" or "Continue with GitHub", you agree to our{" "}
+            <a href="/terms" className="text-blue-600 hover:underline cursor-pointer">Terms of Conditions</a>{" "}
+            and{" "}
+            <a href="/privacy" className="text-blue-600 hover:underline cursor-pointer">Privacy Policy</a>.
+          </p>
+        </div>
       </div>
     </div>
   );

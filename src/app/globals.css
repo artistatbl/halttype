@@ -187,4 +187,8 @@
     @apply bg-background text-foreground;
     letter-spacing: var(--tracking-normal);
   }
+  /* Add cursor-pointer to all clickable elements */
+  button, a, [role="button"], input[type="submit"], input[type="button"], input[type="reset"], select, .cursor-pointer {
+    @apply cursor-pointer;
+  }
 }
