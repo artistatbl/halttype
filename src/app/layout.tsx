@@ -4,8 +4,8 @@ import { Providers } from "../components/providers"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "JStack App",
-  description: "Created using JStack",
+  title: "HaltType - Test Your Typing Speed",
+  description: "A minimalist typing test app to measure your typing speed and accuracy",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 }
 
@@ -15,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
+    <html lang="en" className="dark">
+      <body className="antialiased min-h-screen bg-background text-foreground">
         <Providers>{children}</Providers>
       </body>
     </html>

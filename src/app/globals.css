@@ -125,11 +125,11 @@
 }
 
 .dark {
-  --background: oklch(0.1776 0 0);
+  --background: oklch(0.1 0 0); /* Darker background like MonkeyType */
   --foreground: oklch(0.9491 0 0);
-  --card: oklch(0.2134 0 0);
+  --card: oklch(0.15 0 0); /* Darker card background */
   --card-foreground: oklch(0.9491 0 0);
-  --popover: oklch(0.2134 0 0);
+  --popover: oklch(0.15 0 0); /* Darker popover background */
   --popover-foreground: oklch(0.9491 0 0);
   --primary: oklch(0.9247 0.0524 66.1732);
   --primary-foreground: oklch(0.2029 0.0240 200.1962);
