@@ -35,12 +35,6 @@ export const auth = betterAuth({
       },
     },
   },
-  advanced: {
-    generateId: () => {
-      // Generate a custom ID (you can use any ID generation strategy)
-      return Math.random().toString(36).substring(2) + Date.now().toString(36)
-    },
-  },
 })
 
 export type Session = typeof auth.$Infer.Session
