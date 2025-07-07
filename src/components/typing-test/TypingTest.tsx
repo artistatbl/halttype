@@ -234,31 +234,31 @@ export function TypingTest({
       {/* Test completed view */}
       {testState === "completed" && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-zinc-900 p-8 rounded-lg max-w-md w-full">
-            <h2 className="text-2xl font-bold text-zinc-100 mb-6">Test Complete</h2>
+          <div className="bg-zinc-900/90 p-6 rounded-lg max-w-md w-full border border-zinc-800/50">
+            <h2 className="text-xl font-medium text-yellow-400 mb-6 text-center">Test Complete</h2>
             
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div>
-                <p className="text-zinc-400 text-sm">WPM</p>
-                <p className="text-3xl font-mono text-zinc-100">{wpm}</p>
+            <div className="grid grid-cols-2 gap-6 mb-6">
+              <div className="flex flex-col items-center">
+                <p className="text-yellow-400 text-3xl font-mono">{wpm}</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-wider mt-1">wpm</p>
               </div>
-              <div>
-                <p className="text-zinc-400 text-sm">Accuracy</p>
-                <p className="text-3xl font-mono text-zinc-100">{accuracy}%</p>
+              <div className="flex flex-col items-center">
+                <p className="text-zinc-300 text-3xl font-mono">{accuracy}%</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-wider mt-1">accuracy</p>
               </div>
-              <div>
-                <p className="text-zinc-400 text-sm">Time</p>
-                <p className="text-3xl font-mono text-zinc-100">
-                  {((endTime || 0) - (startTime || 0)) / 1000}s
+              <div className="flex flex-col items-center">
+                <p className="text-zinc-300 text-3xl font-mono">
+                  {Math.round(((endTime || 0) - (startTime || 0)) / 100) / 10}s
                 </p>
+                <p className="text-zinc-500 text-xs uppercase tracking-wider mt-1">time</p>
               </div>
-              <div>
-                <p className="text-zinc-400 text-sm">Characters</p>
-                <p className="text-3xl font-mono text-zinc-100">{userInput.length}</p>
+              <div className="flex flex-col items-center">
+                <p className="text-zinc-300 text-3xl font-mono">{userInput.length}</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-wider mt-1">chars</p>
               </div>
             </div>
             
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               <button
                 onClick={() => {
                   setTestState("idle")
@@ -273,7 +273,7 @@ export function TypingTest({
                   setAccuracy(100)
                   inputRef.current?.focus()
                 }}
-                className="flex-1 py-2 px-4 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 rounded-md transition-colors"
+                className="flex-1 py-2 px-3 bg-zinc-800/70 hover:bg-zinc-700/70 text-zinc-300 text-sm rounded transition-colors"
               >
                 Try Again
               </button>
@@ -281,7 +281,7 @@ export function TypingTest({
                 onClick={() => {
                   // TODO: Navigate to new test
                 }}
-                className="flex-1 py-2 px-4 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 rounded-md transition-colors"
+                className="flex-1 py-2 px-3 bg-zinc-800/70 hover:bg-zinc-700/70 text-zinc-300 text-sm rounded transition-colors"
               >
                 New Test
               </button>

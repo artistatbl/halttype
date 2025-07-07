@@ -57,19 +57,19 @@ function TestConfigInternal({
 
 
   return (
-    <div className="w-full max-w-4xl mx-auto mb-8">
-      <div className="flex items-center justify-center gap-6 text-sm">
+    <div className="w-full max-w-3xl mx-auto mb-6">
+      <div className="flex items-center justify-center gap-4 text-xs">
         {/* Punctuation */}
         <button
           onClick={() => onPunctuationChange(!punctuation)}
           className={cn(
-            "flex items-center gap-1 transition-colors",
+            "flex items-center gap-1 transition-colors px-2 py-1 rounded",
             punctuation
-              ? "text-yellow-400"
-              : "text-zinc-500 hover:text-zinc-300"
+              ? "text-yellow-400 bg-zinc-800/50"
+              : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/30"
           )}
         >
-          <AtSignIcon className="w-4 h-4" />
+          <AtSignIcon className="w-3 h-3" />
           punctuation
         </button>
 
@@ -77,69 +77,69 @@ function TestConfigInternal({
         <button
           onClick={() => onNumbersChange(!numbers)}
           className={cn(
-            "flex items-center gap-1 transition-colors",
+            "flex items-center gap-1 transition-colors px-2 py-1 rounded",
             numbers
-              ? "text-yellow-400"
-              : "text-zinc-500 hover:text-zinc-300"
+              ? "text-yellow-400 bg-zinc-800/50"
+              : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/30"
           )}
         >
-          <HashIcon className="w-4 h-4" />
+          <HashIcon className="w-3 h-3" />
           numbers
         </button>
 
         {/* Test Mode */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 bg-zinc-800/30 rounded p-0.5">
           <button
             onClick={() => onTestModeChange("time")}
             className={cn(
-              "flex items-center gap-1 transition-colors",
+              "flex items-center gap-1 transition-colors px-2 py-1 rounded",
               testMode === "time"
-                ? "text-yellow-400"
-                : "text-zinc-500 hover:text-zinc-300"
+                ? "text-yellow-400 bg-zinc-800/70"
+                : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
             )}
           >
-            <ClockIcon className="w-4 h-4" />
+            <ClockIcon className="w-3 h-3" />
             time
           </button>
           
           <button
             onClick={() => onTestModeChange("words")}
             className={cn(
-              "flex items-center gap-1 transition-colors",
+              "flex items-center gap-1 transition-colors px-2 py-1 rounded",
               testMode === "words"
-                ? "text-yellow-400"
-                : "text-zinc-500 hover:text-zinc-300"
+                ? "text-yellow-400 bg-zinc-800/70"
+                : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
             )}
           >
-            <TextIcon className="w-4 h-4" />
+            <TextIcon className="w-3 h-3" />
             words
           </button>
           
           <button
             onClick={() => onTestModeChange("quote")}
             className={cn(
-              "flex items-center gap-1 transition-colors",
+              "flex items-center gap-1 transition-colors px-2 py-1 rounded",
               testMode === "quote"
-                ? "text-yellow-400"
-                : "text-zinc-500 hover:text-zinc-300"
+                ? "text-yellow-400 bg-zinc-800/70"
+                : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
             )}
           >
-            <QuoteIcon className="w-4 h-4" />
+            <QuoteIcon className="w-3 h-3" />
             quote
           </button>
         </div>
 
         {/* Time/Word/Quote Options */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 bg-zinc-800/30 rounded p-0.5">
           {testMode === "time" && timeOptions.map((time) => (
             <button
               key={time}
               onClick={() => onTimeLimitChange(time)}
               className={cn(
-                "px-2 py-1 transition-colors",
+                "px-2 py-1 transition-colors rounded min-w-[2rem] text-center",
                 timeLimit === time
-                  ? "text-yellow-400"
-                  : "text-zinc-500 hover:text-zinc-300"
+                  ? "text-yellow-400 bg-zinc-800/70"
+                  : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
               )}
             >
               {time}
@@ -151,10 +151,10 @@ function TestConfigInternal({
               key={count}
               onClick={() => onWordCountChange(count)}
               className={cn(
-                "px-2 py-1 transition-colors",
+                "px-2 py-1 transition-colors rounded min-w-[2rem] text-center",
                 wordCount === count
-                  ? "text-yellow-400"
-                  : "text-zinc-500 hover:text-zinc-300"
+                  ? "text-yellow-400 bg-zinc-800/70"
+                  : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
               )}
             >
               {count}
@@ -166,10 +166,10 @@ function TestConfigInternal({
               key={length}
               onClick={() => onQuoteLengthChange(length)}
               className={cn(
-                "px-2 py-1 transition-colors",
+                "px-2 py-1 transition-colors rounded min-w-[2rem] text-center",
                 quoteLength === length
-                  ? "text-yellow-400"
-                  : "text-zinc-500 hover:text-zinc-300"
+                  ? "text-yellow-400 bg-zinc-800/70"
+                  : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
               )}
             >
               {length}

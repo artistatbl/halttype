@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+import { UserDropdown } from "./UserDropdown"
 
 interface NavbarProps {
   className?: string
@@ -10,31 +11,40 @@ interface NavbarProps {
 export function Navbar({ className }: NavbarProps) {
   return (
     <header className={cn(
-      "w-full py-4 px-6 flex items-center justify-between bg-zinc-950/80 backdrop-blur-sm",
+      "w-full py-3 px-4 flex items-center justify-between bg-zinc-950 border-b border-zinc-800/30",
       className
     )}>
-      {/* Logo */}
-      <div className="flex items-center">
-        <Link href="/" className="text-zinc-100 font-medium text-xl flex items-center gap-2">
-          <span className="text-emerald-500 font-bold">halt</span>
-          <span>type</span>
-        </Link>
-      </div>
-      
-      {/* User Menu */}
-      <div className="flex items-center gap-2">
-        <button className="text-zinc-500 hover:text-zinc-300 transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-        </button>
-        <button className="text-zinc-500 hover:text-zinc-300 transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
-            <circle cx="12" cy="12" r="3"></circle>
-          </svg>
-        </button>
+      <div className="max-w-6xl mx-auto w-full flex items-center justify-between">
+        {/* Logo */}
+        <div className="flex items-center">
+          <Link href="/" className="text-zinc-100 font-medium text-lg flex items-center gap-1 hover:text-emerald-400 transition-colors">
+            <span className="text-emerald-500 font-bold">monkey</span>
+            <span>type</span>
+          </Link>
+        </div>
+        
+        {/* Icons - Minimal Navigation */}
+        <div className="flex items-center gap-6">
+          <div className="hidden sm:flex items-center gap-4">
+            <Link href="/" className="text-zinc-500 hover:text-zinc-300 transition-colors text-xs font-medium">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mx-auto mb-1"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path></svg>
+              <span>Test</span>
+            </Link>
+            <Link href="/leaderboard" className="text-zinc-500 hover:text-zinc-300 transition-colors text-xs font-medium">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mx-auto mb-1"><path d="M12 20v-6"></path><path d="M6 20V10"></path><path d="M18 20V4"></path></svg>
+              <span>Leaderboard</span>
+            </Link>
+            <Link href="/about" className="text-zinc-500 hover:text-zinc-300 transition-colors text-xs font-medium">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mx-auto mb-1"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+              <span>About</span>
+            </Link>
+          </div>
+        </div>
+        
+        {/* User Menu */}
+        <div className="flex items-center">
+          <UserDropdown />
+        </div>
       </div>
     </header>
   )

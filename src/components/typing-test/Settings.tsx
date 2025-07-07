@@ -50,23 +50,23 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
   }
 
   return (
-    <div className={cn("w-full max-w-4xl mx-auto p-6 bg-zinc-900 rounded-lg", className)}>
-      <h2 className="text-xl font-semibold text-zinc-100 mb-6">Settings</h2>
+    <div className={cn("w-full max-w-3xl mx-auto p-4 bg-zinc-900/30 rounded border border-zinc-800/30", className)}>
+      <h2 className="text-sm font-medium text-yellow-400 mb-4">Settings</h2>
       
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* Language Selection */}
         <div>
-          <h3 className="text-sm font-medium text-zinc-300 mb-3">Language</h3>
-          <div className="grid grid-cols-5 gap-2">
+          <h3 className="text-xs font-medium text-zinc-400 mb-2 uppercase tracking-wider">Language</h3>
+          <div className="grid grid-cols-5 gap-1.5">
             {languageOptions.map((lang) => (
               <button
                 key={lang.code}
                 onClick={() => handleSettingChange('language', lang.code)}
                 className={cn(
-                  "px-3 py-2 text-sm rounded transition-colors",
+                  "px-2 py-1.5 text-xs rounded transition-colors",
                   settings.language === lang.code
-                    ? "bg-yellow-400 text-black"
-                    : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+                    ? "bg-zinc-800/70 text-yellow-400 border border-yellow-400/30"
+                    : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300"
                 )}
               >
                 {lang.name}
@@ -77,17 +77,17 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
 
         {/* Keyboard Layout */}
         <div>
-          <h3 className="text-sm font-medium text-zinc-300 mb-3">Keyboard Layout</h3>
-          <div className="flex gap-2 flex-wrap">
+          <h3 className="text-xs font-medium text-zinc-400 mb-2 uppercase tracking-wider">Keyboard Layout</h3>
+          <div className="flex gap-1.5 flex-wrap">
             {keyboardLayouts.map((layout) => (
               <button
                 key={layout.code}
                 onClick={() => handleSettingChange('keyboardLayout', layout.code)}
                 className={cn(
-                  "px-3 py-2 text-sm rounded transition-colors",
+                  "px-2 py-1.5 text-xs rounded transition-colors",
                   settings.keyboardLayout === layout.code
-                    ? "bg-yellow-400 text-black"
-                    : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+                    ? "bg-zinc-800/70 text-yellow-400 border border-yellow-400/30"
+                    : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300"
                 )}
               >
                 {layout.name}
@@ -98,17 +98,17 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
 
         {/* WPM Display Options */}
         <div>
-          <h3 className="text-sm font-medium text-zinc-300 mb-3">WPM Display</h3>
-          <div className="flex gap-2">
+          <h3 className="text-xs font-medium text-zinc-400 mb-2 uppercase tracking-wider">WPM Display</h3>
+          <div className="flex gap-1.5">
             {wpmDisplayOptions.map((option) => (
               <button
                 key={option.code}
                 onClick={() => handleSettingChange('wpmDisplay', option.code)}
                 className={cn(
-                  "px-3 py-2 text-sm rounded transition-colors",
+                  "px-2 py-1.5 text-xs rounded transition-colors",
                   settings.wpmDisplay === option.code
-                    ? "bg-yellow-400 text-black"
-                    : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+                    ? "bg-zinc-800/70 text-yellow-400 border border-yellow-400/30"
+                    : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300"
                 )}
               >
                 {option.name}
@@ -119,14 +119,14 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
 
         {/* Sound Toggle */}
         <div>
-          <h3 className="text-sm font-medium text-zinc-300 mb-3">Sound</h3>
+          <h3 className="text-xs font-medium text-zinc-400 mb-2 uppercase tracking-wider">Sound</h3>
           <button
             onClick={() => handleSettingChange('soundEnabled', !settings.soundEnabled)}
             className={cn(
-              "px-3 py-2 text-sm rounded transition-colors",
+              "px-2 py-1.5 text-xs rounded transition-colors",
               settings.soundEnabled
-                ? "bg-yellow-400 text-black"
-                : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+                ? "bg-zinc-800/70 text-yellow-400 border border-yellow-400/30"
+                : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300"
             )}
           >
             {settings.soundEnabled ? "Sound On" : "Sound Off"}
@@ -135,17 +135,17 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
 
         {/* Theme Selection */}
         <div>
-          <h3 className="text-sm font-medium text-zinc-300 mb-3">Theme</h3>
-          <div className="flex gap-2">
+          <h3 className="text-xs font-medium text-zinc-400 mb-2 uppercase tracking-wider">Theme</h3>
+          <div className="flex gap-1.5">
             {["dark", "light", "auto"].map((theme) => (
               <button
                 key={theme}
                 onClick={() => handleSettingChange('theme', theme)}
                 className={cn(
-                  "px-3 py-2 text-sm rounded transition-colors capitalize",
+                  "px-2 py-1.5 text-xs rounded transition-colors capitalize",
                   settings.theme === theme
-                    ? "bg-yellow-400 text-black"
-                    : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+                    ? "bg-zinc-800/70 text-yellow-400 border border-yellow-400/30"
+                    : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300"
                 )}
               >
                 {theme}

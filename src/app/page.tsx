@@ -27,26 +27,26 @@ export default function Home() {
   
   return (
     <Layout>
-      <div className="container flex flex-col items-center px-4 py-8">
+      <div className="flex flex-col items-center">
         {/* Settings Toggle Button */}
-        <div className="w-full max-w-4xl flex justify-end mb-4">
+        <div className="w-full flex justify-end mb-2">
           <button
             onClick={() => setShowSettings(!showSettings)}
             className={cn(
-              "flex items-center gap-2 px-3 py-2 text-sm transition-colors rounded",
+              "flex items-center gap-1.5 px-2 py-1 text-xs transition-colors rounded",
               showSettings
-                ? "text-yellow-400 bg-zinc-800"
-                : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800"
+                ? "text-yellow-400 bg-zinc-800/70"
+                : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
             )}
           >
-            <SettingsIcon className="w-4 h-4" />
+            <SettingsIcon className="w-3.5 h-3.5" />
             Settings
           </button>
         </div>
 
         {/* Settings Panel */}
         {showSettings && (
-          <div className="w-full mb-8">
+          <div className="w-full mb-6">
             <Settings
               settings={userSettings}
               onSettingsChange={setUserSettings}
@@ -55,7 +55,7 @@ export default function Home() {
         )}
 
         {/* Test Configuration Component */}
-        <div className="w-full mt-4 mb-12">
+        <div className="w-full mb-8">
           <TestConfig 
             onConfigChange={setTestConfig}
             initialConfig={testConfig}
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
 
         {/* Main Typing Test Area */}
-        <div className="w-full max-w-4xl">
+        <div className="w-full max-w-3xl mx-auto bg-zinc-900/30 rounded-md p-6 border border-zinc-800/30">
           <TypingTest 
             content={sampleText}
             testMode={testConfig.mode}

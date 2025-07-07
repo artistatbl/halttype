@@ -18,8 +18,8 @@ export function TextDisplay({
   return (
     <div 
       className={cn(
-        "w-full max-w-3xl mx-auto text-2xl leading-relaxed tracking-wide font-mono",
-        "min-h-[200px] flex items-center justify-center",
+        "w-full max-w-3xl mx-auto text-xl leading-relaxed tracking-wide font-mono",
+        "min-h-[180px] flex items-center justify-center",
         className
       )}
     >
@@ -36,7 +36,7 @@ export function TextDisplay({
                 key={index}
                 className={cn(
                   "transition-colors duration-50",
-                  isActive && "bg-zinc-700 text-zinc-100",
+                  isActive && "bg-zinc-800/70 text-zinc-100 rounded",
                   isPast && !isError && "text-zinc-400",
                   isPast && isError && "text-red-500",
                   !isPast && !isActive && "text-zinc-700"
@@ -50,7 +50,7 @@ export function TextDisplay({
         
         {/* Cursor */}
         <div 
-          className="absolute top-0 left-0 w-[2px] h-[1.2em] bg-zinc-400 animate-pulse transition-all duration-50"
+          className="absolute top-0 left-0 w-[2px] h-[1.2em] bg-yellow-400 animate-pulse transition-all duration-50"
           style={{
             transform: `translateX(${currentPosition * 0.6}em)`,
           }}
