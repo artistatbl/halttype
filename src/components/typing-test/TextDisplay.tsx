@@ -18,14 +18,14 @@ export function TextDisplay({
   return (
     <div 
       className={cn(
-        "w-full max-w-3xl mx-auto text-xl leading-relaxed tracking-wide font-mono",
+        "w-full text-xl leading-relaxed tracking-wide font-mono",
         "min-h-[180px] flex items-center justify-center",
         className
       )}
     >
-      <div className="relative">
+      <div className="relative w-full">
         {/* Text content */}
-        <div className="text-center">
+        <div className="w-full">
           {text.split('').map((char, index) => {
             const isActive = index === currentPosition
             const isPast = index < currentPosition

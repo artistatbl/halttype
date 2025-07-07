@@ -202,7 +202,7 @@ export function TypingTest({
   return (
     <div 
       className={cn(
-        "w-full max-w-3xl mx-auto flex flex-col items-center justify-center gap-8",
+        "w-full flex flex-col items-center justify-center gap-8",
         className
       )}
       onClick={() => inputRef.current?.focus()}
@@ -224,12 +224,14 @@ export function TypingTest({
         errors={errors}
       />
       
-      {/* Stats display */}
-      <StatsDisplay 
-        wpm={wpm}
-        accuracy={accuracy}
-        timeRemaining={timeRemaining}
-      />
+      {/* Stats display - only shown when test is completed */}
+      {testState === "completed" && (
+        <StatsDisplay 
+          wpm={wpm}
+          accuracy={accuracy}
+          timeRemaining={timeRemaining}
+        />
+      )}
       
       {/* Test completed view */}
       {testState === "completed" && (

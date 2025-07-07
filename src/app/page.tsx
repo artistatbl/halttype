@@ -63,7 +63,7 @@ export default function Home() {
         </div>
 
         {/* Main Typing Test Area */}
-        <div className="w-full max-w-3xl mx-auto bg-zinc-900/30 rounded-md p-6 border border-zinc-800/30">
+        <div className="w-full bg-zinc-900/30 rounded-md p-6 border border-zinc-800/30">
           <TypingTest 
             content={sampleText}
             testMode={testConfig.mode}
