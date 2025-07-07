@@ -8,10 +8,12 @@ import { StatsDisplay } from "./StatsDisplay"
 interface TypingTestProps {
   content: string
   timeLimit?: number // in seconds, undefined for unlimited
+  wordCount?: number // for word mode, undefined for unlimited
   difficulty?: "easy" | "medium" | "hard"
   language?: string
   onComplete?: (results: TestResults) => void
   className?: string
+  testMode?: "time" | "words" | "quote"
 }
 
 export interface TestResults {
@@ -31,10 +33,12 @@ export interface TestResults {
 export function TypingTest({
   content,
   timeLimit = 30,
+  wordCount = 25,
   difficulty = "medium",
   language = "english",
   onComplete,
   className,
+  testMode = "time",
 }: TypingTestProps) {
   // Test state
   const [testState, setTestState] = useState<"idle" | "running" | "completed">("idle")
@@ -127,8 +131,15 @@ export function TypingTest({
       ])
     }
     
-    // Check if test is complete
-    if (input.length >= content.length) {
+    // Check if test is complete based on test mode
+    if (
+      // Complete if reached end of content
+      input.length >= content.length ||
+      // Complete if in words mode and reached word count
+      (testMode === "words" && 
+       wordCount && 
+       input.trim().split(/\s+/).length >= wordCount)
+    ) {
       completeTest()
     }
   }

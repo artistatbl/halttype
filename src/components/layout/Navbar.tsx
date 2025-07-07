@@ -1,18 +1,13 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { DropdownMenu } from "@/components/ui/dropdown-menu"
 
 interface NavbarProps {
   className?: string
 }
 
 export function Navbar({ className }: NavbarProps) {
-  const [testMode, setTestMode] = useState<"time" | "words" | "quote">("time")
-  const [testLength, setTestLength] = useState<string>("30")
-  
   return (
     <header className={cn(
       "w-full py-4 px-6 flex items-center justify-between bg-zinc-950/80 backdrop-blur-sm",
@@ -24,145 +19,6 @@ export function Navbar({ className }: NavbarProps) {
           <span className="text-emerald-500 font-bold">halt</span>
           <span>type</span>
         </Link>
-      </div>
-      
-      {/* Test Configuration */}
-      <div className="flex items-center gap-4">
-        {/* Test Mode */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setTestMode("time")}
-            className={cn(
-              "px-3 py-1 text-sm rounded-md transition-colors",
-              testMode === "time" 
-                ? "bg-zinc-800 text-zinc-100" 
-                : "text-zinc-500 hover:text-zinc-300"
-            )}
-          >
-            time
-          </button>
-          <button
-            onClick={() => setTestMode("words")}
-            className={cn(
-              "px-3 py-1 text-sm rounded-md transition-colors",
-              testMode === "words" 
-                ? "bg-zinc-800 text-zinc-100" 
-                : "text-zinc-500 hover:text-zinc-300"
-            )}
-          >
-            words
-          </button>
-          <button
-            onClick={() => setTestMode("quote")}
-            className={cn(
-              "px-3 py-1 text-sm rounded-md transition-colors",
-              testMode === "quote" 
-                ? "bg-zinc-800 text-zinc-100" 
-                : "text-zinc-500 hover:text-zinc-300"
-            )}
-          >
-            quote
-          </button>
-        </div>
-        
-        {/* Test Length */}
-        {testMode === "time" && (
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setTestLength("15")}
-              className={cn(
-                "px-3 py-1 text-sm rounded-md transition-colors",
-                testLength === "15" 
-                  ? "bg-zinc-800 text-zinc-100" 
-                  : "text-zinc-500 hover:text-zinc-300"
-              )}
-            >
-              15
-            </button>
-            <button
-              onClick={() => setTestLength("30")}
-              className={cn(
-                "px-3 py-1 text-sm rounded-md transition-colors",
-                testLength === "30" 
-                  ? "bg-zinc-800 text-zinc-100" 
-                  : "text-zinc-500 hover:text-zinc-300"
-              )}
-            >
-              30
-            </button>
-            <button
-              onClick={() => setTestLength("60")}
-              className={cn(
-                "px-3 py-1 text-sm rounded-md transition-colors",
-                testLength === "60" 
-                  ? "bg-zinc-800 text-zinc-100" 
-                  : "text-zinc-500 hover:text-zinc-300"
-              )}
-            >
-              60
-            </button>
-            <button
-              onClick={() => setTestLength("120")}
-              className={cn(
-                "px-3 py-1 text-sm rounded-md transition-colors",
-                testLength === "120" 
-                  ? "bg-zinc-800 text-zinc-100" 
-                  : "text-zinc-500 hover:text-zinc-300"
-              )}
-            >
-              120
-            </button>
-          </div>
-        )}
-        
-        {testMode === "words" && (
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setTestLength("10")}
-              className={cn(
-                "px-3 py-1 text-sm rounded-md transition-colors",
-                testLength === "10" 
-                  ? "bg-zinc-800 text-zinc-100" 
-                  : "text-zinc-500 hover:text-zinc-300"
-              )}
-            >
-              10
-            </button>
-            <button
-              onClick={() => setTestLength("25")}
-              className={cn(
-                "px-3 py-1 text-sm rounded-md transition-colors",
-                testLength === "25" 
-                  ? "bg-zinc-800 text-zinc-100" 
-                  : "text-zinc-500 hover:text-zinc-300"
-              )}
-            >
-              25
-            </button>
-            <button
-              onClick={() => setTestLength("50")}
-              className={cn(
-                "px-3 py-1 text-sm rounded-md transition-colors",
-                testLength === "50" 
-                  ? "bg-zinc-800 text-zinc-100" 
-                  : "text-zinc-500 hover:text-zinc-300"
-              )}
-            >
-              50
-            </button>
-            <button
-              onClick={() => setTestLength("100")}
-              className={cn(
-                "px-3 py-1 text-sm rounded-md transition-colors",
-                testLength === "100" 
-                  ? "bg-zinc-800 text-zinc-100" 
-                  : "text-zinc-500 hover:text-zinc-300"
-              )}
-            >
-              100
-            </button>
-          </div>
-        )}
       </div>
       
       {/* User Menu */}
