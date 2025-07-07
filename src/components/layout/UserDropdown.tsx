@@ -58,7 +58,7 @@ export function UserDropdown({ className }: UserDropdownProps) {
         /* User Avatar Button when signed in */
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-2 py-1 rounded hover:bg-zinc-800/50 transition-colors"
+          className="flex items-center gap-2 px-2 py-1 rounded hover:bg-zinc-800/50 hover:scale-105 transition-all duration-200"
         >
           {/* User Avatar or Initials Circle */}
           {displayUser.image ? (
@@ -78,7 +78,7 @@ export function UserDropdown({ className }: UserDropdownProps) {
           )}
           
           {/* Username */}
-          <span className="text-sm text-zinc-300">{displayUser.name}</span>
+          <span className="text-xs text-zinc-300">{displayUser.name}</span>
           
           {/* Dropdown Arrow */}
           <svg
@@ -97,10 +97,10 @@ export function UserDropdown({ className }: UserDropdownProps) {
         /* User Icon Button when signed out */
         <button
           onClick={() => router.push('/sign')}
-          className="flex items-center gap-2 px-2 py-1 rounded hover:bg-zinc-800/50 transition-colors"
+          className="flex items-center gap-2 px-2 py-1 rounded hover:bg-zinc-800/50 hover:scale-105 transition-all duration-200"
         >
-          <UserIcon className="w-5 h-5 text-zinc-400" />
-          <span className="text-sm text-zinc-400">Sign In</span>
+          <UserIcon className="w-4 h-4 text-zinc-400" />
+          <span className="text-xs text-zinc-400">Sign In</span>
         </button>
       )}
 
@@ -117,7 +117,7 @@ export function UserDropdown({ className }: UserDropdownProps) {
           <div className="py-1">
             <Link
               href="/profile"
-              className="flex items-center gap-2 px-3 py-1.5 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50 transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50 hover:scale-105 transition-all duration-200"
               onClick={() => setIsOpen(false)}
             >
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -128,7 +128,7 @@ export function UserDropdown({ className }: UserDropdownProps) {
             
             <Link
               href="/account"
-              className="flex items-center gap-2 px-3 py-1.5 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50 transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50 hover:scale-105 transition-all duration-200"
               onClick={() => setIsOpen(false)}
             >
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -140,7 +140,7 @@ export function UserDropdown({ className }: UserDropdownProps) {
             
             <Link
               href="/settings"
-              className="flex items-center gap-2 px-3 py-1.5 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50 transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50 hover:scale-105 transition-all duration-200"
               onClick={() => setIsOpen(false)}
             >
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -155,7 +155,7 @@ export function UserDropdown({ className }: UserDropdownProps) {
           
           {/* Sign Out */}
           <button
-            className="flex items-center gap-2 px-3 py-1.5 text-red-400 hover:text-red-300 hover:bg-zinc-800/50 transition-colors w-full text-left"
+            className="flex items-center gap-2 px-3 py-1.5 text-red-400 hover:text-red-300 hover:bg-zinc-800/50 hover:scale-105 transition-all duration-200 w-full text-left"
             onClick={() => {
               setIsOpen(false)
               signOut()
