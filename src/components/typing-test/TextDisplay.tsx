@@ -6,6 +6,8 @@ interface TextDisplayProps {
   text: string
   currentPosition: number
   errors: number[]
+  timeRemaining?: number | null
+  testState?: "idle" | "running" | "completed"
   className?: string
 }
 
@@ -13,6 +15,8 @@ export function TextDisplay({
   text,
   currentPosition,
   errors,
+  timeRemaining,
+  testState = "idle",
   className,
 }: TextDisplayProps) {
   return (
@@ -24,6 +28,12 @@ export function TextDisplay({
       )}
     >
       <div className="relative w-full">
+        {/* Time display in top left corner */}
+        {testState === "running" && timeRemaining !== undefined && timeRemaining !== null && (
+          <div className="absolute top-[10px] left-0 text-sm font-mono text-yellow-400 bg-zinc-800/70 px-2 py-1 rounded">
+            {timeRemaining}s
+          </div>
+        )}
         {/* Text content */}
         <div className="w-full">
           {text.split('').map((char, index) => {

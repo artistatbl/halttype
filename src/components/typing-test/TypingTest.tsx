@@ -222,6 +222,8 @@ export function TypingTest({
         text={content}
         currentPosition={currentPosition}
         errors={errors}
+        timeRemaining={timeRemaining}
+        testState={testState}
       />
       
       {/* Stats display - only shown when test is completed */}
