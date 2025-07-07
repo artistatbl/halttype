@@ -23,17 +23,11 @@ export function TextDisplay({
     <div 
       className={cn(
         "w-full text-xl leading-relaxed tracking-wide font-mono",
-        "min-h-[180px] flex items-center justify-center",
         className
       )}
     >
       <div className="relative w-full">
-        {/* Time display in top left corner */}
-        {testState === "running" && timeRemaining !== undefined && timeRemaining !== null && (
-          <div className="absolute top-[10px] left-0 text-sm font-mono text-yellow-400 bg-zinc-800/70 px-2 py-1 rounded">
-            {timeRemaining}s
-          </div>
-        )}
+
         {/* Text content */}
         <div className="w-full">
           {text.split('').map((char, index) => {

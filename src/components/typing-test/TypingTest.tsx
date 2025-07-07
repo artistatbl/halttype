@@ -217,12 +217,20 @@ export function TypingTest({
         aria-label="Typing input"
       />
       
+      {/* Timer display */}
+      {testState === "running" && timeRemaining !== undefined && timeRemaining !== null && (
+        <div className="w-full flex justify-start mb-4">
+          <div className="text-sm font-mono text-yellow-400 bg-zinc-800/70 px-3 py-1.5 rounded-md shadow-md">
+            {timeRemaining}s
+          </div>
+        </div>
+      )}
+      
       {/* Text display */}
       <TextDisplay 
         text={content}
         currentPosition={currentPosition}
         errors={errors}
-        timeRemaining={timeRemaining}
         testState={testState}
       />
       
