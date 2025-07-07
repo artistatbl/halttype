@@ -14,7 +14,7 @@ export function Footer({ className }: FooterProps) {
   
   return (
     <footer className={cn(
-      "w-full py-2 px-4 flex items-center justify-between bg-zinc-950 text-xs border-t border-zinc-800/30",
+      "w-full py-4 px-6 flex items-center justify-between bg-zinc-950 text-xs",
       className
     )}>
       {/* Language and Settings */}

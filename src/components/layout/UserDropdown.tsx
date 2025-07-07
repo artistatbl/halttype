@@ -2,20 +2,21 @@
 
 import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { useSession, signOut } from "@/lib/auth-client"
+import { UserIcon } from "lucide-react"
 
 interface UserDropdownProps {
-  user?: {
-    name: string
-    email: string
-    avatar?: string
-  }
   className?: string
 }
 
-export function UserDropdown({ user, className }: UserDropdownProps) {
+export function UserDropdown({ className }: UserDropdownProps) {
+  const { data: session, isPending } = useSession()
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -31,11 +32,15 @@ export function UserDropdown({ user, className }: UserDropdownProps) {
     }
   }, [])
 
-  // Default user for demo purposes
-  const displayUser = user || {
-    name: "John Doe",
-    email: "john@example.com",
-    avatar: undefined
+  // Get user info from session - only first name
+  const displayUser = session?.user ? {
+    name: (session.user.name || session.user.email?.split('@')[0] || 'User').split(' ')[0],
+    email: session.user.email || '',
+    image: session.user.image || ''
+  } : {
+    name: "Guest",
+    email: "",
+    image: ""
   }
 
   const getInitials = (name: string) => {
@@ -49,40 +54,58 @@ export function UserDropdown({ user, className }: UserDropdownProps) {
 
   return (
     <div className={cn("relative", className)} ref={dropdownRef}>
-      {/* User Avatar Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-2 py-1 rounded hover:bg-zinc-800/50 transition-colors"
-      >
-        {/* Avatar */}
-        <div className="w-6 h-6 rounded-full bg-yellow-500 flex items-center justify-center text-zinc-900 text-xs font-medium">
-          {displayUser.avatar ? (
-            <img
-              src={displayUser.avatar}
-              alt={displayUser.name}
-              className="w-full h-full rounded-full object-cover"
-            />
-          ) : (
-            getInitials(displayUser.name)
-          )}
-        </div>
-        
-        {/* Dropdown Arrow */}
-        <svg
-          className={cn(
-            "w-3 h-3 text-zinc-500 transition-transform",
-            isOpen && "rotate-180"
-          )}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+      {session ? (
+        /* User Avatar Button when signed in */
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex items-center gap-2 px-2 py-1 rounded hover:bg-zinc-800/50 transition-colors"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+          {/* User Avatar or Initials Circle */}
+          {displayUser.image ? (
+            <div className="relative w-6 h-6 rounded-full overflow-hidden">
+              <Image 
+                src={displayUser.image}
+                alt={`${displayUser.name}'s avatar`}
+                fill
+                sizes="24px"
+                className="object-cover"
+              />
+            </div>
+          ) : (
+            <div className="w-6 h-6 rounded-full bg-yellow-500 flex items-center justify-center text-zinc-900 text-xs font-medium">
+              {getInitials(displayUser.name || '')}
+            </div>
+          )}
+          
+          {/* Username */}
+          <span className="text-sm text-zinc-300">{displayUser.name}</span>
+          
+          {/* Dropdown Arrow */}
+          <svg
+            className={cn(
+              "w-3 h-3 text-zinc-500 transition-transform",
+              isOpen && "rotate-180"
+            )}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+      ) : (
+        /* User Icon Button when signed out */
+        <button
+          onClick={() => router.push('/sign')}
+          className="flex items-center gap-2 px-2 py-1 rounded hover:bg-zinc-800/50 transition-colors"
+        >
+          <UserIcon className="w-5 h-5 text-zinc-400" />
+          <span className="text-sm text-zinc-400">Sign In</span>
+        </button>
+      )}
 
-      {/* Dropdown Menu */}
-      {isOpen && (
+      {/* Dropdown Menu - only show when signed in and dropdown is open */}
+      {session && isOpen && (
         <div className="absolute right-0 top-full mt-1 w-48 bg-zinc-900 border border-zinc-800/50 rounded shadow-lg py-1 z-50 text-xs">
           {/* User Info */}
           <div className="px-3 py-2 border-b border-zinc-800/50">
@@ -135,8 +158,7 @@ export function UserDropdown({ user, className }: UserDropdownProps) {
             className="flex items-center gap-2 px-3 py-1.5 text-red-400 hover:text-red-300 hover:bg-zinc-800/50 transition-colors w-full text-left"
             onClick={() => {
               setIsOpen(false)
-              // Add sign out logic here
-              console.log("Sign out clicked")
+              signOut()
             }}
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

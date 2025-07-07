@@ -57,8 +57,8 @@ function TestConfigInternal({
 
 
   return (
-    <div className="w-full max-w-3xl mx-auto mb-6">
-      <div className="flex items-center justify-center gap-4 text-xs">
+    <div className="w-full max-w-3xl mx-auto mb-6  p-2">
+      <div className="flex items-center justify-center  gap-4 text-xs">
         {/* Punctuation */}
         <button
           onClick={() => onPunctuationChange(!punctuation)}

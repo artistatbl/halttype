@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { signIn, signOut, useSession } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { GoogleIcon } from "@/components/icons/google";
@@ -72,11 +73,15 @@ export function LoginForm({
           <div className="flex flex-col items-center gap-6">
             <Avatar className="w-20 h-20 border border-gray-200">
               {session.user.image ? (
-                <img
-                  src={session.user.image}
-                  alt={session.user.name || "User"}
-                  className="w-full h-full object-cover rounded-full"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={session.user.image}
+                    alt={session.user.name || "User"}
+                    fill
+                    sizes="80px"
+                    className="object-cover rounded-full"
+                  />
+                </div>
               ) : (
                 <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-700 text-2xl font-semibold">
                   {session.user.name?.charAt(0) ||
