@@ -14,13 +14,13 @@ export function Footer({ className }: FooterProps) {
   
   return (
     <footer className={cn(
-      "w-full py-4 px-6 flex items-center justify-between bg-zinc-950 text-xs",
+      "w-full py-5 px-8 flex items-center justify-between bg-zinc-950/70 text-xs mt-10 mb-6 mx-auto max-w-[90%] rounded-xl shadow-md",
       className
     )}>
       {/* Language and Settings */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4">
         <div className="flex items-center gap-1">
-          <button className="text-zinc-500 hover:text-zinc-300 transition-colors flex items-center gap-1">
+          <button className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="m5 8 6 6"></path>
               <path d="m4 14 10-10 6 6-10 10-6-6z"></path>
@@ -30,7 +30,7 @@ export function Footer({ className }: FooterProps) {
         </div>
         
         <div className="flex items-center gap-1">
-          <button className="text-zinc-500 hover:text-zinc-300 transition-colors flex items-center gap-1">
+          <button className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect width="20" height="16" x="2" y="4" rx="2"></rect>
               <path d="M6 8h.01"></path>
@@ -47,7 +47,7 @@ export function Footer({ className }: FooterProps) {
         </div>
         
         <div className="flex items-center gap-1">
-          <button className="text-zinc-500 hover:text-zinc-300 transition-colors flex items-center gap-1">
+          <button className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect width="20" height="16" x="2" y="4" rx="2"></rect>
               <path d="M6 8h.01"></path>
@@ -65,8 +65,8 @@ export function Footer({ className }: FooterProps) {
       </div>
       
       {/* Center - Click to focus */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 text-zinc-600 text-xs">
-        <span className="flex items-center gap-1">
+      <div className="absolute left-1/2 transform -translate-x-1/2 text-zinc-500 text-xs bg-zinc-900/50 px-3 py-1.5 rounded-full shadow-sm">
+        <span className="flex items-center gap-1.5">
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="m19 19-4-4"></path>
             <path d="m19 5-4 4"></path>
@@ -78,14 +78,14 @@ export function Footer({ className }: FooterProps) {
       </div>
       
       {/* Links */}
-      <div className="flex items-center gap-3">
-        <Link href="/about" className="text-zinc-500 hover:text-zinc-300 transition-colors text-xs">
+      <div className="flex items-center gap-4">
+        <Link href="/about" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 text-xs">
           about
         </Link>
-        <Link href="/contact" className="text-zinc-500 hover:text-zinc-300 transition-colors text-xs">
+        <Link href="/contact" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 text-xs">
           contact
         </Link>
-        <Link href="/privacy" className="text-zinc-500 hover:text-zinc-300 transition-colors text-xs">
+        <Link href="/privacy" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 text-xs">
           privacy
         </Link>
       </div>
