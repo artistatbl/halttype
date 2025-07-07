@@ -1,71 +1,39 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+import { Github, Twitter, MessageCircle, HelpCircle, Shield, FileText, ExternalLink, Home, MessageSquare } from "lucide-react"
 
 interface FooterProps {
   className?: string
 }
 
 export function Footer({ className }: FooterProps) {
-  const [language, setLanguage] = useState("english")
-  const [keyboardLayout, setKeyboardLayout] = useState("qwerty")
-  
   return (
     <footer className={cn(
-      "w-full py-5 px-8 flex items-center justify-between bg-zinc-950/70 text-xs mt-10 mb-6 mx-auto max-w-[90%] rounded-xl shadow-md",
+      "w-full py-5 px-8 flex flex-wrap items-center justify-between bg-zinc-950/70 text-xs mt-10 mb-6 mx-auto max-w-[90%] rounded-xl shadow-md gap-y-4",
       className
     )}>
-      {/* Language and Settings */}
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-1">
-          <button className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="m5 8 6 6"></path>
-              <path d="m4 14 10-10 6 6-10 10-6-6z"></path>
-            </svg>
-            <span>{language}</span>
-          </button>
-        </div>
+      {/* Navigation Links - Left Side */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <Link href="/" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+          <Home size={14} />
+          <span>Home</span>
+        </Link>
         
-        <div className="flex items-center gap-1">
-          <button className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-              <path d="M6 8h.01"></path>
-              <path d="M10 8h.01"></path>
-              <path d="M14 8h.01"></path>
-              <path d="M18 8h.01"></path>
-              <path d="M8 12h.01"></path>
-              <path d="M12 12h.01"></path>
-              <path d="M16 12h.01"></path>
-              <path d="M7 16h10"></path>
-            </svg>
-            <span>pb pace 86 wpm</span>
-          </button>
-        </div>
+        <Link href="/contact" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+          <MessageCircle size={14} />
+          <span>Contact</span>
+        </Link>
         
-        <div className="flex items-center gap-1">
-          <button className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-              <path d="M6 8h.01"></path>
-              <path d="M10 8h.01"></path>
-              <path d="M14 8h.01"></path>
-              <path d="M18 8h.01"></path>
-              <path d="M8 12h.01"></path>
-              <path d="M12 12h.01"></path>
-              <path d="M16 12h.01"></path>
-              <path d="M7 16h10"></path>
-            </svg>
-            <span>emulating qwerty</span>
-          </button>
-        </div>
+        <Link href="/support" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+          <HelpCircle size={14} />
+          <span>Support</span>
+        </Link>
       </div>
       
-      {/* Center - Click to focus */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 text-zinc-500 text-xs bg-zinc-900/50 px-3 py-1.5 rounded-full shadow-sm">
+      {/* Center - Click to focus (Desktop) */}
+      <div className="absolute left-1/2 transform -translate-x-1/2 text-zinc-500 text-xs bg-zinc-900/50 px-3 py-1.5 rounded-full shadow-sm hover:bg-zinc-900/70 hover:text-zinc-300 transition-all duration-200 cursor-pointer hidden md:flex">
         <span className="flex items-center gap-1.5">
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="m19 19-4-4"></path>
@@ -73,21 +41,59 @@ export function Footer({ className }: FooterProps) {
             <path d="m5 19 4-4"></path>
             <path d="m5 5 4 4"></path>
           </svg>
-          click here or press any key to focus
+          click to focus
         </span>
       </div>
       
-      {/* Links */}
-      <div className="flex items-center gap-4">
-        <Link href="/about" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 text-xs">
-          about
+      {/* Center - Click to focus (Mobile) */}
+      <div className="w-full flex justify-center md:hidden order-last mt-3">
+        <div className="text-zinc-500 text-xs bg-zinc-900/50 px-3 py-1.5 rounded-full shadow-sm hover:bg-zinc-900/70 hover:text-zinc-300 transition-all duration-200 cursor-pointer">
+          <span className="flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m19 19-4-4"></path>
+              <path d="m19 5-4 4"></path>
+              <path d="m5 19 4-4"></path>
+              <path d="m5 5 4 4"></path>
+            </svg>
+            click to focus
+          </span>
+        </div>
+      </div>
+      
+      {/* Social and Additional Links */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 justify-end">
+        <Link href="/terms" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+          <FileText size={14} />
+          <span>Terms</span>
         </Link>
-        <Link href="/contact" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 text-xs">
-          contact
+        
+        <Link href="/security" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+          <Shield size={14} />
+          <span>Security</span>
         </Link>
-        <Link href="/privacy" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 text-xs">
-          privacy
+        
+        <Link href="/privacy" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+          <FileText size={14} />
+          <span>Privacy</span>
         </Link>
+        
+        <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+          <Github size={14} />
+          <span>GitHub</span>
+          <ExternalLink size={10} className="opacity-70" />
+        </a>
+        
+        <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+          <Twitter size={14} />
+          <span>Twitter</span>
+          <ExternalLink size={10} className="opacity-70" />
+        </a>
+        
+        <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-zinc-300 hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+          <MessageSquare size={14} />
+          <span>Discord</span>
+          <ExternalLink size={10} className="opacity-70" />
+        </a>
       </div>
     </footer>
   )
