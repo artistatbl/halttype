@@ -37,12 +37,32 @@ export function useCapsLock(): boolean {
     // Run the initial check
     checkInitialState()
 
-    // Add event listener for keydown
+    // Add event listeners for both keydown and keyup to detect Caps Lock changes
     document.addEventListener("keydown", checkCapsLock)
+    document.addEventListener("keyup", checkCapsLock)
+    
+    // Function for capslock event
+    const handleCapsLockEvent = () => {
+      // This is a fallback for browsers that support the capslock event
+      // We'll still rely on the keydown/keyup events for most browsers
+      try {
+        const testEvent = new KeyboardEvent("keydown")
+        if (testEvent.getModifierState) {
+          setCapsLockOn(testEvent.getModifierState("CapsLock"))
+        }
+      } catch (error) {
+        // Ignore errors
+      }
+    }
+    
+    // Some browsers support a dedicated 'capslock' event
+    document.addEventListener("capslock", handleCapsLockEvent)
 
     // Cleanup
     return () => {
       document.removeEventListener("keydown", checkCapsLock)
+      document.removeEventListener("keyup", checkCapsLock)
+      document.removeEventListener("capslock", handleCapsLockEvent)
     }
   }, [])
 
@@ -54,16 +74,17 @@ export function CapsLockWarning({
 }: {
   isOn: boolean
 }) {
-  if (!isOn) return null
-
   return (
-    <div className="absolute top-0 left-0 right-0 z-10 transform -translate-y-full mb-2 flex justify-center">
-      <div className="bg-destructive/90 text-destructive-foreground px-3 py-1 rounded-md text-sm font-medium shadow-md flex items-center gap-2">
+    <div 
+      className={`absolute top-0 left-0 right-0 z-50 flex justify-center transition-all duration-200 ease-in-out ${isOn ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}
+      aria-hidden={!isOn}
+    >
+      <div className="bg-destructive text-destructive-foreground px-4 py-2 rounded-b-md text-sm font-bold shadow-lg flex items-center gap-2 animate-pulse">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="m12 8-9.04 9.06a2.82 2.82 0 1 0 3.98 3.98L16 12"/>
           <circle cx="17" cy="7" r="5"/>
         </svg>
-        Caps Lock is on
+        CAPS LOCK IS ON
       </div>
     </div>
   )
