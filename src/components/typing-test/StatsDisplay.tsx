@@ -18,23 +18,23 @@ export function StatsDisplay({
   return (
     <div 
       className={cn(
-        "flex items-center justify-center gap-6 text-zinc-500 text-xs",
+        "flex items-center justify-center gap-6 text-muted-foreground text-xs",
         className
       )}
     >
       <div className="flex flex-col items-center">
-        <span className="text-xl font-mono text-yellow-400">{wpm}</span>
+        <span className="text-xl font-mono text-primary">{wpm}</span>
         <span className="text-xs uppercase tracking-wider">wpm</span>
       </div>
       
       <div className="flex flex-col items-center">
-        <span className="text-xl font-mono text-zinc-300">{accuracy}%</span>
+        <span className="text-xl font-mono text-foreground">{accuracy}%</span>
         <span className="text-xs uppercase tracking-wider">accuracy</span>
       </div>
       
       {timeRemaining !== undefined && timeRemaining !== null && (
         <div className="flex flex-col items-center">
-          <span className="text-xl font-mono text-zinc-300">{timeRemaining}s</span>
+          <span className="text-xl font-mono text-foreground">{timeRemaining}s</span>
           <span className="text-xs uppercase tracking-wider">time</span>
         </div>
       )}

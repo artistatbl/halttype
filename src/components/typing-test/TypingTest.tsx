@@ -220,7 +220,7 @@ export function TypingTest({
       {/* Timer display */}
       {testState === "running" && timeRemaining !== undefined && timeRemaining !== null && (
         <div className="w-full flex justify-start mb-4">
-          <div className="text-sm font-mono text-yellow-400 bg-zinc-800/70 px-3 py-1.5 rounded-md shadow-md">
+          <div className="text-sm font-mono text-primary bg-muted/70 px-3 py-1.5 rounded-md shadow-md">
             {timeRemaining}s
           </div>
         </div>
@@ -245,28 +245,28 @@ export function TypingTest({
       
       {/* Test completed view */}
       {testState === "completed" && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-zinc-900/90 p-6 rounded-lg max-w-md w-full border border-zinc-800/50">
-            <h2 className="text-xl font-medium text-yellow-400 mb-6 text-center">Test Complete</h2>
+        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-card/90 p-6 rounded-lg max-w-md w-full border border-border/50">
+            <h2 className="text-xl font-medium text-primary mb-6 text-center">Test Complete</h2>
             
             <div className="grid grid-cols-2 gap-6 mb-6">
               <div className="flex flex-col items-center">
-                <p className="text-yellow-400 text-3xl font-mono">{wpm}</p>
-                <p className="text-zinc-500 text-xs uppercase tracking-wider mt-1">wpm</p>
+                <p className="text-primary text-3xl font-mono">{wpm}</p>
+                <p className="text-muted-foreground text-xs uppercase tracking-wider mt-1">wpm</p>
               </div>
               <div className="flex flex-col items-center">
-                <p className="text-zinc-300 text-3xl font-mono">{accuracy}%</p>
-                <p className="text-zinc-500 text-xs uppercase tracking-wider mt-1">accuracy</p>
+                <p className="text-foreground text-3xl font-mono">{accuracy}%</p>
+                <p className="text-muted-foreground text-xs uppercase tracking-wider mt-1">accuracy</p>
               </div>
               <div className="flex flex-col items-center">
-                <p className="text-zinc-300 text-3xl font-mono">
+                <p className="text-foreground text-3xl font-mono">
                   {Math.round(((endTime || 0) - (startTime || 0)) / 100) / 10}s
                 </p>
-                <p className="text-zinc-500 text-xs uppercase tracking-wider mt-1">time</p>
+                <p className="text-muted-foreground text-xs uppercase tracking-wider mt-1">time</p>
               </div>
               <div className="flex flex-col items-center">
-                <p className="text-zinc-300 text-3xl font-mono">{userInput.length}</p>
-                <p className="text-zinc-500 text-xs uppercase tracking-wider mt-1">chars</p>
+                <p className="text-foreground text-3xl font-mono">{userInput.length}</p>
+                <p className="text-muted-foreground text-xs uppercase tracking-wider mt-1">chars</p>
               </div>
             </div>
             
@@ -285,7 +285,7 @@ export function TypingTest({
                   setAccuracy(100)
                   inputRef.current?.focus()
                 }}
-                className="flex-1 py-2 px-3 bg-zinc-800/70 hover:bg-zinc-700/70 text-zinc-300 text-sm rounded transition-colors"
+                className="flex-1 py-2 px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-sm rounded transition-colors"
               >
                 Try Again
               </button>
@@ -293,7 +293,7 @@ export function TypingTest({
                 onClick={() => {
                   // TODO: Navigate to new test
                 }}
-                className="flex-1 py-2 px-3 bg-zinc-800/70 hover:bg-zinc-700/70 text-zinc-300 text-sm rounded transition-colors"
+                className="flex-1 py-2 px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-sm rounded transition-colors"
               >
                 New Test
               </button>

@@ -50,13 +50,13 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
   }
 
   return (
-    <div className={cn("w-full max-w-3xl mx-auto p-4 bg-zinc-900/30 rounded border border-zinc-800/30", className)}>
-      <h2 className="text-sm font-medium text-yellow-400 mb-4">Settings</h2>
+    <div className={cn("w-full max-w-3xl mx-auto p-4 bg-card/30 rounded border border-border/30", className)}>
+      <h2 className="text-sm font-medium text-primary mb-4">Settings</h2>
       
       <div className="space-y-4">
         {/* Language Selection */}
         <div>
-          <h3 className="text-xs font-medium text-zinc-400 mb-2 uppercase tracking-wider">Language</h3>
+          <h3 className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Language</h3>
           <div className="grid grid-cols-5 gap-1.5">
             {languageOptions.map((lang) => (
               <button
@@ -65,8 +65,8 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
                 className={cn(
                   "px-2 py-1.5 text-xs rounded transition-colors",
                   settings.language === lang.code
-                    ? "bg-zinc-800/70 text-yellow-400 border border-yellow-400/30"
-                    : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300"
+                    ? "bg-muted/70 text-primary border border-primary/30"
+                    : "bg-muted/50 text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
               >
                 {lang.name}
@@ -77,7 +77,7 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
 
         {/* Keyboard Layout */}
         <div>
-          <h3 className="text-xs font-medium text-zinc-400 mb-2 uppercase tracking-wider">Keyboard Layout</h3>
+          <h3 className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Keyboard Layout</h3>
           <div className="flex gap-1.5 flex-wrap">
             {keyboardLayouts.map((layout) => (
               <button
@@ -86,8 +86,8 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
                 className={cn(
                   "px-2 py-1.5 text-xs rounded transition-colors",
                   settings.keyboardLayout === layout.code
-                    ? "bg-zinc-800/70 text-yellow-400 border border-yellow-400/30"
-                    : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300"
+                    ? "bg-muted/70 text-primary border border-primary/30"
+                    : "bg-muted/50 text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
               >
                 {layout.name}
@@ -98,7 +98,7 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
 
         {/* WPM Display Options */}
         <div>
-          <h3 className="text-xs font-medium text-zinc-400 mb-2 uppercase tracking-wider">WPM Display</h3>
+          <h3 className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">WPM Display</h3>
           <div className="flex gap-1.5">
             {wpmDisplayOptions.map((option) => (
               <button
@@ -107,8 +107,8 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
                 className={cn(
                   "px-2 py-1.5 text-xs rounded transition-colors",
                   settings.wpmDisplay === option.code
-                    ? "bg-zinc-800/70 text-yellow-400 border border-yellow-400/30"
-                    : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300"
+                    ? "bg-muted/70 text-primary border border-primary/30"
+                    : "bg-muted/50 text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
               >
                 {option.name}
@@ -119,14 +119,14 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
 
         {/* Sound Toggle */}
         <div>
-          <h3 className="text-xs font-medium text-zinc-400 mb-2 uppercase tracking-wider">Sound</h3>
+          <h3 className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Sound</h3>
           <button
             onClick={() => handleSettingChange('soundEnabled', !settings.soundEnabled)}
             className={cn(
               "px-2 py-1.5 text-xs rounded transition-colors",
               settings.soundEnabled
-                ? "bg-zinc-800/70 text-yellow-400 border border-yellow-400/30"
-                : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300"
+                ? "bg-muted/70 text-primary border border-primary/30"
+                : "bg-muted/50 text-muted-foreground hover:bg-muted/80 hover:text-foreground"
             )}
           >
             {settings.soundEnabled ? "Sound On" : "Sound Off"}
@@ -135,7 +135,7 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
 
         {/* Theme Selection */}
         <div>
-          <h3 className="text-xs font-medium text-zinc-400 mb-2 uppercase tracking-wider">Theme</h3>
+          <h3 className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Theme</h3>
           <div className="flex gap-1.5">
             {["dark", "light", "auto"].map((theme) => (
               <button
@@ -144,8 +144,8 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
                 className={cn(
                   "px-2 py-1.5 text-xs rounded transition-colors capitalize",
                   settings.theme === theme
-                    ? "bg-zinc-800/70 text-yellow-400 border border-yellow-400/30"
-                    : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300"
+                    ? "bg-muted/70 text-primary border border-primary/30"
+                    : "bg-muted/50 text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
               >
                 {theme}

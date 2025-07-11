@@ -48,7 +48,7 @@ export function LoginForm({
         )}
         {...props}
       >
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-400"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-muted-foreground"></div>
       </div>
     );
   }
@@ -57,7 +57,7 @@ export function LoginForm({
     return (
       <div
         className={cn(
-          "min-h-screen bg-white flex flex-col items-center justify-center",
+          "min-h-screen bg-background flex flex-col items-center justify-center",
           className
         )}
         {...props}
@@ -65,13 +65,13 @@ export function LoginForm({
         <div className="w-full max-w-md">
           {/* Logo */}
           <div className="flex justify-center mb-8">
-            <div className="w-8 h-8 bg-black rounded flex items-center justify-center cursor-pointer">
-              <span className="text-white font-bold text-sm">H</span>
+            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center cursor-pointer">
+              <span className="text-primary-foreground font-bold text-sm">H</span>
             </div>
           </div>
 
           <div className="flex flex-col items-center gap-6">
-            <Avatar className="w-20 h-20 border border-gray-200">
+            <Avatar className="w-20 h-20 border border-border">
               {session.user.image ? (
                 <div className="relative w-full h-full">
                   <Image
@@ -83,7 +83,7 @@ export function LoginForm({
                   />
                 </div>
               ) : (
-                <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-700 text-2xl font-semibold">
+                <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground text-2xl font-semibold">
                   {session.user.name?.charAt(0) ||
                     session.user.email?.charAt(0) ||
                     "U"}
@@ -91,14 +91,14 @@ export function LoginForm({
               )}
             </Avatar>
             <div className="text-center">
-              <h2 className="text-2xl font-bold text-gray-800 mb-1">
+              <h2 className="text-2xl font-bold text-foreground mb-1">
                 Welcome back, {session.user.name || "User"}!
               </h2>
-              <p className="text-gray-500">{session.user.email}</p>
+              <p className="text-muted-foreground">{session.user.email}</p>
             </div>
             <Button
               onClick={() => signOut()}
-              className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 rounded-lg transition-colors border border-gray-200"
+              className="w-full bg-muted hover:bg-muted/80 text-muted-foreground font-medium py-2 rounded-lg transition-colors border border-border"
             >
               Sign Out
             </Button>
@@ -111,7 +111,7 @@ export function LoginForm({
   return (
     <div
       className={cn(
-        "min-h-screen bg-white flex flex-col items-center justify-center p-4",
+        "min-h-screen bg-background flex flex-col items-center justify-center p-4",
         className
       )}
       {...props}
@@ -119,19 +119,19 @@ export function LoginForm({
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="flex justify-center mb-8">
-          <div className="w-8 h-8 bg-black rounded flex items-center justify-center cursor-pointer">
-            <span className="text-white font-bold text-sm">H</span>
+          <div className="w-8 h-8 bg-primary rounded flex items-center justify-center cursor-pointer">
+            <span className="text-primary-foreground font-bold text-sm">H</span>
           </div>
         </div>
 
-        <h1 className="text-center text-3xl font-bold text-black mb-10">
+        <h1 className="text-center text-3xl font-bold text-foreground mb-10">
           Log in
         </h1>
 
         {/* Error Message */}
         {error && (
-          <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-red-600 text-sm">{error}</p>
+          <div className="mb-6 p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
+            <p className="text-destructive text-sm">{error}</p>
           </div>
         )}
 
@@ -140,7 +140,7 @@ export function LoginForm({
           <Button
             onClick={handleGoogleSignIn}
             disabled={isLoading}
-            className="max-w-xs sm:max-w-sm bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 rounded-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2 border border-gray-300 shadow-sm"
+            className="max-w-xs sm:max-w-sm bg-background hover:bg-muted text-muted-foreground font-medium py-2 rounded-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2 border border-border shadow-sm"
           >
             <GoogleIcon className="w-5 h-5" />
             Continue with Google
@@ -149,7 +149,7 @@ export function LoginForm({
           <Button
             onClick={handleGitHubSignIn}
             disabled={isLoading}
-            className="max-w-xs sm:max-w-sm bg-white hover:bg-gray-50 text-gray-700 font-medium py-2 rounded-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2 border border-gray-300 shadow-sm"
+            className="max-w-xs sm:max-w-sm bg-background hover:bg-muted text-muted-foreground font-medium py-2 rounded-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2 border border-border shadow-sm"
           >
             <GitHubIcon className="w-5 h-5" />
             Continue with GitHub
@@ -158,12 +158,12 @@ export function LoginForm({
 
         {isLoading && (
           <div className="flex items-center justify-center mt-4">
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-400"></div>
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-muted-foreground"></div>
           </div>
         )}
         
         {/* Privacy Disclaimer */}
-        <div className="mt-10 text-center text-xs text-gray-500">
+        <div className="mt-10 text-center text-xs text-muted-foreground">
           <p>
             By clicking "Continue with Google" or "Continue with GitHub", you agree to our{" "}
             <a href="/terms" className="text-blue-600 hover:underline cursor-pointer">Terms of Conditions</a>{" "}

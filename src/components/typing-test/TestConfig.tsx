@@ -65,8 +65,8 @@ function TestConfigInternal({
           className={cn(
             "flex items-center gap-1 transition-colors px-2 py-1 rounded",
             punctuation
-              ? "text-yellow-400 bg-zinc-800/50"
-              : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/30"
+              ? "text-primary bg-muted/50"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
           )}
         >
           <AtSignIcon className="w-3 h-3" />
@@ -79,8 +79,8 @@ function TestConfigInternal({
           className={cn(
             "flex items-center gap-1 transition-colors px-2 py-1 rounded",
             numbers
-              ? "text-yellow-400 bg-zinc-800/50"
-              : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/30"
+              ? "text-primary bg-muted/50"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
           )}
         >
           <HashIcon className="w-3 h-3" />
@@ -88,14 +88,14 @@ function TestConfigInternal({
         </button>
 
         {/* Test Mode */}
-        <div className="flex items-center gap-1 bg-zinc-800/30 rounded p-0.5">
+        <div className="flex items-center gap-1 bg-muted/30 rounded p-0.5">
           <button
             onClick={() => onTestModeChange("time")}
             className={cn(
               "flex items-center gap-1 transition-colors px-2 py-1 rounded",
               testMode === "time"
-                ? "text-yellow-400 bg-zinc-800/70"
-                : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
+                ? "text-primary bg-muted/70"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
             )}
           >
             <ClockIcon className="w-3 h-3" />
@@ -107,8 +107,8 @@ function TestConfigInternal({
             className={cn(
               "flex items-center gap-1 transition-colors px-2 py-1 rounded",
               testMode === "words"
-                ? "text-yellow-400 bg-zinc-800/70"
-                : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
+                ? "text-primary bg-muted/70"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
             )}
           >
             <TextIcon className="w-3 h-3" />
@@ -120,8 +120,8 @@ function TestConfigInternal({
             className={cn(
               "flex items-center gap-1 transition-colors px-2 py-1 rounded",
               testMode === "quote"
-                ? "text-yellow-400 bg-zinc-800/70"
-                : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
+                ? "text-primary bg-muted/70"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
             )}
           >
             <QuoteIcon className="w-3 h-3" />
@@ -130,7 +130,7 @@ function TestConfigInternal({
         </div>
 
         {/* Time/Word/Quote Options */}
-        <div className="flex items-center gap-1 bg-zinc-800/30 rounded p-0.5">
+        <div className="flex items-center gap-1 bg-muted/30 rounded p-0.5">
           {testMode === "time" && timeOptions.map((time) => (
             <button
               key={time}
@@ -138,8 +138,8 @@ function TestConfigInternal({
               className={cn(
                 "px-2 py-1 transition-colors rounded min-w-[2rem] text-center",
                 timeLimit === time
-                  ? "text-yellow-400 bg-zinc-800/70"
-                  : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
+                  ? "text-primary bg-muted/70"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               )}
             >
               {time}
@@ -153,8 +153,8 @@ function TestConfigInternal({
               className={cn(
                 "px-2 py-1 transition-colors rounded min-w-[2rem] text-center",
                 wordCount === count
-                  ? "text-yellow-400 bg-zinc-800/70"
-                  : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
+                  ? "text-primary bg-muted/70"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               )}
             >
               {count}
@@ -168,8 +168,8 @@ function TestConfigInternal({
               className={cn(
                 "px-2 py-1 transition-colors rounded min-w-[2rem] text-center",
                 quoteLength === length
-                  ? "text-yellow-400 bg-zinc-800/70"
-                  : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
+                  ? "text-primary bg-muted/70"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               )}
             >
               {length}

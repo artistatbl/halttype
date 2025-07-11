@@ -35,8 +35,8 @@ export default function Home() {
             className={cn(
               "flex items-center gap-1.5 px-2 py-1 text-xs transition-colors rounded",
               showSettings
-                ? "text-yellow-400 bg-zinc-800/70"
-                : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
+                ? "text-primary bg-muted/70"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
             )}
           >
             <SettingsIcon className="w-3.5 h-3.5" />
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
 
         {/* Main Typing Test Area */}
-        <div className="w-full bg-zinc-900/30 rounded-md p-6 border border-zinc-800/30">
+        <div className="w-full bg-card/30 rounded-md p-6 border border-border/30">
           <TypingTest 
             content={sampleText}
             testMode={testConfig.mode}
