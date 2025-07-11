@@ -1,12 +1,13 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { Layout } from "@/components/layout/Layout"
 import { TypingTest } from "@/components/typing-test/TypingTest"
 import { TestConfig, TestConfigOptions } from "@/components/typing-test/TestConfig"
 import { Settings, UserSettings, defaultSettings } from "@/components/typing-test/Settings"
 import { SettingsIcon } from "@/components/icons/settings"
+import { useFocus } from "@/components/typing-test/FocusContext"
 
 // Sample text for typing test
 const sampleText = "The quick brown fox jumps over the lazy dog. Programming is the process of creating a set of instructions that tell a computer how to perform a task. Programming can be done using a variety of computer programming languages, such as JavaScript, Python, and C++."
@@ -24,56 +25,38 @@ export default function Home() {
   
   const [userSettings, setUserSettings] = useState<UserSettings>(defaultSettings)
   const [showSettings, setShowSettings] = useState(false)
-  const [isFocusMode, setIsFocusMode] = useState(false)
   
-  // Listen for focus mode changes from the TypingTest component
-  useEffect(() => {
-    const handleFocusModeChange = () => {
-      const focusModeElements = document.querySelectorAll('[data-focus-mode="true"]')
-      setIsFocusMode(focusModeElements.length > 0)
-    }
-
-    // Create a mutation observer to watch for changes to the DOM
-    const observer = new MutationObserver(handleFocusModeChange)
-    
-    // Start observing the document with the configured parameters
-    observer.observe(document.body, { 
-      attributes: true, 
-      attributeFilter: ['data-focus-mode'],
-      childList: true, 
-      subtree: true 
-    })
-    
-    // Initial check
-    handleFocusModeChange()
-    
-    return () => observer.disconnect()
-  }, [])
+  // Get focus state
+  const { isFocused } = useFocus()
   
   return (
     <Layout>
       <div className="flex flex-col items-center">
         {/* Settings Toggle Button - Hidden in focus mode */}
-        {!isFocusMode && (
-          <div className="w-full flex justify-end mb-2">
-            <button
-              onClick={() => setShowSettings(!showSettings)}
-              className={cn(
-                "flex items-center gap-1.5 px-2 py-1 text-xs transition-colors rounded",
-                showSettings
-                  ? "text-primary bg-muted/70"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-              )}
-            >
-              <SettingsIcon className="w-3.5 h-3.5" />
-              Settings
-            </button>
-          </div>
-        )}
+        <div className={cn(
+          "w-full flex justify-end mb-2 transition-opacity duration-300",
+          isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
+        )}>
+          <button
+            onClick={() => setShowSettings(!showSettings)}
+            className={cn(
+              "flex items-center gap-1.5 px-2 py-1 text-xs transition-colors rounded",
+              showSettings
+                ? "text-primary bg-muted/70"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+            )}
+          >
+            <SettingsIcon className="w-3.5 h-3.5" />
+            Settings
+          </button>
+        </div>
 
         {/* Settings Panel - Hidden in focus mode */}
-        {showSettings && !isFocusMode && (
-          <div className="w-full mb-6">
+        {showSettings && (
+          <div className={cn(
+            "w-full mb-6 transition-opacity duration-300",
+            isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
+          )}>
             <Settings
               settings={userSettings}
               onSettingsChange={setUserSettings}
@@ -82,14 +65,15 @@ export default function Home() {
         )}
 
         {/* Test Configuration Component - Hidden in focus mode */}
-        {!isFocusMode && (
-          <div className="w-full mb-8">
-            <TestConfig 
-              onConfigChange={setTestConfig}
-              initialConfig={testConfig}
-            />
-          </div>
-        )}
+        <div className={cn(
+          "w-full mb-8 transition-opacity duration-300",
+          isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
+        )}>
+          <TestConfig 
+            onConfigChange={setTestConfig}
+            initialConfig={testConfig}
+          />
+        </div>
 
         {/* Main Typing Test Area - Monkeytype-style minimalistic design */}
         <div className="w-full">

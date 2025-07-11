@@ -9,6 +9,7 @@ import { HTTPException } from "hono/http-exception"
 import { PropsWithChildren, useState } from "react"
 import { ThemeProvider } from "./theme/theme-provider"
 import { ThemeSwitcher } from "./theme/theme-switcher"
+import { FocusProvider } from "./typing-test/FocusContext"
 
 export const Providers = ({ children }: PropsWithChildren) => {
   const [queryClient] = useState(
@@ -34,8 +35,10 @@ export const Providers = ({ children }: PropsWithChildren) => {
         storageKey="theme"
         themes={["light", "dark", "amber", "caffiene", "nature", "notebook", "claude", "twitter", "mono"]}
       >
-        <ThemeSwitcher />
-        {children}
+        <FocusProvider>
+          <ThemeSwitcher />
+          {children}
+        </FocusProvider>
       </ThemeProvider>
     </QueryClientProvider>
   )

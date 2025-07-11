@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { cn } from "@/lib/utils"
 import { TextDisplay } from "./TextDisplay"
 import { StatsDisplay } from "./StatsDisplay"
+import { useFocus } from "./FocusContext"
 
 interface TypingTestProps {
   content: string
@@ -45,7 +46,6 @@ export function TypingTest({
   const [startTime, setStartTime] = useState<number | null>(null)
   const [endTime, setEndTime] = useState<number | null>(null)
   const [timeRemaining, setTimeRemaining] = useState<number | null>(timeLimit || null)
-  const [isFocusMode, setIsFocusMode] = useState(false)
   
   // Typing state
   const [currentPosition, setCurrentPosition] = useState(0)
@@ -60,12 +60,15 @@ export function TypingTest({
   // Refs
   const inputRef = useRef<HTMLInputElement>(null)
   
+  // Get focus context
+  const { setFocused } = useFocus()
+  
   // Start the test when user starts typing
   const startTest = () => {
     if (testState === "idle") {
       setTestState("running")
       setStartTime(Date.now())
-      setIsFocusMode(true)
+      setFocused(true) // Set focus mode when typing starts
     }
   }
   
@@ -74,7 +77,7 @@ export function TypingTest({
     if (testState === "running") {
       setTestState("completed")
       setEndTime(Date.now())
-      setIsFocusMode(false)
+      setFocused(false) // Exit focus mode when test completes
       
       // Calculate final results
       const timeSpent = ((endTime || Date.now()) - (startTime || Date.now())) / 1000
@@ -206,16 +209,14 @@ export function TypingTest({
     <div 
       className={cn(
         "w-full flex flex-col items-center justify-center gap-6",
-        isFocusMode && "focus-mode",
         className
       )}
       onClick={() => inputRef.current?.focus()}
-      data-focus-mode={isFocusMode}
     >
       {/* Hidden input field to capture typing - completely hidden from view */}
       <input
         ref={inputRef}
-        type="text"
+        //type="text"
         value={userInput}
         onChange={handleInput}
         className="opacity-0 absolute h-0 w-0 pointer-events-none"
@@ -299,6 +300,7 @@ export function TypingTest({
                   setTimeRemaining(timeLimit || null)
                   setWpm(0)
                   setAccuracy(100)
+                  setFocused(false) // Ensure focus mode is off when resetting
                   inputRef.current?.focus()
                 }}
                 className="flex-1 py-2 px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-sm transition-colors"

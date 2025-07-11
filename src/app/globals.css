@@ -2,43 +2,6 @@
 @import "tw-animate-css";
 @import "./theme.css";
 
-/* Focus mode styles */
-.focus-mode {
-  transition: all 0.3s ease-in-out;
-}
-
-/* Navbar and footer focus mode transitions */
-.navbar-focus-mode,
-.footer-focus-mode {
-  transition: all 0.3s ease-in-out;
-}
-
-/* When in focus mode, make the typing test more prominent */
-.focus-mode .text-display {
-  transform: scale(1.05);
-  transition: transform 0.3s ease-in-out;
-}
-
-/* Keep the app name visible in focus mode */
-.navbar-focus-mode a {
-  opacity: 1;
-}
-
-/* Hide all elements except the app name in navbar when in focus mode */
-.navbar-focus-mode:hover {
-  opacity: 1;
-}
-
-/* Hide all elements in footer when in focus mode except on hover */
-.footer-focus-mode:hover {
-  opacity: 1;
-}
-
-/* Smooth transition for page elements when entering/exiting focus mode */
-.focus-mode ~ * {
-  transition: opacity 0.3s ease-in-out;
-}
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
