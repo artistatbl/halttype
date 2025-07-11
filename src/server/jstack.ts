@@ -1,7 +1,7 @@
 import { jstack } from "jstack"
 import { drizzle } from "drizzle-orm/postgres-js"
 import { env } from "hono/adapter"
-import { getSession } from "@/lib/auth-client"
+import { auth } from "@/lib/auth"
 
 interface Env {
   Bindings: { DATABASE_URL: string }
@@ -26,28 +26,35 @@ const databaseMiddleware = j.middleware(async ({ c, next }) => {
 
 /**
  * Authentication middleware to get the current user
- * Note: In a real implementation, this would extract the user from the request headers
- * For now, we'll use a simplified version that works with the client
+ * Extracts the user from the session and adds it to the context
  */
 const authMiddleware = j.middleware(async ({ c, next }) => {
   try {
-    // In a real implementation, you would extract the session from cookies or headers
-    // and validate it against your auth system
-    // For now, we'll pass a null user which will make tests work for anonymous users
-    return await next({ user: null })
+    // Get the session from the request headers
+    // better-auth requires the headers to extract the session
+    const session = await auth.api.getSession({
+      headers: c.req.raw.headers
+    })
+    
+    if (session?.user) {
+      // If we have a user in the session, add it to the context
+      return await next({ 
+        user: {
+          id: session.user.id,
+          name: session.user.name,
+          email: session.user.email
+        } 
+      })
+    } else {
+      // No authenticated user
+      return await next({ user: null })
+    }
   } catch (error) {
+    console.error("Auth middleware error:", error)
     return await next({ user: null })
   }
 })
 
-/**
- * Public (unauthenticated) procedures
- *
- * This is the base piece you use to build new queries and mutations on your API.
- */
-export const publicProcedure = j.procedure.use(databaseMiddleware)
 
-/**
- * Protected procedures that require authentication
- */
+export const publicProcedure = j.procedure.use(databaseMiddleware)
 export const protectedProcedure = j.procedure.use(databaseMiddleware).use(authMiddleware)

@@ -25,7 +25,7 @@ export function TextDisplay({
   return (
     <div 
       className={cn(
-        "w-full text-base sm:text-lg md:text-xl leading-relaxed tracking-wide font-mono py-5 sm:py-6 md:py-8 px-4 sm:px-5 md:px-6 rounded-lg transition-all",
+        "w-full text-xl sm:text-xl md:text-2xl leading-relaxed tracking-wide font-mono py-5 sm:py-6 md:py-8 px-4 sm:px-5 md:px-6 rounded-lg transition-all",
         className
       )}
     >

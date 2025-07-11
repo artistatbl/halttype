@@ -58,7 +58,7 @@ function TestConfigInternal({
 
   return (
     <div className="w-full max-w-3xl mx-auto mb-4 sm:mb-6 p-2 sm:p-1 bg-accent rounded-md">
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4 text-xs">
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4 text-sm sm:text-base">
         {/* Punctuation */}
         <button
           onClick={() => onPunctuationChange(!punctuation)}
@@ -136,7 +136,7 @@ function TestConfigInternal({
               key={time}
               onClick={() => onTimeLimitChange(time)}
               className={cn(
-                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-xs rounded-sm",
+                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
                 timeLimit === time
                   ? "text-primary bg-muted/80 shadow-sm font-medium"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -151,7 +151,7 @@ function TestConfigInternal({
               key={count}
               onClick={() => onWordCountChange(count)}
               className={cn(
-                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-xs rounded-sm",
+                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
                 wordCount === count
                   ? "text-primary bg-muted/80 shadow-sm font-medium"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -166,7 +166,7 @@ function TestConfigInternal({
               key={length}
               onClick={() => onQuoteLengthChange(length)}
               className={cn(
-                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-xs rounded-sm",
+                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
                 quoteLength === length
                   ? "text-primary bg-muted/80 shadow-sm font-medium"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"

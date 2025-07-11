@@ -25,17 +25,21 @@ const saveTestResultSchema = z.object({
 // Create the test results router
 export const testResultsRouter = j.router({
   // Save a test result to the database
-  saveTestResult: publicProcedure
+  saveTestResult: protectedProcedure
     .input(saveTestResultSchema)
-    .mutation(async ({ input, ctx }) => {
+    .mutation(async ({ input, ctx, c }) => {
       const { db } = ctx
-      const userId = ctx.user?.id // This will be undefined for unauthenticated users
+      const userId = ctx.user?.id // Get the authenticated user's ID
+      
+      if (!userId) {
+        throw new Error("User must be authenticated to save test results")
+      }
 
       // Insert the test result into the database
       const result = await db.insert(testResult).values({
         id: nanoid(),
         testId: input.testId,
-        userId: userId, // This can be null for anonymous users
+        userId: userId, // User ID from the authenticated session
         wpm: input.wpm,
         accuracy: input.accuracy,
         timeSpent: input.timeSpent,
@@ -47,7 +51,8 @@ export const testResultsRouter = j.router({
       })
       .returning()
 
-      return result[0]
+      // Return the result through the context's json method to match the expected ResponseType
+      return c.json(result[0])
     }),
 
   // Get test results for a specific test
@@ -57,7 +62,7 @@ export const testResultsRouter = j.router({
       limit: z.number().int().min(1).max(100).default(10),
       offset: z.number().int().min(0).default(0),
     }))
-    .query(async ({ input, ctx }) => {
+    .query(async ({ input, ctx, c }) => {
       const { db } = ctx
       const { testId, limit, offset } = input
 
@@ -70,7 +75,7 @@ export const testResultsRouter = j.router({
         .offset(offset)
         .orderBy(desc(testResult.completedAt))
 
-      return results
+      return c.json(results)
     }),
 
   // Get test results for the current user
@@ -79,13 +84,13 @@ export const testResultsRouter = j.router({
       limit: z.number().int().min(1).max(100).default(10),
       offset: z.number().int().min(0).default(0),
     }))
-    .query(async ({ input, ctx }) => {
+    .query(async ({ input, ctx, c }) => {
       const { db } = ctx
       const { limit, offset } = input
       const userId = ctx.user?.id
 
       if (!userId) {
-        return []
+        return c.json([])
       }
 
       // Using SQL-like query instead of the query builder
@@ -97,6 +102,6 @@ export const testResultsRouter = j.router({
         .offset(offset)
         .orderBy(desc(testResult.completedAt))
 
-      return results
+      return c.json(results)
     }),
 })
