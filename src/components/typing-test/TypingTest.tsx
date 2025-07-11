@@ -216,7 +216,7 @@ export function TypingTest({
       {/* Hidden input field to capture typing - completely hidden from view */}
       <input
         ref={inputRef}
-        //type="text"
+        type="text"
         value={userInput}
         onChange={handleInput}
         className="opacity-0 absolute h-0 w-0 pointer-events-none"

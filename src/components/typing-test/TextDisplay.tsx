@@ -53,14 +53,14 @@ export function TextDisplay({
         </div>
         
         {/* Cursor - smoother and more visible like Monkeytype */}
-        <div 
+        {/* <div 
           className="absolute top-0 left-0 w-[2px] h-[1.2em] bg-primary transition-all duration-100"
           style={{
             transform: `translateX(${currentPosition * 0.6}em)`,
             animation: 'caret-blink 1.2s ease-in-out infinite',
             opacity: testState === 'running' ? 1 : 0.7,
           }}
-        />
+        /> */}
         
         <style jsx>{`
           @keyframes caret-blink {
