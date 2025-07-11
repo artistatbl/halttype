@@ -202,25 +202,36 @@ export function TypingTest({
   return (
     <div 
       className={cn(
-        "w-full flex flex-col items-center justify-center gap-8",
+        "w-full flex flex-col items-center justify-center gap-6",
         className
       )}
       onClick={() => inputRef.current?.focus()}
     >
-      {/* Hidden input field to capture typing */}
+      {/* Hidden input field to capture typing - completely hidden from view */}
       <input
         ref={inputRef}
         type="text"
         value={userInput}
         onChange={handleInput}
-        className="opacity-0 absolute h-0 w-0"
+        className="opacity-0 absolute h-0 w-0 pointer-events-none"
         aria-label="Typing input"
+        autoComplete="off"
+        autoCapitalize="off"
+        autoCorrect="off"
+        spellCheck="false"
       />
       
-      {/* Timer display */}
+      {/* Monkeytype-style focus indicator */}
+      {testState === "idle" && (
+        <div className="text-primary/50 text-sm mb-2 animate-pulse">
+          click or press any key to start
+        </div>
+      )}
+      
+      {/* Timer display - Monkeytype-style minimalistic */}
       {testState === "running" && timeRemaining !== undefined && timeRemaining !== null && (
-        <div className="w-full flex justify-start mb-4">
-          <div className="text-sm font-mono text-primary bg-muted/70 px-3 py-1.5">
+        <div className="w-full flex justify-center mb-4">
+          <div className="text-sm font-mono text-primary/80">
             {timeRemaining}s
           </div>
         </div>

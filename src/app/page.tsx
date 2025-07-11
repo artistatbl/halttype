@@ -62,8 +62,8 @@ export default function Home() {
           />
         </div>
 
-        {/* Main Typing Test Area */}
-        <div className="w-full bg-background p-6">
+        {/* Main Typing Test Area - Monkeytype-style minimalistic design */}
+        <div className="w-full">
           <TypingTest 
             content={sampleText}
             testMode={testConfig.mode}
