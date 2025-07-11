@@ -1,5 +1,6 @@
 "use client"
 
+import { LockIcon } from "lucide-react"
 import { useState, useEffect } from "react"
 
 interface CapsLockProps {
@@ -76,15 +77,13 @@ export function CapsLockWarning({
 }) {
   return (
     <div 
-      className={`absolute top-0 left-0 right-0 z-50 flex justify-center transition-all duration-200 ease-in-out ${isOn ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}
+      className={`absolute top-0 left-0 right-0 z-50 flex justify-center mb-16 ${isOn ? 'block' : 'hidden'}`}
       aria-hidden={!isOn}
+      style={{ marginTop: '-3rem' }}
     >
-      <div className="bg-destructive text-destructive-foreground px-4 py-2 rounded-b-md text-sm font-bold shadow-lg flex items-center gap-2 animate-pulse">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="m12 8-9.04 9.06a2.82 2.82 0 1 0 3.98 3.98L16 12"/>
-          <circle cx="17" cy="7" r="5"/>
-        </svg>
-        CAPS LOCK IS ON
+      <div className="bg-destructive text-destructive-foreground px-4 py-2 rounded-md text-sm font-bold shadow-lg flex items-center gap-2">
+        <LockIcon className="w-4 h-4"/>
+        CAPS LOCK
       </div>
     </div>
   )
