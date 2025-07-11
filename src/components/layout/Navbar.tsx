@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { UserDropdown } from "./UserDropdown"
 import { useFocus } from "../typing-test/FocusContext"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { Infinity, BarChart3, HelpCircle } from "lucide-react"
 
 interface NavbarProps {
   className?: string
@@ -34,7 +35,7 @@ export function Navbar({ className }: NavbarProps) {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link href="/" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center justify-center p-1.5 rounded-md hover:bg-muted/50">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path></svg>
+                  <Infinity width="16" height="16" />
                 </Link>
               </TooltipTrigger>
               <TooltipContent>
@@ -45,7 +46,7 @@ export function Navbar({ className }: NavbarProps) {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link href="/leaderboard" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center justify-center p-1.5 rounded-md hover:bg-muted/50">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20v-6"></path><path d="M6 20V10"></path><path d="M18 20V4"></path></svg>
+                  <BarChart3 width="16" height="16" />
                 </Link>
               </TooltipTrigger>
               <TooltipContent>
@@ -56,7 +57,7 @@ export function Navbar({ className }: NavbarProps) {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link href="/about" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center justify-center p-1.5 rounded-md hover:bg-muted/50">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                  <HelpCircle width="16" height="16" />
                 </Link>
               </TooltipTrigger>
               <TooltipContent>

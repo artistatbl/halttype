@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { Github, Twitter, Shield, FileText, ExternalLink, MessageSquare } from "lucide-react"
+import { Github, Twitter, Shield, FileText, ExternalLink, MessageSquare, Maximize2 } from "lucide-react"
 import { ThemeModal } from "../theme"
 import { useFocus } from "../typing-test/FocusContext"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
@@ -35,12 +35,7 @@ export function Footer({ className }: FooterProps) {
           : "text-muted-foreground bg-muted/50 hover:bg-muted/70 hover:text-foreground"
       )}>
         <span className="flex items-center gap-1.5">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="m19 19-4-4"></path>
-            <path d="m19 5-4 4"></path>
-            <path d="m5 19 4-4"></path>
-            <path d="m5 5 4 4"></path>
-          </svg>
+          <Maximize2 width="12" height="12" />
           click to focus
         </span>
       </div>
@@ -54,12 +49,7 @@ export function Footer({ className }: FooterProps) {
             : "text-muted-foreground bg-muted/50 hover:bg-muted/70 hover:text-foreground"
         )}>
           <span className="flex items-center gap-1.5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="m19 19-4-4"></path>
-              <path d="m19 5-4 4"></path>
-              <path d="m5 19 4-4"></path>
-              <path d="m5 5 4 4"></path>
-            </svg>
+            <Maximize2 width="12" height="12" />
             click to focus
           </span>
         </div>
