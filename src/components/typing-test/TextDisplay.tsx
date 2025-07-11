@@ -25,7 +25,7 @@ export function TextDisplay({
   return (
     <div 
       className={cn(
-        "w-full text-base sm:text-lg md:text-xl leading-relaxed tracking-wide font-mono py-4 sm:py-5 md:py-6 px-2 sm:px-3 md:px-4 rounded-lg",
+        "w-full text-base sm:text-lg md:text-xl leading-relaxed tracking-wide font-mono py-5 sm:py-6 md:py-8 px-4 sm:px-5 md:px-6 rounded-lg transition-all",
         className
       )}
     >
@@ -45,10 +45,10 @@ export function TextDisplay({
                 key={index}
                 className={cn(
                   "transition-colors duration-50",
-                  isActive && "text-primary font-bold", 
+                  isActive && "text-primary font-bold relative", 
                   isPast && !isError && "text-primary/80",
                   isPast && isError && "text-destructive",
-                  !isPast && !isActive && "text-primary/40"
+                  !isPast && !isActive && "text-primary/30"
                 )}
               >
                 {char}
@@ -60,24 +60,24 @@ export function TextDisplay({
         {/* Improved spacing and line height for better readability with responsive adjustments */}
         <style jsx>{`
           .w-full {
-            line-height: 1.6;
-            letter-spacing: 0.03em;
-            word-spacing: 0.15em;
+            line-height: 1.7;
+            letter-spacing: 0.04em;
+            word-spacing: 0.18em;
           }
           
           @media (min-width: 640px) {
             .w-full {
-              line-height: 1.7;
-              letter-spacing: 0.04em;
-              word-spacing: 0.18em;
+              line-height: 1.8;
+              letter-spacing: 0.05em;
+              word-spacing: 0.2em;
             }
           }
           
           @media (min-width: 768px) {
             .w-full {
-              line-height: 1.8;
-              letter-spacing: 0.05em;
-              word-spacing: 0.2em;
+              line-height: 1.9;
+              letter-spacing: 0.06em;
+              word-spacing: 0.22em;
             }
           }
         `}</style>

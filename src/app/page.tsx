@@ -34,13 +34,13 @@ export default function Home() {
       <div className="flex flex-col items-center">
         {/* Settings Toggle Button - Hidden in focus mode */}
         <div className={cn(
-          "w-full flex justify-end mb-2 transition-opacity duration-300",
+          "w-full flex justify-end mb-3 transition-opacity duration-300",
           isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
         )}>
           <button
             onClick={() => setShowSettings(!showSettings)}
             className={cn(
-              "flex items-center gap-1.5 px-2 py-1 text-xs transition-colors rounded",
+              "flex items-center gap-1.5 px-3 py-1.5 text-xs transition-all rounded-md shadow-sm",
               showSettings
                 ? "text-primary bg-muted/70"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -60,13 +60,14 @@ export default function Home() {
             <Settings
               settings={userSettings}
               onSettingsChange={setUserSettings}
+              className="rounded-md shadow-sm"
             />
           </div>
         )}
 
         {/* Test Configuration Component - Hidden in focus mode */}
         <div className={cn(
-          "w-full mb-8 transition-opacity duration-300",
+          "w-full mb-10 transition-opacity duration-300",
           isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
         )}>
           <TestConfig 
@@ -76,13 +77,14 @@ export default function Home() {
         </div>
 
         {/* Main Typing Test Area - Monkeytype-style minimalistic design */}
-        <div className="w-full">
+        <div className="w-full ">
           <TypingTest 
             content={sampleText}
             testMode={testConfig.mode}
             timeLimit={testConfig.mode === "time" ? testConfig.timeLimit : undefined}
             wordCount={testConfig.mode === "words" ? testConfig.wordCount : undefined}
             difficulty={testConfig.difficulty}
+            //className="max-w-3xl mx-auto"
           />
         </div>
       </div>

@@ -212,7 +212,7 @@ export function TypingTest({
   return (
     <div 
       className={cn(
-        "w-full flex flex-col items-center justify-center gap-4 sm:gap-5 md:gap-6",
+        "w-full flex flex-col items-center justify-center gap-4 sm:gap-5 md:gap-6 transition-all",
         className
       )}
       onClick={() => inputRef.current?.focus()}
@@ -256,6 +256,7 @@ export function TypingTest({
         errors={errors}
         testState={testState}
         capsLockOn={capsLockOn}
+       // className="bg-card/10 shadow-sm border border-muted/10"
       />
       
       {/* Stats display - only shown when test is completed */}
@@ -264,6 +265,7 @@ export function TypingTest({
           wpm={wpm}
           accuracy={accuracy}
           timeRemaining={timeRemaining}
+          //className="mt-4 sm:mt-6 bg-card/5 p-3 rounded-md shadow-sm border border-muted/10"
         />
       )}
       

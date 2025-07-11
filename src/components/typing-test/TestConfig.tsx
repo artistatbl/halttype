@@ -57,16 +57,16 @@ function TestConfigInternal({
 
 
   return (
-    <div className="w-full max-w-3xl mx-auto mb-4 sm:mb-6 p-1 sm:p-2">
+    <div className="w-full max-w-3xl mx-auto mb-4 sm:mb-6 p-2 sm:p-1 bg-accent rounded-md">
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4 text-xs">
         {/* Punctuation */}
         <button
           onClick={() => onPunctuationChange(!punctuation)}
           className={cn(
-            "flex items-center gap-1 transition-colors px-1.5 sm:px-2 py-1",
+            "flex items-center gap-1.5 transition-all px-2 sm:px-2.5 py-1.5 rounded-md",
             punctuation
-              ? "text-primary bg-muted/50"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+              ? "text-primary bg-muted/60 shadow-sm"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
           )}
         >
           <AtSignIcon className="w-3 h-3" />
@@ -77,10 +77,10 @@ function TestConfigInternal({
         <button
           onClick={() => onNumbersChange(!numbers)}
           className={cn(
-            "flex items-center gap-1 transition-colors px-1.5 sm:px-2 py-1",
+            "flex items-center gap-1.5 transition-all px-2 sm:px-2.5 py-1.5 rounded-md",
             numbers
-              ? "text-primary bg-muted/50"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+              ? "text-primary bg-muted/60 shadow-sm"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
           )}
         >
           <HashIcon className="w-3 h-3" />
@@ -88,13 +88,13 @@ function TestConfigInternal({
         </button>
 
         {/* Test Mode */}
-        <div className="flex items-center gap-0.5 sm:gap-1 bg-muted/30 p-0.5">
+        <div className="flex items-center gap-0.5 sm:gap-1 bg-muted/30 p-0.5 rounded-md">
           <button
             onClick={() => onTestModeChange("time")}
             className={cn(
-              "flex items-center gap-1 transition-colors px-2 py-1",
+              "flex items-center gap-1.5 transition-all px-2.5 py-1.5 rounded-sm",
               testMode === "time"
-                ? "text-primary bg-muted/70"
+                ? "text-primary bg-muted/80 shadow-sm"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
             )}
           >
@@ -105,9 +105,9 @@ function TestConfigInternal({
           <button
             onClick={() => onTestModeChange("words")}
             className={cn(
-              "flex items-center gap-1 transition-colors px-2 py-1",
+              "flex items-center gap-1.5 transition-all px-2.5 py-1.5 rounded-sm",
               testMode === "words"
-                ? "text-primary bg-muted/70"
+                ? "text-primary bg-muted/80 shadow-sm"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
             )}
           >
@@ -118,9 +118,9 @@ function TestConfigInternal({
           <button
             onClick={() => onTestModeChange("quote")}
             className={cn(
-              "flex items-center gap-1 transition-colors px-2 py-1",
+              "flex items-center gap-1.5 transition-all px-2.5 py-1.5 rounded-sm",
               testMode === "quote"
-                ? "text-primary bg-muted/70"
+                ? "text-primary bg-muted/80 shadow-sm"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
             )}
           >
@@ -130,15 +130,15 @@ function TestConfigInternal({
         </div>
 
         {/* Time/Word/Quote Options */}
-        <div className="flex items-center gap-0.5 sm:gap-1 bg-muted/30 p-0.5">
+        <div className="flex items-center gap-0.5 sm:gap-1 bg-muted/30 p-0.5 rounded-md">
           {testMode === "time" && timeOptions.map((time) => (
             <button
               key={time}
               onClick={() => onTimeLimitChange(time)}
               className={cn(
-                "px-1.5 sm:px-2 py-1 transition-colors min-w-[1.75rem] sm:min-w-[2rem] text-center text-xs",
+                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-xs rounded-sm",
                 timeLimit === time
-                  ? "text-primary bg-muted/70"
+                  ? "text-primary bg-muted/80 shadow-sm font-medium"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               )}
             >
@@ -151,9 +151,9 @@ function TestConfigInternal({
               key={count}
               onClick={() => onWordCountChange(count)}
               className={cn(
-                "px-1.5 sm:px-2 py-1 transition-colors min-w-[1.75rem] sm:min-w-[2rem] text-center text-xs",
+                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-xs rounded-sm",
                 wordCount === count
-                  ? "text-primary bg-muted/70"
+                  ? "text-primary bg-muted/80 shadow-sm font-medium"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               )}
             >
@@ -166,9 +166,9 @@ function TestConfigInternal({
               key={length}
               onClick={() => onQuoteLengthChange(length)}
               className={cn(
-                "px-1.5 sm:px-2 py-1 transition-colors min-w-[1.75rem] sm:min-w-[2rem] text-center text-xs",
+                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-xs rounded-sm",
                 quoteLength === length
-                  ? "text-primary bg-muted/70"
+                  ? "text-primary bg-muted/80 shadow-sm font-medium"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               )}
             >
