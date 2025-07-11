@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 import { Layout } from "@/components/layout/Layout"
 import { TypingTest } from "@/components/typing-test/TypingTest"
@@ -24,28 +24,55 @@ export default function Home() {
   
   const [userSettings, setUserSettings] = useState<UserSettings>(defaultSettings)
   const [showSettings, setShowSettings] = useState(false)
+  const [isFocusMode, setIsFocusMode] = useState(false)
+  
+  // Listen for focus mode changes from the TypingTest component
+  useEffect(() => {
+    const handleFocusModeChange = () => {
+      const focusModeElements = document.querySelectorAll('[data-focus-mode="true"]')
+      setIsFocusMode(focusModeElements.length > 0)
+    }
+
+    // Create a mutation observer to watch for changes to the DOM
+    const observer = new MutationObserver(handleFocusModeChange)
+    
+    // Start observing the document with the configured parameters
+    observer.observe(document.body, { 
+      attributes: true, 
+      attributeFilter: ['data-focus-mode'],
+      childList: true, 
+      subtree: true 
+    })
+    
+    // Initial check
+    handleFocusModeChange()
+    
+    return () => observer.disconnect()
+  }, [])
   
   return (
     <Layout>
       <div className="flex flex-col items-center">
-        {/* Settings Toggle Button */}
-        <div className="w-full flex justify-end mb-2">
-          <button
-            onClick={() => setShowSettings(!showSettings)}
-            className={cn(
-              "flex items-center gap-1.5 px-2 py-1 text-xs transition-colors rounded",
-              showSettings
-                ? "text-primary bg-muted/70"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-            )}
-          >
-            <SettingsIcon className="w-3.5 h-3.5" />
-            Settings
-          </button>
-        </div>
+        {/* Settings Toggle Button - Hidden in focus mode */}
+        {!isFocusMode && (
+          <div className="w-full flex justify-end mb-2">
+            <button
+              onClick={() => setShowSettings(!showSettings)}
+              className={cn(
+                "flex items-center gap-1.5 px-2 py-1 text-xs transition-colors rounded",
+                showSettings
+                  ? "text-primary bg-muted/70"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+              )}
+            >
+              <SettingsIcon className="w-3.5 h-3.5" />
+              Settings
+            </button>
+          </div>
+        )}
 
-        {/* Settings Panel */}
-        {showSettings && (
+        {/* Settings Panel - Hidden in focus mode */}
+        {showSettings && !isFocusMode && (
           <div className="w-full mb-6">
             <Settings
               settings={userSettings}
@@ -54,13 +81,15 @@ export default function Home() {
           </div>
         )}
 
-        {/* Test Configuration Component */}
-        <div className="w-full mb-8">
-          <TestConfig 
-            onConfigChange={setTestConfig}
-            initialConfig={testConfig}
-          />
-        </div>
+        {/* Test Configuration Component - Hidden in focus mode */}
+        {!isFocusMode && (
+          <div className="w-full mb-8">
+            <TestConfig 
+              onConfigChange={setTestConfig}
+              initialConfig={testConfig}
+            />
+          </div>
+        )}
 
         {/* Main Typing Test Area - Monkeytype-style minimalistic design */}
         <div className="w-full">

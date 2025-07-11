@@ -22,7 +22,7 @@ export function TextDisplay({
   return (
     <div 
       className={cn(
-        "w-full text-xl leading-relaxed tracking-wide font-mono py-4",
+        "w-full text-xl leading-relaxed tracking-wide font-mono py-4 text-display",
         className
       )}
     >

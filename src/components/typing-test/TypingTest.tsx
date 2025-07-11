@@ -45,6 +45,7 @@ export function TypingTest({
   const [startTime, setStartTime] = useState<number | null>(null)
   const [endTime, setEndTime] = useState<number | null>(null)
   const [timeRemaining, setTimeRemaining] = useState<number | null>(timeLimit || null)
+  const [isFocusMode, setIsFocusMode] = useState(false)
   
   // Typing state
   const [currentPosition, setCurrentPosition] = useState(0)
@@ -64,6 +65,7 @@ export function TypingTest({
     if (testState === "idle") {
       setTestState("running")
       setStartTime(Date.now())
+      setIsFocusMode(true)
     }
   }
   
@@ -72,6 +74,7 @@ export function TypingTest({
     if (testState === "running") {
       setTestState("completed")
       setEndTime(Date.now())
+      setIsFocusMode(false)
       
       // Calculate final results
       const timeSpent = ((endTime || Date.now()) - (startTime || Date.now())) / 1000
@@ -203,9 +206,11 @@ export function TypingTest({
     <div 
       className={cn(
         "w-full flex flex-col items-center justify-center gap-6",
+        isFocusMode && "focus-mode",
         className
       )}
       onClick={() => inputRef.current?.focus()}
+      data-focus-mode={isFocusMode}
     >
       {/* Hidden input field to capture typing - completely hidden from view */}
       <input
