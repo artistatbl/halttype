@@ -22,13 +22,12 @@ export function TextDisplay({
   return (
     <div 
       className={cn(
-        "w-full text-xl leading-relaxed tracking-wide font-mono py-4",
+        "w-full text-xl leading-relaxed tracking-wide font-mono py-6 px-4 rounded-lg",
         className
       )}
     >
       <div className="relative w-full">
-
-        {/* Text content - styled like Monkeytype with no visible input line */}
+        {/* Text content with improved styling and readability */}
         <div className="w-full">
           {text.split('').map((char, index) => {
             const isActive = index === currentPosition
@@ -40,8 +39,8 @@ export function TextDisplay({
                 key={index}
                 className={cn(
                   "transition-colors duration-50",
-                  isActive && "text-primary", // Removed the underline
-                  isPast && !isError && "text-primary/70",
+                  isActive && "text-primary font-bold", 
+                  isPast && !isError && "text-primary/80",
                   isPast && isError && "text-destructive",
                   !isPast && !isActive && "text-primary/40"
                 )}
@@ -52,20 +51,12 @@ export function TextDisplay({
           })}
         </div>
         
-        {/* Cursor - smoother and more visible like Monkeytype */}
-        {/* <div 
-          className="absolute top-0 left-0 w-[2px] h-[1.2em] bg-primary transition-all duration-100"
-          style={{
-            transform: `translateX(${currentPosition * 0.6}em)`,
-            animation: 'caret-blink 1.2s ease-in-out infinite',
-            opacity: testState === 'running' ? 1 : 0.7,
-          }}
-        /> */}
-        
+        {/* Improved spacing and line height for better readability */}
         <style jsx>{`
-          @keyframes caret-blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+          .w-full {
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+            word-spacing: 0.2em;
           }
         `}</style>
       </div>

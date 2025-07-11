@@ -227,17 +227,17 @@ export function TypingTest({
         spellCheck="false"
       />
       
-      {/* Monkeytype-style focus indicator */}
+      {/* Improved focus indicator with better visibility */}
       {testState === "idle" && (
-        <div className="text-primary/50 text-sm mb-2 animate-pulse">
+        <div className="text-primary/70 text-sm mb-4 animate-pulse font-medium">
           click or press any key to start
         </div>
       )}
       
-      {/* Timer display - Monkeytype-style minimalistic */}
+      {/* Timer display with improved visibility */}
       {testState === "running" && timeRemaining !== undefined && timeRemaining !== null && (
         <div className="w-full flex justify-center mb-4">
-          <div className="text-sm font-mono text-primary/80">
+          <div className="text-sm font-mono text-primary/90 font-semibold bg-background/50 px-3 py-1 rounded-md">
             {timeRemaining}s
           </div>
         </div>
