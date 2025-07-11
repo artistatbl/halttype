@@ -50,34 +50,34 @@ export function Footer({ className }: FooterProps) {
       
       {/* Social and Additional Links */}
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 justify-end">
-        <Link href="/terms" className="text-muted-foreground hover:text-foreground hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+        <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center gap-1.5">
           <FileText size={14} />
           <span>Terms</span>
         </Link>
         
-        <Link href="/security" className="text-muted-foreground hover:text-foreground hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+        <Link href="/security" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center gap-1.5">
           <Shield size={14} />
           <span>Security</span>
         </Link>
         
-        <Link href="/privacy" className="text-muted-foreground hover:text-foreground hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+        <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center gap-1.5">
           <FileText size={14} />
           <span>Privacy</span>
         </Link>
         
-        <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+        <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center gap-1.5">
           <Github size={14} />
           <span>GitHub</span>
           <ExternalLink size={10} className="opacity-70" />
         </a>
         
-        <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+        <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center gap-1.5">
           <Twitter size={14} />
           <span>Twitter</span>
           <ExternalLink size={10} className="opacity-70" />
         </a>
         
-        <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground hover:scale-105 transition-all duration-200 flex items-center gap-1.5">
+        <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center gap-1.5">
           <MessageSquare size={14} />
           <span>Discord</span>
           <ExternalLink size={10} className="opacity-70" />
