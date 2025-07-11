@@ -57,38 +57,38 @@ function TestConfigInternal({
 
 
   return (
-    <div className="w-full max-w-3xl mx-auto mb-6  p-2">
-      <div className="flex items-center justify-center  gap-4 text-xs">
+    <div className="w-full max-w-3xl mx-auto mb-4 sm:mb-6 p-1 sm:p-2">
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4 text-xs">
         {/* Punctuation */}
         <button
           onClick={() => onPunctuationChange(!punctuation)}
           className={cn(
-            "flex items-center gap-1 transition-colors px-2 py-1",
+            "flex items-center gap-1 transition-colors px-1.5 sm:px-2 py-1",
             punctuation
               ? "text-primary bg-muted/50"
               : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
           )}
         >
           <AtSignIcon className="w-3 h-3" />
-          punctuation
+          <span className="sm:inline">punctuation</span>
         </button>
 
         {/* Numbers */}
         <button
           onClick={() => onNumbersChange(!numbers)}
           className={cn(
-            "flex items-center gap-1 transition-colors px-2 py-1",
+            "flex items-center gap-1 transition-colors px-1.5 sm:px-2 py-1",
             numbers
               ? "text-primary bg-muted/50"
               : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
           )}
         >
           <HashIcon className="w-3 h-3" />
-          numbers
+          <span className="sm:inline">numbers</span>
         </button>
 
         {/* Test Mode */}
-        <div className="flex items-center gap-1 bg-muted/30 p-0.5">
+        <div className="flex items-center gap-0.5 sm:gap-1 bg-muted/30 p-0.5">
           <button
             onClick={() => onTestModeChange("time")}
             className={cn(
@@ -99,7 +99,7 @@ function TestConfigInternal({
             )}
           >
             <ClockIcon className="w-3 h-3" />
-            time
+            <span className="sm:inline">time</span>
           </button>
           
           <button
@@ -112,7 +112,7 @@ function TestConfigInternal({
             )}
           >
             <TextIcon className="w-3 h-3" />
-            words
+            <span className="sm:inline">words</span>
           </button>
           
           <button
@@ -125,18 +125,18 @@ function TestConfigInternal({
             )}
           >
             <QuoteIcon className="w-3 h-3" />
-            quote
+            <span className="sm:inline">quote</span>
           </button>
         </div>
 
         {/* Time/Word/Quote Options */}
-        <div className="flex items-center gap-1 bg-muted/30 p-0.5">
+        <div className="flex items-center gap-0.5 sm:gap-1 bg-muted/30 p-0.5">
           {testMode === "time" && timeOptions.map((time) => (
             <button
               key={time}
               onClick={() => onTimeLimitChange(time)}
               className={cn(
-                "px-2 py-1 transition-colors min-w-[2rem] text-center",
+                "px-1.5 sm:px-2 py-1 transition-colors min-w-[1.75rem] sm:min-w-[2rem] text-center text-xs",
                 timeLimit === time
                   ? "text-primary bg-muted/70"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -151,7 +151,7 @@ function TestConfigInternal({
               key={count}
               onClick={() => onWordCountChange(count)}
               className={cn(
-                "px-2 py-1 transition-colors min-w-[2rem] text-center",
+                "px-1.5 sm:px-2 py-1 transition-colors min-w-[1.75rem] sm:min-w-[2rem] text-center text-xs",
                 wordCount === count
                   ? "text-primary bg-muted/70"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -166,7 +166,7 @@ function TestConfigInternal({
               key={length}
               onClick={() => onQuoteLengthChange(length)}
               className={cn(
-                "px-2 py-1 transition-colors min-w-[2rem] text-center",
+                "px-1.5 sm:px-2 py-1 transition-colors min-w-[1.75rem] sm:min-w-[2rem] text-center text-xs",
                 quoteLength === length
                   ? "text-primary bg-muted/70"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"

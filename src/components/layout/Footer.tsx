@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { Github, Twitter, Shield, FileText, ExternalLink, MessageSquare } from "lucide-react"
 import { ThemeModal } from "../theme"
 import { useFocus } from "../typing-test/FocusContext"
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 
 interface FooterProps {
   className?: string
@@ -15,12 +16,12 @@ export function Footer({ className }: FooterProps) {
   
   return (
     <footer className={cn(
-      "w-full py-5 px-8 flex flex-wrap items-center justify-between text-xs mt-10 mb-6 mx-auto max-w-[90%]  gap-y-4 bg-background text-card-foreground",
+      "w-full py-3 sm:py-4 md:py-5 px-4 sm:px-6 md:px-8 flex flex-wrap items-center justify-between text-xs mt-6 sm:mt-8 md:mt-10 mb-4 sm:mb-5 md:mb-6 mx-auto max-w-full sm:max-w-[95%] md:max-w-[90%] gap-y-3 sm:gap-y-4 bg-background text-card-foreground",
       className
     )}>
       {/* Theme Selector - Left Side - Hidden in focus mode */}
       <div className={cn(
-        "flex flex-wrap items-center gap-x-4 gap-y-2 transition-opacity duration-300",
+        "flex flex-wrap items-center gap-x-2 sm:gap-x-3 md:gap-x-4 gap-y-2 transition-opacity duration-300",
         isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
       )}>
         <ThemeModal />
@@ -66,41 +67,74 @@ export function Footer({ className }: FooterProps) {
       
       {/* Social and Additional Links - Hidden in focus mode */}
       <div className={cn(
-        "flex flex-wrap items-center gap-x-4 gap-y-2 justify-end transition-opacity duration-300",
+        "flex flex-wrap items-center gap-x-1 sm:gap-x-1.5 md:gap-x-2 gap-y-2 justify-end transition-opacity duration-300",
         isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
       )}>
-        <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center gap-1.5">
-          <FileText size={14} />
-          <span>Terms</span>
-        </Link>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-all duration-200 p-2">
+              <FileText size={14} />
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Terms</p>
+          </TooltipContent>
+        </Tooltip>
         
-        <Link href="/security" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center gap-1.5">
-          <Shield size={14} />
-          <span>Security</span>
-        </Link>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link href="/security" className="text-muted-foreground hover:text-foreground transition-all duration-200 p-2">
+              <Shield size={14} />
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Security</p>
+          </TooltipContent>
+        </Tooltip>
         
-        <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center gap-1.5">
-          <FileText size={14} />
-          <span>Privacy</span>
-        </Link>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-all duration-200 p-2">
+              <FileText size={14} />
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Privacy</p>
+          </TooltipContent>
+        </Tooltip>
         
-        <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center gap-1.5">
-          <Github size={14} />
-          <span>GitHub</span>
-          <ExternalLink size={10} className="opacity-70" />
-        </a>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-all duration-200 p-2">
+              <Github size={14} />
+            </a>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>GitHub</p>
+          </TooltipContent>
+        </Tooltip>
         
-        <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center gap-1.5">
-          <Twitter size={14} />
-          <span>Twitter</span>
-          <ExternalLink size={10} className="opacity-70" />
-        </a>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-all duration-200 p-2">
+              <Twitter size={14} />
+            </a>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Twitter</p>
+          </TooltipContent>
+        </Tooltip>
         
-        <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center gap-1.5">
-          <MessageSquare size={14} />
-          <span>Discord</span>
-          <ExternalLink size={10} className="opacity-70" />
-        </a>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-all duration-200 p-2">
+              <MessageSquare size={14} />
+            </a>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Discord</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
     </footer>
   )

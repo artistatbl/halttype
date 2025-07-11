@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { useSession, signOut } from "@/lib/auth-client"
 import { UserIcon } from "lucide-react"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 interface UserDropdownProps {
   className?: string
@@ -56,52 +57,62 @@ export function UserDropdown({ className }: UserDropdownProps) {
     <div className={cn("relative", className)} ref={dropdownRef}>
       {session ? (
         /* User Avatar Button when signed in */
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-2 py-1 rounded hover:bg-muted/50 transition-all duration-200"
-        >
-          {/* User Avatar or Initials Circle */}
-          {displayUser.image ? (
-            <div className="relative w-6 h-6 rounded-full overflow-hidden">
-              <Image 
-                src={displayUser.image}
-                alt={`${displayUser.name}'s avatar`}
-                fill
-                sizes="24px"
-                className="object-cover"
-              />
-            </div>
-          ) : (
-            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-medium">
-              {getInitials(displayUser.name || '')}
-            </div>
-          )}
-          
-          {/* Username */}
-          <span className="text-xs text-foreground">{displayUser.name}</span>
-          
-          {/* Dropdown Arrow */}
-          <svg
-            className={cn(
-              "w-3 h-3 text-muted-foreground transition-transform",
-              isOpen && "rotate-180"
-            )}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="flex items-center gap-1 p-1.5 rounded-md hover:bg-muted/50 transition-all duration-200"
+            >
+              {/* User Avatar or Initials Circle */}
+              {displayUser.image ? (
+                <div className="relative w-6 h-6 rounded-full overflow-hidden">
+                  <Image 
+                    src={displayUser.image}
+                    alt={`${displayUser.name}'s avatar`}
+                    fill
+                    sizes="24px"
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-medium">
+                  {getInitials(displayUser.name || '')}
+                </div>
+              )}
+              
+              {/* Dropdown Arrow */}
+              <svg
+                className={cn(
+                  "w-3 h-3 text-muted-foreground transition-transform",
+                  isOpen && "rotate-180"
+                )}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{displayUser.name}</p>
+          </TooltipContent>
+        </Tooltip>
       ) : (
         /* User Icon Button when signed out */
-        <button
-          onClick={() => router.push('/sign')}
-          className="flex items-center gap-2 px-2 py-1 rounded hover:bg-muted/50 transition-all duration-200"
-        >
-          <UserIcon className="w-4 h-4 text-muted-foreground" />
-          <span className="text-xs text-muted-foreground">Sign In</span>
-        </button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              onClick={() => router.push('/sign')}
+              className="flex items-center justify-center p-1.5 rounded-md hover:bg-muted/50 transition-all duration-200"
+            >
+              <UserIcon className="w-5 h-5 text-muted-foreground" />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Sign In</p>
+          </TooltipContent>
+        </Tooltip>
       )}
 
       {/* Dropdown Menu - only show when signed in and dropdown is open */}

@@ -50,14 +50,14 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
   }
 
   return (
-    <div className={cn("w-full max-w-3xl mx-auto p-4 bg-card/30", className)}>
-      <h2 className="text-sm font-medium text-primary mb-4">Settings</h2>
+    <div className={cn("w-full max-w-full sm:max-w-3xl mx-auto p-3 sm:p-4 bg-card/30", className)}>
+      <h2 className="text-sm font-medium text-primary mb-3 sm:mb-4">Settings</h2>
       
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {/* Language Selection */}
         <div>
           <h3 className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">Language</h3>
-          <div className="grid grid-cols-5 gap-1.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1 sm:gap-1.5">
             {languageOptions.map((lang) => (
               <button
                 key={lang.code}

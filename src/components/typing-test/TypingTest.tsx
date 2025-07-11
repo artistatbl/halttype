@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { TextDisplay } from "./TextDisplay"
 import { StatsDisplay } from "./StatsDisplay"
 import { useFocus } from "./FocusContext"
+import { useCapsLock } from "./CapsLock"
 
 interface TypingTestProps {
   content: string
@@ -52,6 +53,9 @@ export function TypingTest({
   const [userInput, setUserInput] = useState("")
   const [errors, setErrors] = useState<number[]>([])
   const [keystrokes, setKeystrokes] = useState<TestResults["keystrokes"]>([])
+  
+  // Use the capsLock hook instead of managing state directly
+  const capsLockOn = useCapsLock()
   
   // Stats
   const [wpm, setWpm] = useState(0)
@@ -208,7 +212,7 @@ export function TypingTest({
   return (
     <div 
       className={cn(
-        "w-full flex flex-col items-center justify-center gap-6",
+        "w-full flex flex-col items-center justify-center gap-4 sm:gap-5 md:gap-6",
         className
       )}
       onClick={() => inputRef.current?.focus()}
@@ -229,15 +233,17 @@ export function TypingTest({
       
       {/* Improved focus indicator with better visibility */}
       {testState === "idle" && (
-        <div className="text-primary/70 text-sm mb-4 animate-pulse font-medium">
+        <div className="text-primary/70 text-xs sm:text-sm mb-2 sm:mb-4 animate-pulse font-medium">
           click or press any key to start
         </div>
       )}
       
+
+      
       {/* Timer display with improved visibility */}
       {testState === "running" && timeRemaining !== undefined && timeRemaining !== null && (
-        <div className="w-full flex justify-center mb-4">
-          <div className="text-sm font-mono text-primary/90 font-semibold bg-background/50 px-3 py-1 rounded-md">
+        <div className="w-full flex justify-center mb-2 sm:mb-4">
+          <div className="text-xs sm:text-sm font-mono text-primary/90 font-semibold bg-background/50 px-2 sm:px-3 py-1 rounded-md">
             {timeRemaining}s
           </div>
         </div>
@@ -249,6 +255,7 @@ export function TypingTest({
         currentPosition={currentPosition}
         errors={errors}
         testState={testState}
+        capsLockOn={capsLockOn}
       />
       
       {/* Stats display - only shown when test is completed */}
@@ -262,32 +269,32 @@ export function TypingTest({
       
       {/* Test completed view */}
       {testState === "completed" && (
-        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-card/90 p-6 max-w-md w-full">
-            <h2 className="text-xl font-medium text-primary mb-6 text-center">Test Complete</h2>
+        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-card/90 p-4 sm:p-6 max-w-md w-full rounded-md">
+            <h2 className="text-lg sm:text-xl font-medium text-primary mb-4 sm:mb-6 text-center">Test Complete</h2>
             
-            <div className="grid grid-cols-2 gap-6 mb-6">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
               <div className="flex flex-col items-center">
-                <p className="text-primary text-3xl font-mono">{wpm}</p>
+                <p className="text-primary text-2xl sm:text-3xl font-mono">{wpm}</p>
                 <p className="text-muted-foreground text-xs uppercase tracking-wider mt-1">wpm</p>
               </div>
               <div className="flex flex-col items-center">
-                <p className="text-foreground text-3xl font-mono">{accuracy}%</p>
+                <p className="text-foreground text-2xl sm:text-3xl font-mono">{accuracy}%</p>
                 <p className="text-muted-foreground text-xs uppercase tracking-wider mt-1">accuracy</p>
               </div>
               <div className="flex flex-col items-center">
-                <p className="text-foreground text-3xl font-mono">
+                <p className="text-foreground text-2xl sm:text-3xl font-mono">
                   {Math.round(((endTime || 0) - (startTime || 0)) / 100) / 10}s
                 </p>
                 <p className="text-muted-foreground text-xs uppercase tracking-wider mt-1">time</p>
               </div>
               <div className="flex flex-col items-center">
-                <p className="text-foreground text-3xl font-mono">{userInput.length}</p>
+                <p className="text-foreground text-2xl sm:text-3xl font-mono">{userInput.length}</p>
                 <p className="text-muted-foreground text-xs uppercase tracking-wider mt-1">chars</p>
               </div>
             </div>
             
-            <div className="flex gap-3">
+            <div className="flex gap-2 sm:gap-3">
               <button
                 onClick={() => {
                   setTestState("idle")
@@ -303,7 +310,7 @@ export function TypingTest({
                   setFocused(false) // Ensure focus mode is off when resetting
                   inputRef.current?.focus()
                 }}
-                className="flex-1 py-2 px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-sm transition-colors"
+                className="flex-1 py-1.5 sm:py-2 px-2 sm:px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-xs sm:text-sm transition-colors rounded"
               >
                 Try Again
               </button>
@@ -311,7 +318,7 @@ export function TypingTest({
                 onClick={() => {
                   // TODO: Navigate to new test
                 }}
-                className="flex-1 py-2 px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-sm transition-colors"
+                className="flex-1 py-1.5 sm:py-2 px-2 sm:px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-xs sm:text-sm transition-colors rounded"
               >
                 New Test
               </button>
