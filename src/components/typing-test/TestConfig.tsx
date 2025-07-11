@@ -65,7 +65,7 @@ function TestConfigInternal({
           className={cn(
             "flex items-center gap-1.5 transition-all px-2 sm:px-2.5 py-1.5 rounded-md",
             punctuation
-              ? "text-primary bg-muted/60 shadow-sm"
+              ? "text-primary bg-muted/60"
               : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
           )}
         >
@@ -79,7 +79,7 @@ function TestConfigInternal({
           className={cn(
             "flex items-center gap-1.5 transition-all px-2 sm:px-2.5 py-1.5 rounded-md",
             numbers
-              ? "text-primary bg-muted/60 shadow-sm"
+              ? "text-primary bg-muted/60"
               : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
           )}
         >
@@ -94,7 +94,7 @@ function TestConfigInternal({
             className={cn(
               "flex items-center gap-1.5 transition-all px-2.5 py-1.5 rounded-sm",
               testMode === "time"
-                ? "text-primary bg-muted/80 shadow-sm"
+                ? "text-primary bg-muted/80"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
             )}
           >
@@ -107,7 +107,7 @@ function TestConfigInternal({
             className={cn(
               "flex items-center gap-1.5 transition-all px-2.5 py-1.5 rounded-sm",
               testMode === "words"
-                ? "text-primary bg-muted/80 shadow-sm"
+                ? "text-primary bg-muted/80"  
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
             )}
           >
@@ -120,7 +120,7 @@ function TestConfigInternal({
             className={cn(
               "flex items-center gap-1.5 transition-all px-2.5 py-1.5 rounded-sm",
               testMode === "quote"
-                ? "text-primary bg-muted/80 shadow-sm"
+                ? "text-primary bg-muted/80"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
             )}
           >
@@ -138,7 +138,7 @@ function TestConfigInternal({
               className={cn(
                 "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
                 timeLimit === time
-                  ? "text-primary bg-muted/80 shadow-sm font-medium"
+                  ? "text-primary bg-muted/80 font-medium"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               )}
             >
@@ -153,7 +153,7 @@ function TestConfigInternal({
               className={cn(
                 "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
                 wordCount === count
-                  ? "text-primary bg-muted/80 shadow-sm font-medium"
+                  ? "text-primary bg-muted/80  font-medium"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               )}
             >
@@ -168,7 +168,7 @@ function TestConfigInternal({
               className={cn(
                 "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
                 quoteLength === length
-                  ? "text-primary bg-muted/80 shadow-sm font-medium"
+                  ? "text-primary bg-muted/80  font-medium"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               )}
             >
