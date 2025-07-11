@@ -63,7 +63,7 @@ function TestConfigInternal({
         <button
           onClick={() => onPunctuationChange(!punctuation)}
           className={cn(
-            "flex items-center gap-1 transition-colors px-2 py-1 rounded",
+            "flex items-center gap-1 transition-colors px-2 py-1",
             punctuation
               ? "text-primary bg-muted/50"
               : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
@@ -77,7 +77,7 @@ function TestConfigInternal({
         <button
           onClick={() => onNumbersChange(!numbers)}
           className={cn(
-            "flex items-center gap-1 transition-colors px-2 py-1 rounded",
+            "flex items-center gap-1 transition-colors px-2 py-1",
             numbers
               ? "text-primary bg-muted/50"
               : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
@@ -88,11 +88,11 @@ function TestConfigInternal({
         </button>
 
         {/* Test Mode */}
-        <div className="flex items-center gap-1 bg-muted/30 rounded p-0.5">
+        <div className="flex items-center gap-1 bg-muted/30 p-0.5">
           <button
             onClick={() => onTestModeChange("time")}
             className={cn(
-              "flex items-center gap-1 transition-colors px-2 py-1 rounded",
+              "flex items-center gap-1 transition-colors px-2 py-1",
               testMode === "time"
                 ? "text-primary bg-muted/70"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -105,7 +105,7 @@ function TestConfigInternal({
           <button
             onClick={() => onTestModeChange("words")}
             className={cn(
-              "flex items-center gap-1 transition-colors px-2 py-1 rounded",
+              "flex items-center gap-1 transition-colors px-2 py-1",
               testMode === "words"
                 ? "text-primary bg-muted/70"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -118,7 +118,7 @@ function TestConfigInternal({
           <button
             onClick={() => onTestModeChange("quote")}
             className={cn(
-              "flex items-center gap-1 transition-colors px-2 py-1 rounded",
+              "flex items-center gap-1 transition-colors px-2 py-1",
               testMode === "quote"
                 ? "text-primary bg-muted/70"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -130,13 +130,13 @@ function TestConfigInternal({
         </div>
 
         {/* Time/Word/Quote Options */}
-        <div className="flex items-center gap-1 bg-muted/30 rounded p-0.5">
+        <div className="flex items-center gap-1 bg-muted/30 p-0.5">
           {testMode === "time" && timeOptions.map((time) => (
             <button
               key={time}
               onClick={() => onTimeLimitChange(time)}
               className={cn(
-                "px-2 py-1 transition-colors rounded min-w-[2rem] text-center",
+                "px-2 py-1 transition-colors min-w-[2rem] text-center",
                 timeLimit === time
                   ? "text-primary bg-muted/70"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -151,7 +151,7 @@ function TestConfigInternal({
               key={count}
               onClick={() => onWordCountChange(count)}
               className={cn(
-                "px-2 py-1 transition-colors rounded min-w-[2rem] text-center",
+                "px-2 py-1 transition-colors min-w-[2rem] text-center",
                 wordCount === count
                   ? "text-primary bg-muted/70"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -166,7 +166,7 @@ function TestConfigInternal({
               key={length}
               onClick={() => onQuoteLengthChange(length)}
               className={cn(
-                "px-2 py-1 transition-colors rounded min-w-[2rem] text-center",
+                "px-2 py-1 transition-colors min-w-[2rem] text-center",
                 quoteLength === length
                   ? "text-primary bg-muted/70"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"

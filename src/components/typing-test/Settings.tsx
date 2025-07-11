@@ -50,7 +50,7 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
   }
 
   return (
-    <div className={cn("w-full max-w-3xl mx-auto p-4 bg-card/30 rounded border border-border/30", className)}>
+    <div className={cn("w-full max-w-3xl mx-auto p-4 bg-card/30", className)}>
       <h2 className="text-sm font-medium text-primary mb-4">Settings</h2>
       
       <div className="space-y-4">
@@ -63,9 +63,9 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
                 key={lang.code}
                 onClick={() => handleSettingChange('language', lang.code)}
                 className={cn(
-                  "px-2 py-1.5 text-xs rounded transition-colors",
+                  "px-2 py-1.5 text-xs transition-colors",
                   settings.language === lang.code
-                    ? "bg-muted/70 text-primary border border-primary/30"
+                    ? "bg-muted/70 text-primary"
                     : "bg-muted/50 text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
               >
@@ -84,9 +84,9 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
                 key={layout.code}
                 onClick={() => handleSettingChange('keyboardLayout', layout.code)}
                 className={cn(
-                  "px-2 py-1.5 text-xs rounded transition-colors",
+                  "px-2 py-1.5 text-xs transition-colors",
                   settings.keyboardLayout === layout.code
-                    ? "bg-muted/70 text-primary border border-primary/30"
+                    ? "bg-muted/70 text-primary"
                     : "bg-muted/50 text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
               >
@@ -105,9 +105,9 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
                 key={option.code}
                 onClick={() => handleSettingChange('wpmDisplay', option.code)}
                 className={cn(
-                  "px-2 py-1.5 text-xs rounded transition-colors",
+                  "px-2 py-1.5 text-xs transition-colors",
                   settings.wpmDisplay === option.code
-                    ? "bg-muted/70 text-primary border border-primary/30"
+                    ? "bg-muted/70 text-primary"
                     : "bg-muted/50 text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
               >
@@ -123,9 +123,9 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
           <button
             onClick={() => handleSettingChange('soundEnabled', !settings.soundEnabled)}
             className={cn(
-              "px-2 py-1.5 text-xs rounded transition-colors",
+              "px-2 py-1.5 text-xs transition-colors",
               settings.soundEnabled
-                ? "bg-muted/70 text-primary border border-primary/30"
+                ? "bg-muted/70 text-primary"
                 : "bg-muted/50 text-muted-foreground hover:bg-muted/80 hover:text-foreground"
             )}
           >
@@ -142,9 +142,9 @@ export function Settings({ settings, onSettingsChange, className }: SettingsProp
                 key={theme}
                 onClick={() => handleSettingChange('theme', theme)}
                 className={cn(
-                  "px-2 py-1.5 text-xs rounded transition-colors capitalize",
+                  "px-2 py-1.5 text-xs transition-colors capitalize",
                   settings.theme === theme
-                    ? "bg-muted/70 text-primary border border-primary/30"
+                    ? "bg-muted/70 text-primary"
                     : "bg-muted/50 text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 )}
               >

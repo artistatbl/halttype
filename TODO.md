@@ -15,7 +15,7 @@
 ## UI Design Implementation
 
 ### 1. Layout and Core UI Components
-- [ ] Create dark theme with minimal design (based on MonkeyType)
+- [ ] Create dark theme with minimal design (based on haltType)
 - [ ] Implement navbar with:
   - [ ] Logo and branding
   - [ ] Test configuration options (punctuation, numbers, time, words, quote)

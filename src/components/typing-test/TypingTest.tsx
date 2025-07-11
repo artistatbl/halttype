@@ -220,7 +220,7 @@ export function TypingTest({
       {/* Timer display */}
       {testState === "running" && timeRemaining !== undefined && timeRemaining !== null && (
         <div className="w-full flex justify-start mb-4">
-          <div className="text-sm font-mono text-primary bg-muted/70 px-3 py-1.5 rounded-md shadow-md">
+          <div className="text-sm font-mono text-primary bg-muted/70 px-3 py-1.5">
             {timeRemaining}s
           </div>
         </div>
@@ -246,7 +246,7 @@ export function TypingTest({
       {/* Test completed view */}
       {testState === "completed" && (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-card/90 p-6 rounded-lg max-w-md w-full border border-border/50">
+          <div className="bg-card/90 p-6 max-w-md w-full">
             <h2 className="text-xl font-medium text-primary mb-6 text-center">Test Complete</h2>
             
             <div className="grid grid-cols-2 gap-6 mb-6">
@@ -285,7 +285,7 @@ export function TypingTest({
                   setAccuracy(100)
                   inputRef.current?.focus()
                 }}
-                className="flex-1 py-2 px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-sm rounded transition-colors"
+                className="flex-1 py-2 px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-sm transition-colors"
               >
                 Try Again
               </button>
@@ -293,7 +293,7 @@ export function TypingTest({
                 onClick={() => {
                   // TODO: Navigate to new test
                 }}
-                className="flex-1 py-2 px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-sm rounded transition-colors"
+                className="flex-1 py-2 px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-sm transition-colors"
               >
                 New Test
               </button>

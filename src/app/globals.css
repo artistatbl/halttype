@@ -126,7 +126,7 @@
 }
 
 .dark {
-  --background: oklch(0.1 0 0); /* Darker background like MonkeyType */
+  --background: oklch(0.1 0 0); /* Darker background like haltType */
   --foreground: oklch(0.9491 0 0);
   --card: oklch(0.15 0 0); /* Darker card background */
   --card-foreground: oklch(0.9491 0 0);

@@ -63,7 +63,7 @@ export default function Home() {
         </div>
 
         {/* Main Typing Test Area */}
-        <div className="w-full bg-card/30 rounded-md p-6 border border-border/30">
+        <div className="w-full bg-background p-6">
           <TypingTest 
             content={sampleText}
             testMode={testConfig.mode}

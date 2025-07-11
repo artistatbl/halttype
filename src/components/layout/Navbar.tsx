@@ -18,7 +18,7 @@ export function Navbar({ className }: NavbarProps) {
         {/* Logo and Navigation */}
         <div className="flex items-center gap-4">
           <Link href="/" className="text-foreground font-medium flex items-center gap-1 hover:text-primary transition-all duration-200">
-            <span className="text-primary font-bold">monkey</span>
+            <span className="text-primary font-bold">halt</span>
             <span>type</span>
           </Link>
           

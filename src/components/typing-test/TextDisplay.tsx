@@ -40,7 +40,7 @@ export function TextDisplay({
                 key={index}
                 className={cn(
                   "transition-colors duration-50",
-                  isActive && "bg-muted/70 text-foreground rounded",
+                  isActive && "bg-muted/70 text-primary",
                   isPast && !isError && "text-muted-foreground",
                   isPast && isError && "text-destructive",
                   !isPast && !isActive && "text-muted-foreground/70"
