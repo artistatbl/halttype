@@ -1,5 +1,5 @@
 {
-  "id": "05f105c9-4dc9-4904-b29a-a146bd5ef919",
+  "id": "650a3167-4a5d-449a-8cb2-7b1f0f61fd4c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -624,12 +624,25 @@
           "notNull": false,
           "default": "'[]'::jsonb"
         },
+        "startedAt": {
+          "name": "startedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
         "completedAt": {
           "name": "completedAt",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'completed'"
         }
       },
       "indexes": {},

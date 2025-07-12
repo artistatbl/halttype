@@ -31,5 +31,7 @@ export const testResult = pgTable("testResult", {
     timestamp: number;
     correct: boolean;
   }[]>().default([]),
-  completedAt: timestamp("completedAt").notNull().defaultNow(),
+  startedAt: timestamp("startedAt"), // When the test was started
+  completedAt: timestamp("completedAt").notNull().defaultNow(), // When the test was completed
+  status: text("status").notNull().default("completed"), // Status of the test: 'started', 'completed', 'abandoned'
 })

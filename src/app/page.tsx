@@ -12,6 +12,9 @@ import { useFocus } from "@/components/typing-test/FocusContext"
 // Sample text for typing test
 const sampleText = "The quick brown fox jumps over the lazy dog. Programming is the process of creating a set of instructions that tell a computer how to perform a task. Programming can be done using a variety of computer programming languages, such as JavaScript, Python, and C++."
 
+// Default test ID for the sample text
+const sampleTestId = "sample-test"
+
 export default function Home() {
   const [testConfig, setTestConfig] = useState<TestConfigOptions>({
     mode: "time",
@@ -84,6 +87,7 @@ export default function Home() {
             timeLimit={testConfig.mode === "time" ? testConfig.timeLimit : undefined}
             wordCount={testConfig.mode === "words" ? testConfig.wordCount : undefined}
             difficulty={testConfig.difficulty}
+            testId={sampleTestId}
             //className="max-w-3xl mx-auto"
           />
         </div>

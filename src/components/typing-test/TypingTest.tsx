@@ -6,6 +6,8 @@ import { TextDisplay } from "./TextDisplay"
 import { StatsDisplay } from "./StatsDisplay"
 import { useFocus } from "./FocusContext"
 import { useCapsLock } from "./CapsLock"
+import { client } from "@/lib/client"
+import { nanoid } from "nanoid"
 
 interface TypingTestProps {
   content: string
@@ -16,12 +18,13 @@ interface TypingTestProps {
   onComplete?: (results: TestResults) => void
   className?: string
   testMode?: "time" | "words" | "quote"
+  testId?: string // ID of the test being taken
 }
 
 export interface TestResults {
   wpm: number
   accuracy: number
-  timeSpent: number // in seconds
+  timeSpent: number // in seconds (integer)
   wordsTyped: number
   correctWords: number
   incorrectWords: number
@@ -41,6 +44,7 @@ export function TypingTest({
   onComplete,
   className,
   testMode = "time",
+  testId = "default", // Default test ID if none provided
 }: TypingTestProps) {
   // Test state
   const [testState, setTestState] = useState<"idle" | "running" | "completed">("idle")
@@ -68,16 +72,26 @@ export function TypingTest({
   const { setFocused } = useFocus()
   
   // Start the test when user starts typing
-  const startTest = () => {
+  const startTest = async () => {
     if (testState === "idle") {
       setTestState("running")
       setStartTime(Date.now())
       setFocused(true) // Set focus mode when typing starts
+      
+      try {
+        // Call the API to record the test start
+        await client.testResults.startTest.$post({
+          testId: testId,
+        })
+      } catch (error) {
+        // If there's an error, we still want the test to continue locally
+        console.error("Failed to record test start:", error)
+      }
     }
   }
   
   // Complete the test
-  const completeTest = () => {
+  const completeTest = async () => {
     if (testState === "running") {
       setTestState("completed")
       setEndTime(Date.now())
@@ -87,15 +101,35 @@ export function TypingTest({
       const timeSpent = ((endTime || Date.now()) - (startTime || Date.now())) / 1000
       const wordsTyped = userInput.trim().split(/\s+/).length
       const correctWords = wordsTyped - errors.length
+      const calculatedWpm = Math.round((wordsTyped / timeSpent) * 60)
+      const calculatedAccuracy = Math.round((correctWords / wordsTyped) * 100) || 0
+      
+      const roundedTimeSpent = Math.round(timeSpent);
       
       const results: TestResults = {
-        wpm: Math.round((wordsTyped / timeSpent) * 60),
-        accuracy: Math.round((correctWords / wordsTyped) * 100) || 0,
-        timeSpent,
+        wpm: calculatedWpm,
+        accuracy: calculatedAccuracy,
+        timeSpent: roundedTimeSpent,
         wordsTyped,
         correctWords,
         incorrectWords: errors.length,
         keystrokes,
+      }
+      
+      try {
+        // Save the test result to the database
+        await client.testResults.saveTestResult.$post({
+          testId: testId,
+          wpm: calculatedWpm,
+          accuracy: calculatedAccuracy,
+          timeSpent: roundedTimeSpent, // Using the rounded integer value
+          wordsTyped,
+          correctWords,
+          incorrectWords: errors.length,
+          keystrokes,
+        })
+      } catch (error) {
+        console.error("Failed to save test result:", error)
       }
       
       // Call onComplete callback with results
@@ -104,12 +138,12 @@ export function TypingTest({
   }
   
   // Handle user input
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value
     
     // Start test if not already started
     if (testState === "idle") {
-      startTest()
+      await startTest()
     }
     
     // Update user input

@@ -77,7 +77,9 @@ CREATE TABLE "testResult" (
 	"correctWords" integer NOT NULL,
 	"incorrectWords" integer NOT NULL,
 	"keystrokes" jsonb DEFAULT '[]'::jsonb,
-	"completedAt" timestamp DEFAULT now() NOT NULL
+	"startedAt" timestamp,
+	"completedAt" timestamp DEFAULT now() NOT NULL,
+	"status" text DEFAULT 'completed' NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "user" (
