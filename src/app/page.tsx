@@ -77,6 +77,7 @@ export default function Home() {
             />
           </div>
         )}
+        
         <div
           className={cn(
             "w-full mb-10 transition-opacity duration-300",

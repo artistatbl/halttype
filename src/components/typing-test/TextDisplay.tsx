@@ -30,11 +30,10 @@ export function TextDisplay({
       )}
     >
       <div className="relative w-full">
-        {/* Caps Lock warning */}
         <CapsLockWarning isOn={capsLockOn} />
         
         {/* Text content with improved styling and readability */}
-        <div className="w-full">
+        <div className="w-full leading-[1.7] tracking-[0.04em] [word-spacing:0.18em] sm:leading-[1.8] sm:tracking-[0.05em] sm:[word-spacing:0.2em] md:leading-[1.9] md:tracking-[0.06em] md:[word-spacing:0.22em]">
           {text.split('').map((char, index) => {
             const isActive = index === currentPosition
             const isPast = index < currentPosition
@@ -56,31 +55,6 @@ export function TextDisplay({
             )
           })}
         </div>
-        
-        {/* Improved spacing and line height for better readability with responsive adjustments */}
-        <style jsx>{`
-          .w-full {
-            line-height: 1.7;
-            letter-spacing: 0.04em;
-            word-spacing: 0.18em;
-          }
-          
-          @media (min-width: 640px) {
-            .w-full {
-              line-height: 1.8;
-              letter-spacing: 0.05em;
-              word-spacing: 0.2em;
-            }
-          }
-          
-          @media (min-width: 768px) {
-            .w-full {
-              line-height: 1.9;
-              letter-spacing: 0.06em;
-              word-spacing: 0.22em;
-            }
-          }
-        `}</style>
       </div>
     </div>
   )
