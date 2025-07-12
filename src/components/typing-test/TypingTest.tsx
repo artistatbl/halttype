@@ -274,9 +274,9 @@ export function TypingTest({
       
 
       
-      {/* Timer display with improved visibility */}
+      {/* Timer display with improved visibility - positioned on the left */}
       {testState === "running" && timeRemaining !== undefined && timeRemaining !== null && (
-        <div className="w-full flex justify-center mb-2 sm:mb-4">
+        <div className="w-full flex justify-start mb-2 sm:mb-4">
           <div className="text-sm sm:text-base md:text-lg font-mono text-primary/90 font-semibold bg-background/50 px-2 sm:px-3 py-1 rounded-md">
             {timeRemaining}s
           </div>
