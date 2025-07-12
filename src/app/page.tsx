@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { Layout } from "@/components/layout/Layout";
 import { TypingTest } from "@/components/typing-test/TypingTest";
@@ -15,11 +15,8 @@ import {
 } from "@/components/typing-test/Settings";
 import { SettingsIcon } from "@/components/icons/settings";
 import { useFocus } from "@/components/typing-test/FocusContext";
-
-const sampleText =
-  "The quick brown fox jumps over the lazy dog. Programming is the process of creating a set of instructions that tell a computer how to perform a task. Programming can be done using a variety of computer programming languages, such as JavaScript, Python, and C++.";
-
-const sampleTestId = "sample-test";
+import { useTextGeneration } from "@/components/typing-test/useTextGeneration";
+import { nanoid } from "nanoid";
 
 export default function Home() {
   const [testConfig, setTestConfig] = useState<TestConfigOptions>({
@@ -35,9 +32,22 @@ export default function Home() {
   const [userSettings, setUserSettings] =
     useState<UserSettings>(defaultSettings);
   const [showSettings, setShowSettings] = useState(false);
+  const [testId] = useState(() => nanoid());
 
   // Get focus state
   const { isFocused } = useFocus();
+
+  // Memoize the text generation config to prevent infinite loops
+  const textGenerationConfig = useMemo(() => ({
+    mode: testConfig.mode,
+    wordCount: testConfig.wordCount as 10 | 25 | 50 | 100,
+    difficulty: testConfig.difficulty as 'easy' | 'medium' | 'hard',
+    punctuation: testConfig.punctuation || false,
+    numbers: testConfig.numbers || false,
+  }), [testConfig.mode, testConfig.wordCount, testConfig.difficulty, testConfig.punctuation, testConfig.numbers]);
+
+  // Generate text based on current configuration
+  const { currentText, regenerateText, isGenerating, error } = useTextGeneration(textGenerationConfig);
 
   return (
     <Layout>
@@ -80,7 +90,7 @@ export default function Home() {
         
         <div
           className={cn(
-            "w-full mb-10 transition-opacity duration-300",
+            "w-full mb-6 transition-opacity duration-300",
             isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
           )}
         >
@@ -89,18 +99,51 @@ export default function Home() {
             initialConfig={testConfig}
           />
         </div>
-        <TypingTest
-          content={sampleText}
-          testMode={testConfig.mode}
-          timeLimit={
-            testConfig.mode === "time" ? testConfig.timeLimit : undefined
-          }
-          wordCount={
-            testConfig.mode === "words" ? testConfig.wordCount : undefined
-          }
-          difficulty={testConfig.difficulty}
-          testId={sampleTestId}
-        />
+        
+        {/* Regenerate Text Button */}
+        <div
+          className={cn(
+            "w-full mb-4 flex justify-center transition-opacity duration-300",
+            isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
+          )}
+        >
+          <button
+            onClick={regenerateText}
+            disabled={isGenerating}
+            className={cn(
+              "px-4 py-2 text-sm transition-all rounded-md",
+              "text-muted-foreground hover:text-foreground hover:bg-muted/50",
+              "disabled:opacity-50 disabled:cursor-not-allowed"
+            )}
+          >
+            {isGenerating ? "Generating..." : "🔄 New Text"}
+          </button>
+        </div>
+        {error && (
+          <div className="w-full mb-4 p-3 bg-destructive/10 border border-destructive/20 rounded-md text-destructive text-sm">
+            Error generating text: {error}
+          </div>
+        )}
+        
+        {isGenerating ? (
+          <div className="w-full flex items-center justify-center py-8">
+            <div className="text-muted-foreground">Generating text...</div>
+          </div>
+        ) : (
+          <TypingTest
+            content={currentText}
+            testMode={testConfig.mode}
+            timeLimit={
+              testConfig.mode === "time" ? testConfig.timeLimit : undefined
+            }
+            wordCount={
+              testConfig.mode === "words" ? testConfig.wordCount : undefined
+            }
+            difficulty={testConfig.difficulty}
+            testId={testId}
+            key={`${testId}-${currentText.slice(0, 20)}`} // Force re-render when text changes
+          />
+        )}
       </div>
     </Layout>
   );

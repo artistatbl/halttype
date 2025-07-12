@@ -177,6 +177,24 @@ function TestConfigInternal({
           ))}
         </div>
 
+        {/* Difficulty Options */}
+        <div className="flex items-center gap-0.5 sm:gap-1  p-0.5 rounded-md">
+          {difficultyOptions.map((diff) => (
+            <button
+              key={diff}
+              onClick={() => onDifficultyChange(diff)}
+              className={cn(
+                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
+                difficulty === diff
+                  ? "text-accent-foreground font-medium"
+                  : "text-muted-foreground hover:text-primary "
+              )}
+            >
+              {diff}
+            </button>
+          ))}
+        </div>
+
 
       </div>
     </div>
