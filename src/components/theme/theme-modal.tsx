@@ -12,20 +12,8 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { SettingsIcon as Settings } from "@/components/icons/settings"
-
-// Define available themes from theme.md
-const themes = [
-  { name: "system", label: "System" },
-  { name: "light", label: "Light" },
-  { name: "dark", label: "Dark" },
-  { name: "amber", label: "Amber" },
-  { name: "caffiene", label: "Caffiene" },
-  { name: "nature", label: "Nature" },
-  { name: "notebook", label: "Notebook" },
-  { name: "claude", label: "Claude" },
-  { name: "twitter", label: "Twitter" },
-  { name: "mono", label: "Mono" },
-]
+import { themes } from "./theme-config"
+import { ThemeButton } from "./theme-button"
 
 export function ThemeModal() {
   const { theme, setTheme } = useTheme()
@@ -43,34 +31,33 @@ export function ThemeModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="h-8 flex items-center gap-2 px-3">
-          <Settings className="h-4 w-4" />
-          {mounted && <span>{currentTheme}</span>}
+        <Button variant="ghost" size="sm" className="h-8 flex items-center gap-2 px-2.5 hover:bg-muted">
+          <Settings className="h-3.5 w-3.5 text-muted-foreground" />
+          {mounted && <span className="text-sm font-normal">{currentTheme}</span>}
           <span className="sr-only">Theme settings</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Choose Theme</DialogTitle>
-          <DialogDescription>
-            Select a theme to customize your experience.
+      <DialogContent className="sm:max-w-[400px] p-0 gap-0">
+        <DialogHeader className="px-6 pt-6 pb-4 space-y-1.5">
+          <DialogTitle className="text-xl font-semibold">Themes</DialogTitle>
+          <DialogDescription className="text-sm text-muted-foreground">
+            Choose your visual style
           </DialogDescription>
         </DialogHeader>
-        <div className="grid grid-cols-2 gap-4 py-4">
-          {themes.map((t) => (
-            <Button
-              key={t.name}
-              variant={theme === t.name ? "default" : "outline"}
-              className="justify-start"
-              onClick={() => {
-                console.log('Setting theme to:', t.name)
-                setTheme(t.name)
-                setOpen(false)
-              }}
-            >
-              {t.label}
-            </Button>
-          ))}
+        <div className="px-2 pb-4">
+          <div className="space-y-0.5">
+            {themes.map((t) => (
+              <ThemeButton
+                key={t.name}
+                theme={t}
+                isSelected={theme === t.name}
+                onClick={() => {
+                  setTheme(t.name)
+                  setOpen(false)
+                }}
+              />
+            ))}
+          </div>
         </div>
       </DialogContent>
     </Dialog>

@@ -81,7 +81,7 @@ export function CapsLockWarning({
       aria-hidden={!isOn}
       style={{ marginTop: '-3rem' }}
     >
-      <div className="bg-destructive text-destructive-foreground px-4 py-2 rounded-md text-sm font-bold shadow-lg flex items-center gap-2">
+      <div className="bg-accent text-primany px-4 py-2 rounded-md text-sm font-bold  flex items-center gap-2">
         <LockIcon className="w-4 h-4"/>
         CAPS LOCK
       </div>
