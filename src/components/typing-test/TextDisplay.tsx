@@ -25,7 +25,7 @@ export function TextDisplay({
   return (
     <div 
       className={cn(
-        "w-full text-xl sm:text-xl md:text-2xl leading-relaxed tracking-wide font-mono py-5 sm:py-6 md:py-8 px-4 sm:px-5 md:px-6 rounded-lg transition-all",
+        "w-full text-accent-foreground text-xl sm:text-xl md:text-2xl leading-relaxed tracking-wide  py-5 sm:py-6 md:py-8 px-4 sm:px-5 md:px-6 rounded-lg transition-all",
         className
       )}
     >
@@ -46,9 +46,9 @@ export function TextDisplay({
                 className={cn(
                   "transition-colors duration-50",
                   isActive && "text-primary font-bold relative", 
-                  isPast && !isError && "text-primary/80",
+                  isPast && !isError && "text-primary/40",
                   isPast && isError && "text-destructive",
-                  !isPast && !isActive && "text-primary/30"
+                  !isPast && !isActive && "text-primary"
                 )}
               >
                 {char}

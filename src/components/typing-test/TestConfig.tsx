@@ -65,8 +65,8 @@ function TestConfigInternal({
           className={cn(
             "flex items-center gap-1.5 transition-all px-2 sm:px-2.5 py-1.5 rounded-md",
             punctuation
-              ? "text-primary bg-muted/60"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+              ? "text-accent-foreground font-medium"
+              : "text-muted-foreground hover:text-primary "
           )}
         >
           <AtSignIcon className="w-3 h-3" />
@@ -79,8 +79,8 @@ function TestConfigInternal({
           className={cn(
             "flex items-center gap-1.5 transition-all px-2 sm:px-2.5 py-1.5 rounded-md",
             numbers
-              ? "text-primary bg-muted/60"
-              : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+              ? "text-accent-foreground font-medium"
+              : "text-muted-foreground hover:text-primary "
           )}
         >
           <HashIcon className="w-3 h-3" />
@@ -88,14 +88,14 @@ function TestConfigInternal({
         </button>
 
         {/* Test Mode */}
-        <div className="flex items-center gap-0.5 sm:gap-1 bg-muted/30 p-0.5 rounded-md">
+        <div className="flex items-center gap-0.5 sm:gap-1  p-0.5 rounded-md">
           <button
             onClick={() => onTestModeChange("time")}
             className={cn(
               "flex items-center gap-1.5 transition-all px-2.5 py-1.5 rounded-sm",
               testMode === "time"
-                ? "text-primary bg-muted/80"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                ? "text-accent-foreground font-medium"
+                : "text-muted-foreground hover:text-primary "
             )}
           >
             <ClockIcon className="w-3 h-3" />
@@ -107,8 +107,8 @@ function TestConfigInternal({
             className={cn(
               "flex items-center gap-1.5 transition-all px-2.5 py-1.5 rounded-sm",
               testMode === "words"
-                ? "text-primary bg-muted/80"  
-                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                ? "text-accent-foreground font-medium"
+                : "text-muted-foreground hover:text-primary "
             )}
           >
             <TextIcon className="w-3 h-3" />
@@ -120,8 +120,8 @@ function TestConfigInternal({
             className={cn(
               "flex items-center gap-1.5 transition-all px-2.5 py-1.5 rounded-sm",
               testMode === "quote"
-                ? "text-primary bg-muted/80"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                ? "text-accent-foreground font-medium"
+                : "text-muted-foreground hover:text-primary "
             )}
           >
             <QuoteIcon className="w-3 h-3" />
@@ -130,7 +130,7 @@ function TestConfigInternal({
         </div>
 
         {/* Time/Word/Quote Options */}
-        <div className="flex items-center gap-0.5 sm:gap-1 bg-muted/30 p-0.5 rounded-md">
+        <div className="flex items-center gap-0.5 sm:gap-1  p-0.5 rounded-md">
           {testMode === "time" && timeOptions.map((time) => (
             <button
               key={time}
@@ -138,8 +138,8 @@ function TestConfigInternal({
               className={cn(
                 "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
                 timeLimit === time
-                  ? "text-primary bg-muted/80 font-medium"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  ? "text-accent-foreground font-medium"
+                  : "text-muted-foreground hover:text-primary "
               )}
             >
               {time}
@@ -153,8 +153,8 @@ function TestConfigInternal({
               className={cn(
                 "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
                 wordCount === count
-                  ? "text-primary bg-muted/80  font-medium"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  ? "text-accent-foreground font-medium"
+                  : "text-muted-foreground hover:text-primary "
               )}
             >
               {count}
@@ -168,8 +168,8 @@ function TestConfigInternal({
               className={cn(
                 "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
                 quoteLength === length
-                  ? "text-primary bg-muted/80  font-medium"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  ? "text-accent-foreground font-medium"
+                  : "text-muted-foreground hover:text-primary "
               )}
             >
               {length}

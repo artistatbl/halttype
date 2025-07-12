@@ -12,16 +12,18 @@ export function Layout({ children }: LayoutProps) {
   const { isFocused } = useFocus()
   
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-background">
       <Navbar />
-      <main className="flex-1 bg-background flex items-start justify-center pt-4 sm:pt-6 md:pt-8">
-        <div className="w-full max-w-full sm:max-w-[95%] md:max-w-[90%] lg:max-w-7xl px-3 sm:px-4">
-          {children}
+      <main className="flex-1 flex items-start justify-center">
+        <div className="w-full max-w-7xl mx-auto px-6 py-8 md:py-12">
+          <div className="max-w-7xl mx-auto">
+            {children}
+          </div>
         </div>
       </main>
       <Footer className={cn(
-        "transition-opacity duration-300",
-        isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
+        "transition-all duration-300 ease-in-out",
+        isFocused ? "opacity-0 pointer-events-none translate-y-2" : "opacity-100 translate-y-0"
       )} />
     </div>
   )

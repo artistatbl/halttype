@@ -16,115 +16,104 @@ export function Footer({ className }: FooterProps) {
   
   return (
     <footer className={cn(
-      "w-full py-3 sm:py-4 md:py-5 px-4 sm:px-6 md:px-8 flex flex-wrap items-center justify-between text-xs mt-6 sm:mt-8 md:mt-10 mb-4 sm:mb-5 md:mb-6 mx-auto max-w-full sm:max-w-[95%] md:max-w-[90%] gap-y-3 sm:gap-y-4 bg-background text-card-foreground",
+      "w-full bg-background",
       className
     )}>
-      {/* Theme Selector - Left Side - Hidden in focus mode */}
-      <div className={cn(
-        "flex flex-wrap items-center gap-x-2 sm:gap-x-3 md:gap-x-4 gap-y-2 transition-opacity duration-300",
-        isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
-      )}>
-        <ThemeModal />
-      </div>
-      
-      {/* Center - Click to focus (Desktop) - Always visible */}
-      <div className={cn(
-        "absolute left-1/2 transform -translate-x-1/2 text-xs px-3 py-1.5 rounded-full shadow-sm transition-all duration-200 cursor-pointer hidden md:flex",
-        isFocused 
-          ? "text-primary bg-muted/70 hover:bg-muted/90" 
-          : "text-muted-foreground bg-muted/50 hover:bg-muted/70 hover:text-foreground"
-      )}>
-        <span className="flex items-center gap-1.5">
-          <Maximize2 width="12" height="12" />
-          click to focus
-        </span>
-      </div>
-      
-      {/* Center - Click to focus (Mobile) - Always visible */}
-      <div className="w-full flex justify-center md:hidden order-last mt-3">
-        <div className={cn(
-          "text-xs px-3 py-1.5 rounded-full shadow-sm transition-all duration-200 cursor-pointer",
-          isFocused 
-            ? "text-primary bg-muted/70 hover:bg-muted/90" 
-            : "text-muted-foreground bg-muted/50 hover:bg-muted/70 hover:text-foreground"
-        )}>
-          <span className="flex items-center gap-1.5">
-            <Maximize2 width="12" height="12" />
-            click to focus
-          </span>
+      <div className="max-w-6xl mx-auto px-6 py-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          {/* Theme Selector - Left Side - Hidden in focus mode */}
+          <div className={cn(
+            "flex items-center transition-all duration-300 ease-in-out",
+            isFocused ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
+          )}>
+            <ThemeModal />
+          </div>
+          
+          {/* Center - Click to focus - Always visible */}
+          <div className={cn(
+            "flex items-center gap-2 text-sm px-4 py-2 rounded-full border border-border/50 transition-all duration-200 cursor-pointer backdrop-blur-sm",
+            isFocused 
+              ? "text-primary bg-primary/5 border-primary/20 hover:bg-primary/10" 
+              : "text-muted-foreground bg-muted/30 hover:bg-muted/50 hover:text-foreground hover:border-border"
+          )}>
+            <Maximize2 className="w-3.5 h-3.5" />
+            <span className="font-medium">Click to focus</span>
+          </div>
+          
+          {/* Social and Additional Links - Hidden in focus mode */}
+          <div className={cn(
+            "flex items-center gap-1 transition-all duration-300 ease-in-out",
+            isFocused ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
+          )}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
+                  <FileText className="w-4 h-4" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="top">
+                <p>Terms</p>
+              </TooltipContent>
+            </Tooltip>
+            
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link href="/security" className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
+                  <Shield className="w-4 h-4" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="top">
+                <p>Security</p>
+              </TooltipContent>
+            </Tooltip>
+            
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
+                  <FileText className="w-4 h-4" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="top">
+                <p>Privacy</p>
+              </TooltipContent>
+            </Tooltip>
+            
+            <div className="w-px h-4 bg-border/50 mx-1" />
+            
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
+                  <Github className="w-4 h-4" />
+                </a>
+              </TooltipTrigger>
+              <TooltipContent side="top">
+                <p>GitHub</p>
+              </TooltipContent>
+            </Tooltip>
+            
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
+                  <Twitter className="w-4 h-4" />
+                </a>
+              </TooltipTrigger>
+              <TooltipContent side="top">
+                <p>Twitter</p>
+              </TooltipContent>
+            </Tooltip>
+            
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
+                  <MessageSquare className="w-4 h-4" />
+                </a>
+              </TooltipTrigger>
+              <TooltipContent side="top">
+                <p>Discord</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
         </div>
-      </div>
-      
-      {/* Social and Additional Links - Hidden in focus mode */}
-      <div className={cn(
-        "flex flex-wrap items-center gap-x-1 sm:gap-x-1.5 md:gap-x-2 gap-y-2 justify-end transition-opacity duration-300",
-        isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
-      )}>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-all duration-200 p-2">
-              <FileText size={14} />
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Terms</p>
-          </TooltipContent>
-        </Tooltip>
-        
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link href="/security" className="text-muted-foreground hover:text-foreground transition-all duration-200 p-2">
-              <Shield size={14} />
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Security</p>
-          </TooltipContent>
-        </Tooltip>
-        
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-all duration-200 p-2">
-              <FileText size={14} />
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Privacy</p>
-          </TooltipContent>
-        </Tooltip>
-        
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-all duration-200 p-2">
-              <Github size={14} />
-            </a>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>GitHub</p>
-          </TooltipContent>
-        </Tooltip>
-        
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-all duration-200 p-2">
-              <Twitter size={14} />
-            </a>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Twitter</p>
-          </TooltipContent>
-        </Tooltip>
-        
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-all duration-200 p-2">
-              <MessageSquare size={14} />
-            </a>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Discord</p>
-          </TooltipContent>
-        </Tooltip>
       </div>
     </footer>
   )
