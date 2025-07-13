@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { THEME_PREVIEW_DELAY } from '../constants';
+
 import { getFallbackTheme } from '../utils';
 
 /**
@@ -25,12 +25,12 @@ export function useThemePreview() {
       // Apply hovered theme after delay
       timeoutId = setTimeout(() => {
         setTheme(hoveredTheme);
-      }, THEME_PREVIEW_DELAY);
+      }, 150);
     } else if (originalTheme) {
       // Restore original theme after delay
       timeoutId = setTimeout(() => {
         setTheme(originalTheme);
-      }, THEME_PREVIEW_DELAY);
+      }, 150);
     }
 
     return () => clearTimeout(timeoutId);

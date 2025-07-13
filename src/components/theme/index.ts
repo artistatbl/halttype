@@ -22,15 +22,3 @@ export {
 
 // Hooks
 export { useThemePreview } from './hooks/use-theme-preview';
-
-// Constants
-export {
-  DEFAULT_THEME,
-  THEME_PREVIEW_DELAY,
-  THEME_TRANSITION_DELAY,
-  THEME_COLOR_DOT_SIZE,
-  THEME_MODAL_MAX_WIDTH,
-  THEME_MODAL_HEIGHT,
-  THEME_COLOR_DOT_CLASSES,
-  THEME_BUTTON_BASE_CLASSES,
-} from './constants';

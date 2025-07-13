@@ -1,5 +1,3 @@
-import { THEME_COLOR_DOT_SIZE, THEME_COLOR_DOT_CLASSES } from '../constants';
-
 interface ThemeColorDotsProps {
   colors: string[];
   className?: string;
@@ -14,7 +12,7 @@ export function ThemeColorDots({ colors, className = '' }: ThemeColorDotsProps) 
       {colors.map((color, index) => (
         <div
           key={index}
-          className={`${THEME_COLOR_DOT_SIZE} ${THEME_COLOR_DOT_CLASSES}`}
+          className="w-3 h-3 rounded-full border border-border/20"
           style={{ backgroundColor: color }}
         />
       ))}

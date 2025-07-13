@@ -29,7 +29,7 @@ export function Footer({ className }: FooterProps) {
             <ThemeModal />
           </div>
           
-          {/* Center - Click to focus - Always visible */}
+          {/* Center - Click to focus - Always visible
           <div className={cn(
             "flex items-center gap-2 text-sm px-4 py-2 rounded-full border border-border/50 transition-all duration-200 cursor-pointer backdrop-blur-sm",
             isFocused 
@@ -38,7 +38,7 @@ export function Footer({ className }: FooterProps) {
           )}>
             <Maximize2 className="w-3.5 h-3.5" />
             <span className="font-medium">Click to focus</span>
-          </div>
+          </div> */}
           
           {/* Social and Additional Links - Hidden in focus mode */}
           <div className={cn(

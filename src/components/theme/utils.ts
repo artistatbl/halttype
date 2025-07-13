@@ -1,5 +1,4 @@
 import { themes } from './theme-config';
-import { DEFAULT_THEME } from './constants';
 
 /**
  * Theme utility functions
@@ -31,7 +30,7 @@ export function isValidTheme(themeName: string): boolean {
  * Get fallback theme name
  */
 export function getFallbackTheme(currentTheme?: string | null): string {
-  return currentTheme || DEFAULT_THEME;
+  return currentTheme || 'halt';
 }
 
 /**

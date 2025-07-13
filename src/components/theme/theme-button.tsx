@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { ThemeColorDots } from "./components/theme-color-dots";
-import { THEME_PREVIEW_DELAY, THEME_BUTTON_BASE_CLASSES } from "./constants";
+
 import { getFallbackTheme } from "./utils";
 
 interface ThemeButtonProps {
@@ -22,11 +22,11 @@ export function ThemeButton({ theme, isSelected, onClick }: ThemeButtonProps) {
     if (isHovering) {
       timeoutId = setTimeout(() => {
         setTheme(theme.name);
-      }, THEME_PREVIEW_DELAY);
+      }, 150);
     } else if (!isSelected) {
       timeoutId = setTimeout(() => {
         setTheme(getFallbackTheme(currentTheme));
-      }, THEME_PREVIEW_DELAY);
+      }, 150);
     }
     
     return () => clearTimeout(timeoutId);
@@ -35,7 +35,7 @@ export function ThemeButton({ theme, isSelected, onClick }: ThemeButtonProps) {
   return (
     <Button
       variant="ghost"
-      className={`${THEME_BUTTON_BASE_CLASSES} ${isSelected ? 'bg-muted' : ''}`}
+      className={`w-full justify-between items-center h-auto p-3 rounded-md hover:bg-muted transition-colors ${isSelected ? 'bg-muted' : ''}`}
       onClick={onClick}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}

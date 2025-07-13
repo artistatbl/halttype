@@ -5,15 +5,16 @@ import { useTheme } from 'next-themes';
 import { themes } from './theme-config';
 import { ThemeColorDots } from './components/theme-color-dots';
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
 import { Button } from '@/components/ui/button';
 import { Palette } from 'lucide-react';
-import { THEME_MODAL_MAX_WIDTH, THEME_MODAL_HEIGHT, THEME_PREVIEW_DELAY } from './constants';
+
 import { getFallbackTheme } from './utils';
 
 export function ThemeModal() {
@@ -32,11 +33,11 @@ export function ThemeModal() {
       }
       timeoutId = setTimeout(() => {
         setTheme(hoveredTheme);
-      }, THEME_PREVIEW_DELAY);
+      }, 150);
     } else if (originalTheme && !hoveredTheme) {
       timeoutId = setTimeout(() => {
         setTheme(originalTheme);
-      }, THEME_PREVIEW_DELAY);
+      }, 150);
     }
     
     return () => clearTimeout(timeoutId);
@@ -69,40 +70,44 @@ export function ThemeModal() {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleDialogClose}>
-      <DialogTrigger asChild>
-        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-          <Palette className="h-4 w-4" />
-        </Button>
-      </DialogTrigger>
-      <DialogContent className={`${THEME_MODAL_MAX_WIDTH} ${THEME_MODAL_HEIGHT} flex flex-col`}>
-        <DialogHeader>
-          <DialogTitle>Choose Theme</DialogTitle>
-        </DialogHeader>
-        <div className="flex-1 overflow-y-auto space-y-2 pr-2">
-          {themes.map((themeItem) => (
-            <Button
-              key={themeItem.name}
-              variant="ghost"
-              className={`w-full justify-between items-center h-12 px-4 rounded-sm hover:bg-muted ${theme === themeItem.name ? 'bg-muted' : ''}`}
-              onClick={() => handleThemeSelect(themeItem.name)}
-              onMouseEnter={() => handleThemeHover(themeItem.name)}
-              onMouseLeave={handleThemeLeave}
-            >
-              <div className="flex items-center gap-3">
-                <span className="text-sm font-medium">{themeItem.label}</span>
-                {theme === themeItem.name && (
-                  <span className="text-xs text-muted-foreground">Current</span>
-                )}
-                {hoveredTheme === themeItem.name && (
-                  <span className="text-xs text-muted-foreground animate-pulse">Preview</span>
-                )}
-              </div>
-              <ThemeColorDots colors={themeItem.colors} />
-            </Button>
-          ))}
-        </div>
-      </DialogContent>
-    </Dialog>
+    <>
+      <Button
+        variant="ghost"
+        size="sm"
+        className="h-8 w-8 p-0"
+        onClick={() => setIsOpen(true)}
+      >
+        <Palette className="h-4 w-4" />
+      </Button>
+      <CommandDialog open={isOpen} onOpenChange={handleDialogClose} className="top-[25%]">
+        <CommandInput placeholder="Search themes..." />
+        <CommandList className="h-[600px]">
+          <CommandEmpty>No themes found.</CommandEmpty>
+          <CommandGroup>
+            {themes.map((themeItem) => (
+              <CommandItem
+                key={themeItem.name}
+                value={themeItem.label}
+                onSelect={() => handleThemeSelect(themeItem.name)}
+                onMouseEnter={() => handleThemeHover(themeItem.name)}
+                onMouseLeave={handleThemeLeave}
+                className="flex items-center justify-between p-4 cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-medium">{themeItem.label}</span>
+                  {theme === themeItem.name && (
+                    <span className="text-xs text-muted-foreground">Current</span>
+                  )}
+                  {hoveredTheme === themeItem.name && (
+                    <span className="text-xs text-muted-foreground animate-pulse">Preview</span>
+                  )}
+                </div>
+                <ThemeColorDots colors={themeItem.colors} />
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
+    </>
   );
 }
