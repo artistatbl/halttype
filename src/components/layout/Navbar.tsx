@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { UserDropdown } from "./UserDropdown"
+import { UserDropdown } from "./users/UserDropdown"
 import { useFocus } from "../typing-test/FocusContext"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { Infinity, BarChart3, HelpCircle } from "lucide-react"
