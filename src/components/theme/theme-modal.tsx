@@ -23,6 +23,19 @@ export function ThemeModal() {
   const [hoveredTheme, setHoveredTheme] = useState<string | null>(null);
   const [originalTheme, setOriginalTheme] = useState<string | null>(null);
 
+  // Handle keyboard shortcut (Cmd+K / Ctrl+K)
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+        event.preventDefault();
+        setIsOpen(true);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   // Handle theme preview on hover
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -74,10 +87,11 @@ export function ThemeModal() {
       <Button
         variant="ghost"
         size="sm"
-        className="h-8 w-8 p-0"
+        className="h-8 px-2 hover:bg-transparent hover:text-foreground/80 transition-colors flex items-center gap-1.5"
         onClick={() => setIsOpen(true)}
       >
         <Palette className="h-4 w-4" />
+        <span className="text-xs font-medium capitalize">{theme || 'halt'}</span>
       </Button>
       <CommandDialog open={isOpen} onOpenChange={handleDialogClose} className="top-[25%]">
         <CommandInput placeholder="Search themes..." />

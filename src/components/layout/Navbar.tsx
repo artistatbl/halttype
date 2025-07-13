@@ -16,27 +16,28 @@ export function Navbar({ className }: NavbarProps) {
   
   return (
     <header className={cn(
-      "w-full  bg-background backdrop-blur-sm sticky top-0 z-50",
+      "w-full bg-background/80 backdrop-blur-md border-b border-border/50 sticky top-0 z-50",
       className
     )}>
-      <div className="max-w-6xl mx-auto px-6 py-4">
+      <div className="max-w-7xl mx-auto px-8 py-5">
         <div className="flex items-center justify-between">
           {/* Logo and Navigation */}
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-1 group">
-              <span className="text-primary font-bold text-xl tracking-tight">halt</span>
-              <span className="text-foreground font-bold text-xl tracking-tight group-hover:text-primary transition-colors duration-200">type</span>
+              <span className="text-primary font-bold text-3xl tracking-tight">halt</span>
+              <span className="text-foreground font-bold text-3xl tracking-tight group-hover:text-primary transition-colors duration-200">type</span>
             </Link>
             
             {/* Navigation Links - Hidden in focus mode */}
             <nav className={cn(
-              "flex items-center gap-1 transition-all duration-300 ease-in-out",
+              "hidden md:flex items-center gap-2 transition-all duration-300 ease-in-out",
               isFocused ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
             )}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
+                  <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
                     <Infinity className="w-4 h-4" />
+                    <span className="text-sm font-medium">Practice</span>
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent side="bottom">
@@ -46,8 +47,9 @@ export function Navbar({ className }: NavbarProps) {
               
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/leaderboard" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
+                  <Link href="/leaderboard" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
                     <BarChart3 className="w-4 h-4" />
+                    <span className="text-sm font-medium">Leaderboard</span>
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent side="bottom">
@@ -57,8 +59,9 @@ export function Navbar({ className }: NavbarProps) {
               
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
+                  <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
                     <HelpCircle className="w-4 h-4" />
+                    <span className="text-sm font-medium">About</span>
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent side="bottom">
