@@ -21,7 +21,7 @@ export function ThemeButton({ theme, isSelected, onClick }: ThemeButtonProps) {
       }, 150)
     } else if (!isSelected) {
       timeoutId = setTimeout(() => {
-        setTheme(currentTheme || 'system')
+        setTheme(currentTheme || 'halt')
       }, 150)
     }
     return () => clearTimeout(timeoutId)

@@ -26,12 +26,11 @@ interface TestConfigProps {
   punctuation: boolean
   numbers: boolean
   onTestModeChange: (mode: "time" | "words" | "quote") => void
-  onTimeLimitChange: (time: number) => void
-  onWordCountChange: (count: number) => void
-  onQuoteLengthChange: (length: "short" | "medium" | "long") => void
-  onDifficultyChange: (difficulty: "easy" | "medium" | "hard") => void
-  onPunctuationChange: (enabled: boolean) => void
-  onNumbersChange: (enabled: boolean) => void
+  onTimeLimitChange: (timeLimit: number) => void
+  onWordCountChange: (wordCount: number) => void
+  onQuoteLengthChange: (quoteLength: "short" | "medium" | "long") => void
+  onPunctuationChange: (punctuation: boolean) => void
+  onNumbersChange: (numbers: boolean) => void
 }
 
 function TestConfigInternal({
@@ -46,7 +45,6 @@ function TestConfigInternal({
   onTimeLimitChange,
   onWordCountChange,
   onQuoteLengthChange,
-  onDifficultyChange,
   onPunctuationChange,
   onNumbersChange,
 }: TestConfigProps) {
@@ -176,26 +174,6 @@ function TestConfigInternal({
             </button>
           ))}
         </div>
-
-        {/* Difficulty Options */}
-        <div className="flex items-center gap-0.5 sm:gap-1  p-0.5 rounded-md">
-          {difficultyOptions.map((diff) => (
-            <button
-              key={diff}
-              onClick={() => onDifficultyChange(diff)}
-              className={cn(
-                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
-                difficulty === diff
-                  ? "text-accent-foreground font-medium"
-                  : "text-muted-foreground hover:text-primary "
-              )}
-            >
-              {diff}
-            </button>
-          ))}
-        </div>
-
-
       </div>
     </div>
   )
@@ -254,7 +232,6 @@ export function TestConfig({
       onTimeLimitChange={handleTimeLimitChange}
       onWordCountChange={handleWordCountChange}
       onQuoteLengthChange={handleQuoteLengthChange}
-      onDifficultyChange={handleDifficultyChange}
       onPunctuationChange={handlePunctuationChange}
       onNumbersChange={handleNumbersChange}
     />

@@ -3,11 +3,8 @@ export interface Theme {
   label: string
   colors: [string, string, string]
 }
-
 export const themes: Theme[] = [
-  { name: "system", label: "System", colors: ["#808080", "#D3D3D3", "#000000"] },
-  { name: "light", label: "Light", colors: ["#FFFFFF", "#F0F0F0", "#000000"] },
-  { name: "dark", label: "Dark", colors: ["#000000", "#1A1A1A", "#FFFFFF"] },
+  { name: "halt", label: "Halt", colors: ["#FB923C", "#27272A", "#FFFFFF"] },
   { name: "amber", label: "Amber", colors: ["#FFBF00", "#FFE5B4", "#000000"] },
   { name: "caffiene", label: "Caffiene", colors: ["#6F4E37", "#C4A484", "#FFFFFF"] },
   { name: "nature", label: "Nature", colors: ["#4CAF50", "#A5D6A7", "#000000"] },

@@ -31,7 +31,7 @@ export function ThemeModal() {
     let timeoutId: NodeJS.Timeout
     if (hoveredTheme) {
       if (!originalTheme) {
-        setOriginalTheme(theme || 'system')
+        setOriginalTheme(theme || 'halt')
       }
       timeoutId = setTimeout(() => {
         setTheme(hoveredTheme)

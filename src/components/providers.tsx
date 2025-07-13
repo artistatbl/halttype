@@ -29,11 +29,11 @@ export const Providers = ({ children }: PropsWithChildren) => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider
         attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
+        defaultTheme="halt"
+        //enableSystem={false}
+       // disableTransitionOnChange
         storageKey="theme"
-        themes={["light", "dark", "amber", "caffiene", "nature", "notebook", "claude", "twitter", "mono"]}
+        themes={["halt", "amber", "caffiene", "nature", "notebook", "claude", "twitter", "mono"]}
       >
         <FocusProvider>
           <ThemeSwitcher />

@@ -19,6 +19,7 @@ export interface GeneratedText {
 }
 
 /**
+ * 
  * Simple seeded random number generator for reproducible results
  */
 class SeededRandom {
