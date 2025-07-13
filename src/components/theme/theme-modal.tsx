@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { themes } from './theme-config';
-import { ThemeButton } from './theme-button';
+import { ThemeColorDots } from './components/theme-color-dots';
 import {
   Dialog,
   DialogContent,
@@ -13,42 +13,63 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Palette } from 'lucide-react';
-import { THEME_MODAL_MAX_WIDTH, THEME_MODAL_HEIGHT } from './constants';
+import { THEME_MODAL_MAX_WIDTH, THEME_MODAL_HEIGHT, THEME_PREVIEW_DELAY } from './constants';
 import { getFallbackTheme } from './utils';
 
 export function ThemeModal() {
   const { theme, setTheme } = useTheme();
-  const [selectedTheme, setSelectedTheme] = useState(theme || getFallbackTheme());
-  const [originalTheme, setOriginalTheme] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [hoveredTheme, setHoveredTheme] = useState<string | null>(null);
+  const [originalTheme, setOriginalTheme] = useState<string | null>(null);
 
+  // Handle theme preview on hover
   useEffect(() => {
-    if (isOpen && !originalTheme) {
-      setOriginalTheme(getFallbackTheme(theme));
+    let timeoutId: NodeJS.Timeout;
+    
+    if (hoveredTheme) {
+      if (!originalTheme) {
+        setOriginalTheme(getFallbackTheme(theme));
+      }
+      timeoutId = setTimeout(() => {
+        setTheme(hoveredTheme);
+      }, THEME_PREVIEW_DELAY);
+    } else if (originalTheme && !hoveredTheme) {
+      timeoutId = setTimeout(() => {
+        setTheme(originalTheme);
+      }, THEME_PREVIEW_DELAY);
     }
-  }, [isOpen, theme, originalTheme]);
+    
+    return () => clearTimeout(timeoutId);
+  }, [hoveredTheme, theme, setTheme, originalTheme]);
 
   const handleThemeSelect = (themeName: string) => {
-    setSelectedTheme(themeName);
     setTheme(themeName);
+    setHoveredTheme(null);
+    setOriginalTheme(null);
+    setIsOpen(false);
   };
 
-  const handleCancel = () => {
-    if (originalTheme) {
-      setTheme(originalTheme);
-      setSelectedTheme(originalTheme);
+  const handleThemeHover = (themeName: string) => {
+    setHoveredTheme(themeName);
+  };
+
+  const handleThemeLeave = () => {
+    setHoveredTheme(null);
+  };
+
+  const handleDialogClose = (open: boolean) => {
+    if (!open) {
+      setHoveredTheme(null);
+      if (originalTheme) {
+        setTheme(originalTheme);
+        setOriginalTheme(null);
+      }
     }
-    setIsOpen(false);
-    setOriginalTheme(null);
-  };
-
-  const handleConfirm = () => {
-    setIsOpen(false);
-    setOriginalTheme(null);
+    setIsOpen(open);
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={handleDialogClose}>
       <DialogTrigger asChild>
         <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
           <Palette className="h-4 w-4" />
@@ -59,22 +80,27 @@ export function ThemeModal() {
           <DialogTitle>Choose Theme</DialogTitle>
         </DialogHeader>
         <div className="flex-1 overflow-y-auto space-y-2 pr-2">
-          {themes.map((theme) => (
-            <ThemeButton
-              key={theme.name}
-              theme={theme}
-              isSelected={selectedTheme === theme.name}
-              onClick={() => handleThemeSelect(theme.name)}
-            />
+          {themes.map((themeItem) => (
+            <Button
+              key={themeItem.name}
+              variant="ghost"
+              className={`w-full justify-between items-center h-12 px-4 rounded-sm hover:bg-muted ${theme === themeItem.name ? 'bg-muted' : ''}`}
+              onClick={() => handleThemeSelect(themeItem.name)}
+              onMouseEnter={() => handleThemeHover(themeItem.name)}
+              onMouseLeave={handleThemeLeave}
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-medium">{themeItem.label}</span>
+                {theme === themeItem.name && (
+                  <span className="text-xs text-muted-foreground">Current</span>
+                )}
+                {hoveredTheme === themeItem.name && (
+                  <span className="text-xs text-muted-foreground animate-pulse">Preview</span>
+                )}
+              </div>
+              <ThemeColorDots colors={themeItem.colors} />
+            </Button>
           ))}
-        </div>
-        <div className="flex justify-end gap-2 pt-4 border-t">
-          <Button variant="outline" onClick={handleCancel}>
-            Cancel
-          </Button>
-          <Button onClick={handleConfirm}>
-            Apply
-          </Button>
         </div>
       </DialogContent>
     </Dialog>
