@@ -16,10 +16,10 @@ export function Navbar({ className }: NavbarProps) {
   
   return (
     <header className={cn(
-      "w-full bg-background/80 backdrop-blur-md border-b border-border/50 sticky top-0 z-50",
+      "w-full bg-background backdrop-blur-md sticky top-0 z-50",
       className
     )}>
-      <div className="max-w-7xl mx-auto px-8 py-5">
+      <div className="max-w-7xl mx-auto px-10 py-5">
         <div className="flex items-center justify-between">
           {/* Logo and Navigation */}
           <div className="flex items-center gap-8">
@@ -71,12 +71,54 @@ export function Navbar({ className }: NavbarProps) {
             </nav>
           </div>
           
-          {/* User Menu - Hidden in focus mode */}
-          <div className={cn(
-            "flex items-center transition-all duration-300 ease-in-out",
-            isFocused ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
-          )}>
-            <UserDropdown />
+          {/* Mobile Navigation + User Menu */}
+          <div className="flex items-center gap-2">
+            {/* Mobile Navigation - Only icons */}
+            <nav className={cn(
+              "flex md:hidden items-center gap-1 transition-all duration-300 ease-in-out",
+              isFocused ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
+            )}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
+                    <Infinity className="w-4 h-4" />
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                  <p>Practice</p>
+                </TooltipContent>
+              </Tooltip>
+              
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link href="/leaderboard" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
+                    <BarChart3 className="w-4 h-4" />
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                  <p>Leaderboard</p>
+                </TooltipContent>
+              </Tooltip>
+              
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
+                    <HelpCircle className="w-4 h-4" />
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                  <p>About</p>
+                </TooltipContent>
+              </Tooltip>
+            </nav>
+            
+            {/* User Menu - Hidden in focus mode */}
+            <div className={cn(
+              "flex items-center transition-all duration-300 ease-in-out",
+              isFocused ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
+            )}>
+              <UserDropdown />
+            </div>
           </div>
         </div>
       </div>

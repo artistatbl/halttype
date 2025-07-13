@@ -16,9 +16,7 @@ export function Layout({ children }: LayoutProps) {
       <Navbar />
       <main className="flex-1 flex items-start justify-center">
         <div className="w-full max-w-7xl mx-auto px-6 py-8 md:py-12">
-          <div className="max-w-7xl mx-auto">
             {children}
-          </div>
         </div>
       </main>
       <Footer className={cn(
