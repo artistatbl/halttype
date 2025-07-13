@@ -16,7 +16,7 @@ export function Navbar({ className }: NavbarProps) {
   
   return (
     <header className={cn(
-      "w-full bg-background backdrop-blur-md sticky top-0 z-50",
+      "w-full  top-0 z-50",
       className
     )}>
       <div className="max-w-7xl mx-auto px-10 py-5">
@@ -35,7 +35,7 @@ export function Navbar({ className }: NavbarProps) {
             )}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
+                  <Link href="/" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
                     <Infinity className="w-4 h-4" />
                     <span className="text-sm font-medium">Practice</span>
                   </Link>
@@ -47,7 +47,7 @@ export function Navbar({ className }: NavbarProps) {
               
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/leaderboard" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
+                  <Link href="/leaderboard" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
                     <BarChart3 className="w-4 h-4" />
                     <span className="text-sm font-medium">Leaderboard</span>
                   </Link>
@@ -59,7 +59,7 @@ export function Navbar({ className }: NavbarProps) {
               
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
+                  <Link href="/about" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
                     <HelpCircle className="w-4 h-4" />
                     <span className="text-sm font-medium">About</span>
                   </Link>
@@ -80,7 +80,7 @@ export function Navbar({ className }: NavbarProps) {
             )}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
+                  <Link href="/" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
                     <Infinity className="w-4 h-4" />
                   </Link>
                 </TooltipTrigger>
@@ -91,7 +91,7 @@ export function Navbar({ className }: NavbarProps) {
               
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/leaderboard" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
+                  <Link href="/leaderboard" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
                     <BarChart3 className="w-4 h-4" />
                   </Link>
                 </TooltipTrigger>
@@ -102,7 +102,7 @@ export function Navbar({ className }: NavbarProps) {
               
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
+                  <Link href="/about" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
                     <HelpCircle className="w-4 h-4" />
                   </Link>
                 </TooltipTrigger>

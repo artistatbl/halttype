@@ -94,7 +94,7 @@ export function UserDropdown({ className }: UserDropdownProps) {
           )}
 
           {/* Username */}
-          <span className="text-sm hidden sm:inline">{displayUser.name}</span>
+          <span className="text-sm hidden sm:inline text-accent">{displayUser.name}</span>
 
           {/* Dropdown Arrow */}
           <ChevronDown
@@ -110,8 +110,8 @@ export function UserDropdown({ className }: UserDropdownProps) {
           onClick={() => router.push("/sign")}
           className="flex items-center gap-2 p-1.5 rounded-md hover:bg-muted/50 transition-all duration-200"
         >
-          <UserIcon className="w-5 h-5 text-muted-foreground" />
-          <span className="text-sm hidden sm:inline">Sign In</span>
+          <UserIcon className="w-5 h-5 text-accent" />
+          <span className="text-sm hidden sm:inline text-accent">Sign In</span>
         </button>
       )}
 

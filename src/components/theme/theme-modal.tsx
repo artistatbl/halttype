@@ -87,7 +87,7 @@ export function ThemeModal() {
       <Button
         variant="ghost"
         size="sm"
-        className="h-8 px-2 hover:bg-transparent hover:text-foreground/80 transition-colors flex items-center gap-1.5"
+        className="h-8 px-2 hover:bg-transparent text-primary hover:text-accent transition-colors flex items-center gap-1.5"
         onClick={() => setIsOpen(true)}
       >
         <Palette className="h-4 w-4" />

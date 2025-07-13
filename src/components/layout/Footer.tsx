@@ -16,7 +16,7 @@ export function Footer({ className }: FooterProps) {
   
   return (
     <footer className={cn(
-      "w-full bg-background",
+      "w-full ",
       className
     )}>
       <div className="max-w-7xl mx-auto px-10 py-6">
@@ -40,34 +40,34 @@ export function Footer({ className }: FooterProps) {
           
             {/* Desktop Navigation - Text + Icons */}
             <div className="hidden md:flex items-center gap-2">
-              <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
+              <Link href="/terms" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
                  <FileText className="w-4 h-4" />
                  <span className="text-xs font-medium">Terms</span>
                </Link>
               
-              <Link href="/security" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
+              <Link href="/security" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
                  <Shield className="w-4 h-4" />
                  <span className="text-xs font-medium">Security</span>
                </Link>
               
-              <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
+              <Link href="/privacy" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
                  <FileText className="w-4 h-4" />
                  <span className="text-xs font-medium">Privacy</span>
                </Link>
               
               <div className="w-px h-4 bg-border/50 mx-2" />
               
-              <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
+              <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
                  <Github className="w-4 h-4" />
                  <span className="text-xs font-medium">GitHub</span>
                </a>
               
-              <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
+              <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
                  <Twitter className="w-4 h-4" />
                  <span className="text-xs font-medium">Twitter</span>
                </a>
               
-              <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
+              <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
                  <MessageSquare className="w-4 h-4" />
                  <span className="text-xs font-medium">Discord</span>
                </a>
@@ -77,7 +77,7 @@ export function Footer({ className }: FooterProps) {
             <div className="flex md:hidden items-center gap-1">
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
+                  <Link href="/terms" className="text-primary hover:text-accent/80 transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
                     <FileText className="w-4 h-4" />
                   </Link>
                 </TooltipTrigger>
@@ -88,7 +88,7 @@ export function Footer({ className }: FooterProps) {
               
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/security" className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
+                  <Link href="/security" className="text-accent hover:text-accent/80 transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
                     <Shield className="w-4 h-4" />
                   </Link>
                 </TooltipTrigger>
@@ -99,7 +99,7 @@ export function Footer({ className }: FooterProps) {
               
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
+                  <Link href="/privacy" className="text-accent hover:text-accent/80 transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
                     <FileText className="w-4 h-4" />
                   </Link>
                 </TooltipTrigger>
@@ -112,7 +112,7 @@ export function Footer({ className }: FooterProps) {
               
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
+                  <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent/80 transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
                     <Github className="w-4 h-4" />
                   </a>
                 </TooltipTrigger>
@@ -123,7 +123,7 @@ export function Footer({ className }: FooterProps) {
               
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
+                  <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent/80 transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
                     <Twitter className="w-4 h-4" />
                   </a>
                 </TooltipTrigger>
@@ -134,7 +134,7 @@ export function Footer({ className }: FooterProps) {
               
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
+                  <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent/80 transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
                     <MessageSquare className="w-4 h-4" />
                   </a>
                 </TooltipTrigger>

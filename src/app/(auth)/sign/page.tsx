@@ -18,7 +18,7 @@ export default function AuthPage() {
  
 
   return (
-    <main className="flex min-h-screen bg-background flex-col items-center justify-center">
+    <main className="flex min-h-screen flex-col items-center justify-center">
       <div className="w-full max-w-md">
         <LoginForm />
       </div>

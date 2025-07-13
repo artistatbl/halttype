@@ -12,7 +12,7 @@ export function Guide({ className }: GuideProps) {
   
   return (
     <section className={cn(
-      "w-full bg-background transition-all duration-300 ease-in-out",
+      "w-full  transition-all duration-300 ease-in-out",
       isFocused ? "opacity-0 pointer-events-none translate-y-2" : "opacity-100 translate-y-0",
       className
     )}>
