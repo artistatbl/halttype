@@ -9,6 +9,17 @@ const nextConfig = {
       'gravatar.com', // Gravatar images (commonly used as fallback)
     ],
   },
+  
+  // SEO optimizations
+  
+  // Generate static pages for better SEO
+  trailingSlash: false,
+  
+  // Optimize for search engines
+  poweredByHeader: false,
+  
+  // Compress responses
+  compress: true,
 }
 
 export default nextConfig
