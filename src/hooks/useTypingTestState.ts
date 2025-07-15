@@ -1,7 +1,5 @@
-import { useState, useCallback } from 'react';
-import { TestResults } from '@/components/typing-test/TypingTest';
-
-export type TestState = "idle" | "running" | "completed";
+import { useState, useCallback, useEffect } from 'react';
+import { TestResults, TestState } from '@/lib/typing-test/types';
 
 export interface TypingTestState {
   testState: TestState;
@@ -68,11 +66,12 @@ export function useTypingTestState(initialTimeLimit?: number): UseTypingTestStat
   }, []);
 
   const resetTest = useCallback((timeLimit?: number) => {
+    const newTimeLimit = timeLimit || initialTimeLimit;
     setState({
       testState: "idle",
       startTime: null,
       endTime: null,
-      timeRemaining: timeLimit || null,
+      timeRemaining: newTimeLimit || null,
       currentPosition: 0,
       userInput: "",
       errors: [],
@@ -80,7 +79,7 @@ export function useTypingTestState(initialTimeLimit?: number): UseTypingTestStat
       wpm: 0,
       accuracy: 100,
     });
-  }, []);
+  }, [initialTimeLimit]);
 
   const updateInput = useCallback((input: string) => {
     setState(prev => ({
@@ -131,6 +130,16 @@ export function useTypingTestState(initialTimeLimit?: number): UseTypingTestStat
       timeRemaining: time,
     }));
   }, []);
+
+  // Update timeRemaining when initialTimeLimit changes and test is idle
+  useEffect(() => {
+    if (state.testState === "idle" && initialTimeLimit) {
+      setState(prev => ({
+        ...prev,
+        timeRemaining: initialTimeLimit,
+      }));
+    }
+  }, [initialTimeLimit, state.testState]);
 
   return {
     state,

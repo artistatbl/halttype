@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
-import { TestResults } from '@/components/typing-test/TypingTest';
+import { TestResults, TestMode } from '@/lib/typing-test/types';
 import { UseTypingTestStateReturn } from './useTypingTestState';
 
 export interface UseInputHandlerProps {
   content: string;
-  testMode: "time" | "words" | "quote";
+  testMode: TestMode;
   wordCount?: number;
   state: UseTypingTestStateReturn['state'];
   actions: UseTypingTestStateReturn['actions'];

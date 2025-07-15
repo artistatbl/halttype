@@ -16,32 +16,9 @@ import { useInputHandler } from "@/hooks/useInputHandler"
 import { useTestCompletion } from "@/hooks/useTestCompletion"
 import { calculateRealTimeWPM, calculateRealTimeAccuracy } from "@/lib/typing-test/calculations"
 import { client } from "@/lib/client"
+import { TypingTestProps, TestResults } from "@/lib/typing-test/types"
 
-interface TypingTestProps {
-  content: string
-  timeLimit?: number // in seconds, undefined for unlimited
-  wordCount?: number // for word mode, undefined for unlimited
-  difficulty?: "easy" | "medium" | "hard"
-  language?: string
-  onComplete?: (results: TestResults) => void
-  className?: string
-  testMode?: "time" | "words" | "quote"
-  testId?: string // ID of the test being taken
-}
 
-export interface TestResults {
-  wpm: number
-  accuracy: number
-  timeSpent: number // in seconds (integer)
-  wordsTyped: number
-  correctWords: number
-  incorrectWords: number
-  keystrokes: {
-    key: string
-    timestamp: number
-    correct: boolean
-  }[]
-}
 
 export function TypingTest({
   content,
@@ -65,7 +42,6 @@ export function TypingTest({
   // Handle test start
   const handleTestStart = () => {
     setFocused(true)
-    actions.startTest()
     
     // Start elapsed timer for word-based tests
     if (testMode === "words") {
@@ -114,24 +90,24 @@ export function TypingTest({
   useEffect(() => {
     let timer: NodeJS.Timeout | null = null
     
-    if (state.testState === "running" && testMode === "time" && timeLimit) {
+    if (state.testState === "running" && testMode === "time" && timeLimit && state.startTime) {
       timer = setInterval(() => {
-        const elapsed = Math.floor((Date.now() - (state.startTime || Date.now())) / 1000)
+        const elapsed = Math.floor((Date.now() - state.startTime!) / 1000)
         const remaining = timeLimit - elapsed
         
-        actions.setTimeRemaining(remaining >= 0 ? remaining : 0)
-        
         if (remaining <= 0) {
+          actions.setTimeRemaining(0)
           handleTestComplete()
-          if (timer) clearInterval(timer)
+        } else {
+          actions.setTimeRemaining(remaining)
         }
-      }, 1000)
+      }, 100) // Update more frequently for smoother countdown
     }
     
     return () => {
       if (timer) clearInterval(timer)
     }
-  }, [state.testState, state.startTime, timeLimit, testMode, actions, handleTestComplete])
+  }, [state.testState, testMode, timeLimit, state.startTime, actions, handleTestComplete])
   
   // Calculate WPM and accuracy in real-time
   useEffect(() => {

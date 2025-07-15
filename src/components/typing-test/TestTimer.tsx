@@ -2,11 +2,12 @@
 
 import { cn } from "@/lib/utils"
 import { formatTime } from "@/lib/typing-test/calculations"
+import { TestMode, TestState } from "@/lib/typing-test/types"
 
 interface TestTimerProps {
   timeRemaining: number
-  testMode: "time" | "words" | "quote"
-  testState: "idle" | "running" | "completed"
+  testMode: TestMode
+  testState: TestState
   className?: string
 }
 
@@ -36,7 +37,7 @@ export function TestTimer({
 // Alternative timer component for elapsed time display
 interface ElapsedTimerProps {
   elapsedTime: number
-  testState: "idle" | "running" | "completed"
+  testState: TestState
   className?: string
 }
 

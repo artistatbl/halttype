@@ -35,3 +35,5 @@ export type {
   QuoteLength,
   Difficulty,
 } from './constants';
+
+export * from './types';

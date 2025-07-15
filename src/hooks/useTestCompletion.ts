@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { TestResults } from '@/components/typing-test/TypingTest';
+import { TestResults } from '@/lib/typing-test/types';
 import { UseTypingTestStateReturn } from './useTypingTestState';
 import { client } from '@/lib/client';
 
