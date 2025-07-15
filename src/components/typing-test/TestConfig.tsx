@@ -10,7 +10,7 @@ import { HashIcon } from "@/components/icons/hash"
 export interface TestConfigOptions {
   mode: "time" | "words" | "quote"
   timeLimit: number
-  wordCount: number
+  wordCount: 10 | 25 | 50 | 100
   quoteLength: "short" | "medium" | "long"
   difficulty: "easy" | "medium" | "hard"
   punctuation?: boolean
@@ -20,14 +20,14 @@ export interface TestConfigOptions {
 interface TestConfigProps {
   testMode: "time" | "words" | "quote"
   timeLimit: number
-  wordCount: number
+  wordCount: 10 | 25 | 50 | 100
   quoteLength: "short" | "medium" | "long"
   difficulty: "easy" | "medium" | "hard"
   punctuation: boolean
   numbers: boolean
   onTestModeChange: (mode: "time" | "words" | "quote") => void
   onTimeLimitChange: (timeLimit: number) => void
-  onWordCountChange: (wordCount: number) => void
+  onWordCountChange: (wordCount: 10 | 25 | 50 | 100) => void
   onQuoteLengthChange: (quoteLength: "short" | "medium" | "long") => void
   onPunctuationChange: (punctuation: boolean) => void
   onNumbersChange: (numbers: boolean) => void
@@ -49,7 +49,7 @@ function TestConfigInternal({
   onNumbersChange,
 }: TestConfigProps) {
   const timeOptions = [15, 30, 60, 120]
-  const wordOptions = [10, 25, 50, 100]
+  const wordOptions: (10 | 25 | 50 | 100)[] = [10, 25, 50, 100]
   const quoteLengthOptions: ("short" | "medium" | "long")[] = ["short", "medium", "long"]
   const difficultyOptions: ("easy" | "medium" | "hard")[] = ["easy", "medium", "hard"]
 
@@ -204,7 +204,7 @@ export function TestConfig({
     onConfigChange({ ...initialConfig, timeLimit })
   }
 
-  const handleWordCountChange = (wordCount: number) => {
+  const handleWordCountChange = (wordCount: 10 | 25 | 50 | 100) => {
     onConfigChange({ ...initialConfig, wordCount })
   }
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { configStorage, type StoredTestConfig, type StoredUserSettings } from '@/lib/storage/config-storage';
+import { configStorage } from '@/lib/storage';
 import type { TestConfigOptions } from '@/components/typing-test/TestConfig';
 import type { UserSettings } from '@/components/typing-test/Settings';
 
@@ -61,13 +61,11 @@ export function useConfigStorage(): UseConfigStorageReturn {
       });
 
       setUserSettings({
+        language: storedUserSettings.language,
+        keyboardLayout: storedUserSettings.keyboardLayout,
+        wpmDisplay: storedUserSettings.wpmDisplay,
         theme: storedUserSettings.theme,
-        fontSize: storedUserSettings.fontSize,
-        fontFamily: storedUserSettings.fontFamily,
-        soundEnabled: storedUserSettings.soundEnabled,
-        showWPM: storedUserSettings.showWPM,
-        showAccuracy: storedUserSettings.showAccuracy,
-        showProgress: storedUserSettings.showProgress
+        soundEnabled: storedUserSettings.soundEnabled
       });
 
       setIsLoaded(true);
@@ -104,13 +102,11 @@ export function useConfigStorage(): UseConfigStorageReturn {
       
       // Save to localStorage
       configStorage.saveUserSettings({
+        language: updated.language,
+        keyboardLayout: updated.keyboardLayout,
+        wpmDisplay: updated.wpmDisplay,
         theme: updated.theme,
-        fontSize: updated.fontSize,
-        fontFamily: updated.fontFamily,
-        soundEnabled: updated.soundEnabled,
-        showWPM: updated.showWPM,
-        showAccuracy: updated.showAccuracy,
-        showProgress: updated.showProgress
+        soundEnabled: updated.soundEnabled
       });
       
       return updated;
@@ -135,13 +131,11 @@ export function useConfigStorage(): UseConfigStorageReturn {
     });
     
     setUserSettings({
+      language: defaultUserSettings.language,
+      keyboardLayout: defaultUserSettings.keyboardLayout,
+      wpmDisplay: defaultUserSettings.wpmDisplay,
       theme: defaultUserSettings.theme,
-      fontSize: defaultUserSettings.fontSize,
-      fontFamily: defaultUserSettings.fontFamily,
-      soundEnabled: defaultUserSettings.soundEnabled,
-      showWPM: defaultUserSettings.showWPM,
-      showAccuracy: defaultUserSettings.showAccuracy,
-      showProgress: defaultUserSettings.showProgress
+      soundEnabled: defaultUserSettings.soundEnabled
     });
   }, []);
 
