@@ -64,7 +64,7 @@ export function TextDisplay({
   return (
     <div 
       className={cn(
-        "w-full text-accent-foreground text-xl sm:text-xl md:text-2xl leading-relaxed tracking-wide py-5 sm:py-6 md:py-8 px-4 sm:px-5 md:px-6 rounded-lg transition-all",
+        "w-full text-accent-foreground text-2xl sm:text-3xl md:text-4xl leading-relaxed tracking-wide py-5 sm:py-6 md:py-8 px-4 sm:px-5 md:px-6 rounded-lg transition-all",
         className
       )}
     >

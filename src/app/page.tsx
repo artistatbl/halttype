@@ -10,6 +10,7 @@ import { SettingsIcon } from "@/components/icons/settings";
 import { useFocus } from "@/components/typing-test/FocusContext";
 import { useTextGeneration } from "@/hooks/useTextGeneration";
 import { useConfigStorage } from "@/hooks/useConfigStorage";
+import { RotateCcw } from "lucide-react";
 import { nanoid } from "nanoid";
 
 export default function Home() {
@@ -104,25 +105,6 @@ export default function Home() {
           />
         </div>
         
-        {/* Regenerate Text Button */}
-        <div
-          className={cn(
-            "w-full mb-4 flex justify-center transition-opacity duration-300",
-            isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
-          )}
-        >
-          <button
-            onClick={regenerateText}
-            disabled={isGenerating}
-            className={cn(
-              "px-4 py-2 text-sm transition-all rounded-md",
-              "text-muted-foreground hover:text-foreground hover:bg-muted/50",
-              "disabled:opacity-50 disabled:cursor-not-allowed"
-            )}
-          >
-            {isGenerating ? "Generating..." : "🔄 New Text"}
-          </button>
-        </div>
         {error && (
           <div className="w-full mb-4 p-3 bg-destructive/10 border border-destructive/20 rounded-md text-destructive text-sm">
             Error generating text: {error}
@@ -134,20 +116,42 @@ export default function Home() {
             <div className="text-muted-foreground">Generating text...</div>
           </div>
         ) : (
-          <TypingTest
-            content={currentText}
-            testMode={testConfig.mode}
-            timeLimit={
-              testConfig.mode === "time" ? testConfig.timeLimit : undefined
-            }
-            wordCount={
-              testConfig.mode === "words" ? testConfig.wordCount : undefined
-            }
-            difficulty={testConfig.difficulty}
-            testId={testId}
-            key={`${testId}-${currentText.slice(0, 20)}`} // Force re-render when text changes
-          />
+          <div className="mt-8">
+            <TypingTest
+              content={currentText}
+              testMode={testConfig.mode}
+              timeLimit={
+                testConfig.mode === "time" ? testConfig.timeLimit : undefined
+              }
+              wordCount={
+                testConfig.mode === "words" ? testConfig.wordCount : undefined
+              }
+              difficulty={testConfig.difficulty}
+              testId={testId}
+              key={`${testId}-${currentText.slice(0, 20)}`} // Force re-render when text changes
+            />
+          </div>
         )}
+        
+        {/* Regenerate Text Button - Positioned below the typing test */}
+        <div
+          className={cn(
+            "w-full mt-4 flex justify-center transition-opacity duration-300",
+            isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
+          )}
+        >
+          <button
+             onClick={regenerateText}
+             disabled={isGenerating}
+             className={cn(
+               "p-2 transition-all rounded-md",
+               "text-muted-foreground hover:text-foreground hover:bg-muted/50",
+               "disabled:opacity-50 disabled:cursor-not-allowed"
+             )}
+           >
+             <RotateCcw className={cn("w-4 h-4", isGenerating && "animate-spin")} />
+           </button>
+        </div>
       </div>
     </Layout>
   );
