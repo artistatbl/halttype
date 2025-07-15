@@ -30,9 +30,6 @@ export const Providers = ({ children }: PropsWithChildren) => {
       <ThemeProvider
         attribute="class"
         defaultTheme="halt"
-        //enableSystem={false}
-       // disableTransitionOnChange
-        storageKey="theme"
         themes={["halt", "amber", "caffiene", "nature", "notebook", "claude", "twitter", "mono"]}
       >
         <FocusProvider>

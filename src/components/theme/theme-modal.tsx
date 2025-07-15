@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTheme } from 'next-themes';
+import { useTheme } from './theme-provider';
 import { themes } from './theme-config';
 import { ThemeColorDots } from './components/theme-color-dots';
 import {

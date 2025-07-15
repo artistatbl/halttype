@@ -21,4 +21,5 @@ export {
 } from './utils';
 
 // Hooks
+export { useTheme } from './theme-provider';
 export { useThemePreview } from './hooks/use-theme-preview';

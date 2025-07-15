@@ -7,7 +7,7 @@ export interface UserSettings {
   language: string
   keyboardLayout: string
   wpmDisplay: "live" | "end" | "both"
-  theme: "dark" | "light" | "auto"
+  theme: string // Support any theme name
   soundEnabled: boolean
 }
 
@@ -163,6 +163,6 @@ export const defaultSettings: UserSettings = {
   language: "english",
   keyboardLayout: "qwerty",
   wpmDisplay: "live",
-  theme: "dark",
+  theme: "halt",
   soundEnabled: false
 }

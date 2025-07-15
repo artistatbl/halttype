@@ -17,7 +17,7 @@ export interface StoredUserSettings {
   language: string;
   keyboardLayout: string;
   wpmDisplay: 'live' | 'end' | 'both';
-  theme: 'dark' | 'light' | 'auto';
+  theme: string; // Support any theme name from theme-config
   soundEnabled: boolean;
 }
 
@@ -59,7 +59,7 @@ class ConfigStorageService {
         language: 'english',
         keyboardLayout: 'qwerty',
         wpmDisplay: 'live',
-        theme: 'dark',
+        theme: 'halt',
         soundEnabled: false
       },
       lastUpdated: Date.now()

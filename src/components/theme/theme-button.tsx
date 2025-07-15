@@ -1,6 +1,6 @@
 import { Theme } from "./theme-config";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "next-themes";
+import { useTheme } from "./theme-provider";
 import { useEffect, useState } from "react";
 import { ThemeColorDots } from "./components/theme-color-dots";
 
