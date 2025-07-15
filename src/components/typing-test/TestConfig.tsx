@@ -1,11 +1,9 @@
 "use client"
 
-import { cn } from "@/lib/utils"
-import { ClockIcon } from "@/components/icons/clock"
-import { TextIcon } from "@/components/icons/text"
-import { QuoteIcon } from "@/components/icons/quote"
-import { AtSignIcon } from "@/components/icons/at-sign"
-import { HashIcon } from "@/components/icons/hash"
+import { ConfigSeparator } from "./ConfigButton"
+import { FeatureToggles } from "./FeatureToggles"
+import { TestModeSelector } from "./TestModeSelector"
+import { TestOptionsSelector } from "./TestOptionsSelector"
 
 export interface TestConfigOptions {
   mode: "time" | "words" | "quote"
@@ -47,139 +45,34 @@ function TestConfigInternal({
   onPunctuationChange,
   onNumbersChange,
 }: TestConfigProps) {
-  const timeOptions = [15, 30, 60, 120]
-  const wordOptions: (10 | 25 | 50 | 100)[] = [10, 25, 50, 100]
-  const quoteLengthOptions: ("short" | "medium" | "long")[] = ["short", "medium", "long"]
-
-
   return (
     <div className="w-full max-w-3xl mx-auto mb-6">
-      <div className="flex flex-wrap items-center bg-accent rounded-md p-2  justify-center gap-4 text-sm">
-        
-        {/* Punctuation */}
-        <button
-          onClick={() => onPunctuationChange(!punctuation)}
-          className={cn(
-            "flex items-center gap-1.5 px-2 py-1 rounded transition-colors",
-            punctuation
-              ? "text-primary"
-              : "text-muted-foreground hover:text-foreground"
-          )}
-        >
-          <AtSignIcon className="w-3 h-3" />
-          <span>punctuation</span>
-        </button>
+      <div className="flex flex-wrap items-center bg-accent rounded-md p-2 justify-center gap-4 text-sm">
+        <FeatureToggles
+          punctuation={punctuation}
+          numbers={numbers}
+          onPunctuationChange={onPunctuationChange}
+          onNumbersChange={onNumbersChange}
+        />
 
-        {/* Numbers */}
-        <button
-          onClick={() => onNumbersChange(!numbers)}
-          className={cn(
-            "flex items-center gap-1.5 px-2 py-1 rounded transition-colors",
-            numbers
-              ? "text-primary"
-              : "text-muted-foreground hover:text-foreground"
-          )}
-        >
-          <HashIcon className="w-3 h-3" />
-          <span>numbers</span>
-        </button>
+        <ConfigSeparator />
 
-        {/* Separator */}
-        <div className="w-1 h-4 rounded-2xl bg-accent-foreground"></div>
+        <TestModeSelector
+          testMode={testMode}
+          onTestModeChange={onTestModeChange}
+        />
 
-        {/* Test Mode */}
-        <div className="flex items-center gap-1">
-          <button
-            onClick={() => onTestModeChange("time")}
-            className={cn(
-              "flex items-center gap-1.5 px-2 py-1 rounded transition-colors",
-              testMode === "time"
-                ? "text-primary"
-                : "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            <ClockIcon className="w-3 h-3" />
-            <span>time</span>
-          </button>
-          
-          <button
-            onClick={() => onTestModeChange("words")}
-            className={cn(
-              "flex items-center gap-1.5 px-2 py-1 rounded transition-colors",
-              testMode === "words"
-                ? "text-primary"
-                : "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            <TextIcon className="w-3 h-3" />
-            <span>words</span>
-          </button>
-          
-          <button
-            onClick={() => onTestModeChange("quote")}
-            className={cn(
-              "flex items-center gap-1.5 px-2 py-1 rounded transition-colors",
-              testMode === "quote"
-                ? "text-primary"
-                : "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            <QuoteIcon className="w-3 h-3" />
-            <span>quote</span>
-          </button>
-        </div>
+        <ConfigSeparator />
 
-        {/* Separator */}
-        <div className="w-1 h-4 rounded-2xl bg-accent-foreground"></div>
-
-
-        {/* Time/Word/Quote Options */}
-        <div className="flex items-center gap-1">
-          {testMode === "time" && timeOptions.map((time) => (
-            <button
-              key={time}
-              onClick={() => onTimeLimitChange(time)}
-              className={cn(
-                "px-2 py-1 rounded transition-colors min-w-[2rem] text-center",
-                timeLimit === time
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              {time}
-            </button>
-          ))}
-          
-          {testMode === "words" && wordOptions.map((count) => (
-            <button
-              key={count}
-              onClick={() => onWordCountChange(count)}
-              className={cn(
-                "px-2 py-1 rounded transition-colors min-w-[2rem] text-center",
-                wordCount === count
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              {count}
-            </button>
-          ))}
-          
-          {testMode === "quote" && quoteLengthOptions.map((length) => (
-            <button
-              key={length}
-              onClick={() => onQuoteLengthChange(length)}
-              className={cn(
-                "px-2 py-1 rounded transition-colors min-w-[2rem] text-center capitalize",
-                quoteLength === length
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              {length}
-            </button>
-          ))}
-        </div>
+        <TestOptionsSelector
+          testMode={testMode}
+          timeLimit={timeLimit}
+          wordCount={wordCount}
+          quoteLength={quoteLength}
+          onTimeLimitChange={onTimeLimitChange}
+          onWordCountChange={onWordCountChange}
+          onQuoteLengthChange={onQuoteLengthChange}
+        />
       </div>
     </div>
   )
