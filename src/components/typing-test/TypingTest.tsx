@@ -324,6 +324,7 @@ export function TypingTest({
         errors={errors}
         testState={testState}
         capsLockOn={capsLockOn}
+        maxVisibleWords={wordCount && wordCount >= 50 ? 25 : 20} // Show more words for longer tests
        // className="bg-card/10 shadow-sm border border-muted/10"
       />
       
