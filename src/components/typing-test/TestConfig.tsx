@@ -55,89 +55,96 @@ function TestConfigInternal({
 
 
   return (
-    <div className="w-full max-w-3xl mx-auto mb-4 sm:mb-6 p-2 sm:p-1 bg-accent rounded-md">
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4 text-sm sm:text-base">
+    <div className="w-full max-w-3xl mx-auto mb-6">
+      <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
+        
         {/* Punctuation */}
         <button
           onClick={() => onPunctuationChange(!punctuation)}
           className={cn(
-            "flex items-center gap-1.5 transition-all px-2 sm:px-2.5 py-1.5 rounded-md",
+            "flex items-center gap-1.5 px-2 py-1 rounded transition-colors",
             punctuation
-              ? "text-accent-foreground font-medium"
-              : "text-muted-foreground hover:text-primary "
+              ? "text-primary"
+              : "text-muted-foreground hover:text-foreground"
           )}
         >
           <AtSignIcon className="w-3 h-3" />
-          <span className="sm:inline">punctuation</span>
+          <span>punctuation</span>
         </button>
 
         {/* Numbers */}
         <button
           onClick={() => onNumbersChange(!numbers)}
           className={cn(
-            "flex items-center gap-1.5 transition-all px-2 sm:px-2.5 py-1.5 rounded-md",
+            "flex items-center gap-1.5 px-2 py-1 rounded transition-colors",
             numbers
-              ? "text-accent-foreground font-medium"
-              : "text-muted-foreground hover:text-primary "
+              ? "text-primary"
+              : "text-muted-foreground hover:text-foreground"
           )}
         >
           <HashIcon className="w-3 h-3" />
-          <span className="sm:inline">numbers</span>
+          <span>numbers</span>
         </button>
 
+        {/* Separator */}
+        <div className="w-px h-4 bg-border"></div>
+
         {/* Test Mode */}
-        <div className="flex items-center gap-0.5 sm:gap-1  p-0.5 rounded-md">
+        <div className="flex items-center gap-1">
           <button
             onClick={() => onTestModeChange("time")}
             className={cn(
-              "flex items-center gap-1.5 transition-all px-2.5 py-1.5 rounded-sm",
+              "flex items-center gap-1.5 px-2 py-1 rounded transition-colors",
               testMode === "time"
-                ? "text-accent-foreground font-medium"
-                : "text-muted-foreground hover:text-primary "
+                ? "text-primary"
+                : "text-muted-foreground hover:text-foreground"
             )}
           >
             <ClockIcon className="w-3 h-3" />
-            <span className="sm:inline">time</span>
+            <span>time</span>
           </button>
           
           <button
             onClick={() => onTestModeChange("words")}
             className={cn(
-              "flex items-center gap-1.5 transition-all px-2.5 py-1.5 rounded-sm",
+              "flex items-center gap-1.5 px-2 py-1 rounded transition-colors",
               testMode === "words"
-                ? "text-accent-foreground font-medium"
-                : "text-muted-foreground hover:text-primary "
+                ? "text-primary"
+                : "text-muted-foreground hover:text-foreground"
             )}
           >
             <TextIcon className="w-3 h-3" />
-            <span className="sm:inline">words</span>
+            <span>words</span>
           </button>
           
           <button
             onClick={() => onTestModeChange("quote")}
             className={cn(
-              "flex items-center gap-1.5 transition-all px-2.5 py-1.5 rounded-sm",
+              "flex items-center gap-1.5 px-2 py-1 rounded transition-colors",
               testMode === "quote"
-                ? "text-accent-foreground font-medium"
-                : "text-muted-foreground hover:text-primary "
+                ? "text-primary"
+                : "text-muted-foreground hover:text-foreground"
             )}
           >
             <QuoteIcon className="w-3 h-3" />
-            <span className="sm:inline">quote</span>
+            <span>quote</span>
           </button>
         </div>
 
+        {/* Separator */}
+        <div className="w-px h-4 bg-border"></div>
+
         {/* Time/Word/Quote Options */}
-        <div className="flex items-center gap-0.5 sm:gap-1  p-0.5 rounded-md">
+        <div className="flex items-center gap-1">
           {testMode === "time" && timeOptions.map((time) => (
             <button
               key={time}
               onClick={() => onTimeLimitChange(time)}
               className={cn(
-                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
+                "px-2 py-1 rounded transition-colors min-w-[2rem] text-center",
                 timeLimit === time
-                  ? "text-accent-foreground font-medium"
-                  : "text-muted-foreground hover:text-primary "
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
               )}
             >
               {time}
@@ -149,10 +156,10 @@ function TestConfigInternal({
               key={count}
               onClick={() => onWordCountChange(count)}
               className={cn(
-                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
+                "px-2 py-1 rounded transition-colors min-w-[2rem] text-center",
                 wordCount === count
-                  ? "text-accent-foreground font-medium"
-                  : "text-muted-foreground hover:text-primary "
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
               )}
             >
               {count}
@@ -164,10 +171,10 @@ function TestConfigInternal({
               key={length}
               onClick={() => onQuoteLengthChange(length)}
               className={cn(
-                "px-1.5 sm:px-2.5 py-1.5 transition-all min-w-[1.75rem] sm:min-w-[2.25rem] text-center text-sm rounded-sm",
+                "px-2 py-1 rounded transition-colors min-w-[2rem] text-center capitalize",
                 quoteLength === length
-                  ? "text-accent-foreground font-medium"
-                  : "text-muted-foreground hover:text-primary "
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
               )}
             >
               {length}
