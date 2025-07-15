@@ -38,7 +38,6 @@ function TestConfigInternal({
   timeLimit,
   wordCount,
   quoteLength,
-  difficulty,
   punctuation,
   numbers,
   onTestModeChange,
@@ -51,12 +50,11 @@ function TestConfigInternal({
   const timeOptions = [15, 30, 60, 120]
   const wordOptions: (10 | 25 | 50 | 100)[] = [10, 25, 50, 100]
   const quoteLengthOptions: ("short" | "medium" | "long")[] = ["short", "medium", "long"]
-  const difficultyOptions: ("easy" | "medium" | "hard")[] = ["easy", "medium", "hard"]
 
 
   return (
     <div className="w-full max-w-3xl mx-auto mb-6">
-      <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
+      <div className="flex flex-wrap items-center bg-accent rounded-md p-2  justify-center gap-4 text-sm">
         
         {/* Punctuation */}
         <button
@@ -87,7 +85,7 @@ function TestConfigInternal({
         </button>
 
         {/* Separator */}
-        <div className="w-px h-4 bg-border"></div>
+        <div className="w-1 h-4 rounded-2xl bg-white"></div>
 
         {/* Test Mode */}
         <div className="flex items-center gap-1">
@@ -132,7 +130,8 @@ function TestConfigInternal({
         </div>
 
         {/* Separator */}
-        <div className="w-px h-4 bg-border"></div>
+        <div className="w-1 h-4 rounded-2xl bg-white"></div>
+
 
         {/* Time/Word/Quote Options */}
         <div className="flex items-center gap-1">

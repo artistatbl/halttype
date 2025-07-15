@@ -81,7 +81,7 @@ export function TypingTest({
   const { setFocused } = useFocus()
   
   // Start the test when user starts typing
-  const startTest = async () => {
+  const startTest = () => {
     if (testState === "idle") {
       setTestState("running")
       setStartTime(Date.now())
@@ -92,15 +92,13 @@ export function TypingTest({
         startTimer()
       }
       
-      try {
-        // Call the API to record the test start
-        await client.testResults.startTest.$post({
-          testId: testId,
-        })
-      } catch (error) {
+      // Call the API to record the test start (non-blocking)
+      client.testResults.startTest.$post({
+        testId: testId,
+      }).catch(error => {
         // If there's an error, we still want the test to continue locally
         console.error("Failed to record test start:", error)
-      }
+      })
     }
   }
   
@@ -159,28 +157,37 @@ export function TypingTest({
   }
   
   // Handle user input
-  const handleInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value
     
-    // Start test if not already started
+    // Start test if not already started (non-blocking)
     if (testState === "idle") {
-      await startTest()
+      startTest() // Remove await to prevent blocking
     }
     
-    // Update user input
+    // Update user input immediately
     setUserInput(input)
     
-    // Check for errors
-    const newErrors: number[] = []
-    for (let i = 0; i < input.length; i++) {
-      if (input[i] !== content[i]) {
-        newErrors.push(i)
-      }
-    }
-    setErrors(newErrors)
-    
-    // Update current position
+    // Update current position immediately for responsive UI
     setCurrentPosition(input.length)
+    
+    // Optimized error checking - only check new characters
+    const prevLength = userInput.length
+    const newErrors = [...errors]
+    
+    if (input.length > prevLength) {
+      // Adding characters - check only new ones
+      for (let i = prevLength; i < input.length; i++) {
+        if (input[i] !== content[i]) {
+          newErrors.push(i)
+        }
+      }
+    } else if (input.length < prevLength) {
+      // Removing characters - filter out errors beyond current position
+      newErrors.splice(0, newErrors.length, ...newErrors.filter(errorIndex => errorIndex < input.length))
+    }
+    
+    setErrors(newErrors)
     
     // Update word counter for word-based tests
     if (testMode === "words") {
@@ -188,9 +195,9 @@ export function TypingTest({
       updateWordsCompleted(completedWords)
     }
     
-    // Record keystroke
-    const lastChar = input.charAt(input.length - 1)
-    if (lastChar) {
+    // Record keystroke only for new characters
+    if (input.length > prevLength) {
+      const lastChar = input.charAt(input.length - 1)
       const expectedChar = content.charAt(input.length - 1)
       const isCorrect = expectedChar === lastChar
       setKeystrokes(prev => [

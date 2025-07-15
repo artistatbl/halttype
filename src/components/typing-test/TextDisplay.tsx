@@ -61,6 +61,9 @@ export function TextDisplay({
     return { visibleText, visibleStartIndex }
   }, [text, currentPosition, maxVisibleWords])
 
+  // Convert errors array to Set for O(1) lookup performance
+  const errorSet = useMemo(() => new Set(errors), [errors])
+
   return (
     <div 
       className={cn(
@@ -77,7 +80,7 @@ export function TextDisplay({
             const absoluteIndex = visibleStartIndex + index
             const isActive = absoluteIndex === currentPosition
             const isPast = absoluteIndex < currentPosition
-            const isError = errors.includes(absoluteIndex)
+            const isError = errorSet.has(absoluteIndex)
             
             return (
               <span
