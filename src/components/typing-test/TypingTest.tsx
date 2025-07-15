@@ -1,16 +1,21 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 import { cn } from "@/lib/utils"
 import { TextDisplay } from "./TextDisplay"
 import { StatsDisplay } from "./StatsDisplay"
 import { WordCounter } from "./WordCounter"
+import { TestCompletionModal } from "./TestCompletionModal"
+import { TestTimer } from "./TestTimer"
 import { useFocus } from "./FocusContext"
 import { useCapsLock } from "./CapsLock"
 import { useWordTest } from "@/hooks/useWordTest"
 import { useElapsedTime } from "@/hooks/useElapsedTime"
+import { useTypingTestState } from "@/hooks/useTypingTestState"
+import { useInputHandler } from "@/hooks/useInputHandler"
+import { useTestCompletion } from "@/hooks/useTestCompletion"
+import { calculateRealTimeWPM, calculateRealTimeAccuracy } from "@/lib/typing-test/calculations"
 import { client } from "@/lib/client"
-import { nanoid } from "nanoid"
 
 interface TypingTestProps {
   content: string
@@ -49,193 +54,74 @@ export function TypingTest({
   testMode = "time",
   testId = "default", // Default test ID if none provided
 }: TypingTestProps) {
-  // Test state
-  const [testState, setTestState] = useState<"idle" | "running" | "completed">("idle")
-  const [startTime, setStartTime] = useState<number | null>(null)
-  const [endTime, setEndTime] = useState<number | null>(null)
-  const [timeRemaining, setTimeRemaining] = useState<number | null>(timeLimit || null)
-  
-  // Typing state
-  const [currentPosition, setCurrentPosition] = useState(0)
-  const [userInput, setUserInput] = useState("")
-  const [errors, setErrors] = useState<number[]>([])
-  const [keystrokes, setKeystrokes] = useState<TestResults["keystrokes"]>([])
-  
-  // Use the capsLock hook instead of managing state directly
+  // Custom hooks for state management
+  const { state, actions } = useTypingTestState(timeLimit)
   const capsLockOn = useCapsLock()
-  
-  // Word test hook for word-based tests
   const { wordTestState, updateWordsCompleted, countCompletedWords, resetWordTest } = useWordTest(wordCount || 25)
-  
-  // Elapsed time hook for word-based tests
   const { elapsedTime, startTimer, stopTimer, resetTimer } = useElapsedTime()
-  
-  // Stats
-  const [wpm, setWpm] = useState(0)
-  const [accuracy, setAccuracy] = useState(100)
-  
-  // Refs
+  const { setFocused } = useFocus()
   const inputRef = useRef<HTMLInputElement>(null)
   
-  // Get focus context
-  const { setFocused } = useFocus()
-  
-  // Start the test when user starts typing
-  const startTest = () => {
-    if (testState === "idle") {
-      setTestState("running")
-      setStartTime(Date.now())
-      setFocused(true) // Set focus mode when typing starts
-      
-      // Start elapsed timer for word-based tests
-      if (testMode === "words") {
-        startTimer()
-      }
-      
-      // Call the API to record the test start (non-blocking)
-      client.testResults.startTest.$post({
-        testId: testId,
-      }).catch(error => {
-        // If there's an error, we still want the test to continue locally
-        console.error("Failed to record test start:", error)
-      })
-    }
-  }
-  
-  // Complete the test
-  const completeTest = async () => {
-    if (testState === "running") {
-      setTestState("completed")
-      setEndTime(Date.now())
-      setFocused(false) // Exit focus mode when test completes
-      
-      // Stop elapsed timer for word-based tests
-      if (testMode === "words") {
-        stopTimer()
-      }
-      
-      // Calculate final results
-      const timeSpent = testMode === "words" 
-        ? elapsedTime 
-        : ((endTime || Date.now()) - (startTime || Date.now())) / 1000
-      const wordsTyped = userInput.trim().split(/\s+/).length
-      const correctWords = wordsTyped - errors.length
-      const calculatedWpm = Math.round((wordsTyped / (timeSpent / 60)) || 0)
-      const calculatedAccuracy = Math.round((correctWords / wordsTyped) * 100) || 0
-      
-      const roundedTimeSpent = Math.round(timeSpent);
-      
-      const results: TestResults = {
-        wpm: calculatedWpm,
-        accuracy: calculatedAccuracy,
-        timeSpent: roundedTimeSpent,
-        wordsTyped,
-        correctWords,
-        incorrectWords: errors.length,
-        keystrokes,
-      }
-      
-      try {
-        // Save the test result to the database
-        await client.testResults.saveTestResult.$post({
-          testId: testId,
-          wpm: calculatedWpm,
-          accuracy: calculatedAccuracy,
-          timeSpent: roundedTimeSpent, // Using the rounded integer value
-          wordsTyped,
-          correctWords,
-          incorrectWords: errors.length,
-          keystrokes,
-        })
-      } catch (error) {
-        console.error("Failed to save test result:", error)
-      }
-      
-      // Call onComplete callback with results
-      onComplete?.(results)
-    }
-  }
-  
-  // Handle user input
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value
+  // Handle test start
+  const handleTestStart = () => {
+    setFocused(true)
     
-    // Start test if not already started (non-blocking)
-    if (testState === "idle") {
-      startTest() // Remove await to prevent blocking
-    }
-    
-    // Update user input immediately
-    setUserInput(input)
-    
-    // Update current position immediately for responsive UI
-    setCurrentPosition(input.length)
-    
-    // Optimized error checking - only check new characters
-    const prevLength = userInput.length
-    const newErrors = [...errors]
-    
-    if (input.length > prevLength) {
-      // Adding characters - check only new ones
-      for (let i = prevLength; i < input.length; i++) {
-        if (input[i] !== content[i]) {
-          newErrors.push(i)
-        }
-      }
-    } else if (input.length < prevLength) {
-      // Removing characters - filter out errors beyond current position
-      newErrors.splice(0, newErrors.length, ...newErrors.filter(errorIndex => errorIndex < input.length))
-    }
-    
-    setErrors(newErrors)
-    
-    // Update word counter for word-based tests
+    // Start elapsed timer for word-based tests
     if (testMode === "words") {
-      const completedWords = countCompletedWords(input)
-      updateWordsCompleted(completedWords)
+      startTimer()
     }
     
-    // Record keystroke only for new characters
-    if (input.length > prevLength) {
-      const lastChar = input.charAt(input.length - 1)
-      const expectedChar = content.charAt(input.length - 1)
-      const isCorrect = expectedChar === lastChar
-      setKeystrokes(prev => [
-        ...prev,
-        {
-          key: lastChar,
-          timestamp: Date.now(),
-          correct: isCorrect,
-        }
-      ])
-    }
-    
-    // Check if test is complete based on test mode
-    if (
-      // Complete if reached end of content
-      input.length >= content.length ||
-      // Complete if in words mode and reached word count
-      (testMode === "words" && 
-       wordCount && 
-       countCompletedWords(input) >= wordCount)
-    ) {
-      completeTest()
-    }
+    // Call the API to record the test start (non-blocking)
+    client.testResults.startTest.$post({
+      testId: testId,
+    }).catch(error => {
+      console.error("Failed to record test start:", error)
+    })
   }
+  
+  // Handle test completion
+  const handleTestComplete = () => {
+    setFocused(false)
+    completeTest()
+  }
+  
+  // Input handler hook
+  const { handleInput } = useInputHandler({
+    content,
+    testMode,
+    wordCount,
+    state,
+    actions,
+    onTestStart: handleTestStart,
+    onTestComplete: handleTestComplete,
+    countCompletedWords,
+    updateWordsCompleted,
+  })
+  
+  // Test completion hook
+  const { completeTest } = useTestCompletion({
+    testMode,
+    testId,
+    state,
+    actions,
+    elapsedTime,
+    onComplete,
+    stopTimer,
+  })
   
   // Timer effect - only for time-based tests
   useEffect(() => {
     let timer: NodeJS.Timeout | null = null
     
-    if (testState === "running" && testMode === "time" && timeLimit) {
+    if (state.testState === "running" && testMode === "time" && timeLimit) {
       timer = setInterval(() => {
-        const elapsed = Math.floor((Date.now() - (startTime || Date.now())) / 1000)
+        const elapsed = Math.floor((Date.now() - (state.startTime || Date.now())) / 1000)
         const remaining = timeLimit - elapsed
         
-        setTimeRemaining(remaining >= 0 ? remaining : 0)
+        actions.setTimeRemaining(remaining >= 0 ? remaining : 0)
         
         if (remaining <= 0) {
-          completeTest()
+          handleTestComplete()
           if (timer) clearInterval(timer)
         }
       }, 1000)
@@ -244,24 +130,17 @@ export function TypingTest({
     return () => {
       if (timer) clearInterval(timer)
     }
-  }, [testState, startTime, timeLimit, testMode])
+  }, [state.testState, state.startTime, timeLimit, testMode, actions, handleTestComplete])
   
   // Calculate WPM and accuracy in real-time
   useEffect(() => {
-    if (testState === "running" && startTime) {
-      const timeElapsed = (Date.now() - startTime) / 1000 / 60 // in minutes
-      const wordsTyped = userInput.trim().split(/\s+/).length
+    if (state.testState === "running" && state.startTime) {
+      const currentWpm = calculateRealTimeWPM(state.userInput, state.startTime)
+      const currentAccuracy = calculateRealTimeAccuracy(state.userInput, state.errors)
       
-      // Calculate WPM
-      const currentWpm = Math.round(wordsTyped / timeElapsed) || 0
-      setWpm(currentWpm)
-      
-      // Calculate accuracy
-      const correctChars = userInput.length - errors.length
-      const currentAccuracy = Math.round((correctChars / userInput.length) * 100) || 100
-      setAccuracy(currentAccuracy)
+      actions.updateStats(currentWpm, currentAccuracy)
     }
-  }, [userInput, startTime, testState, errors])
+  }, [state.userInput, state.startTime, state.testState, state.errors, actions])
   
   // Focus input on mount and when clicked anywhere
   useEffect(() => {
@@ -290,7 +169,7 @@ export function TypingTest({
       <input
         ref={inputRef}
         type="text"
-        value={userInput}
+        value={state.userInput}
         onChange={handleInput}
         className="opacity-0 absolute h-0 w-0 pointer-events-none"
         aria-label="Typing input"
@@ -303,16 +182,14 @@ export function TypingTest({
     
       
       {/* Timer display for time-based tests */}
-      {testState === "running" && testMode === "time" && timeRemaining !== undefined && timeRemaining !== null && (
-        <div className="w-full flex justify-start mb-2 sm:mb-4">
-          <div className="text-sm sm:text-base md:text-lg font-mono text-primary/90 font-semibold bg-background/50 px-2 sm:px-3 py-1 rounded-md">
-            {timeRemaining}s
-          </div>
-        </div>
-      )}
+      <TestTimer
+        timeRemaining={state.timeRemaining || 0}
+        testMode={testMode}
+        testState={state.testState}
+      />
       
       {/* Word counter for word-based tests */}
-      {testState === "running" && testMode === "words" && (
+      {state.testState === "running" && testMode === "words" && (
         <div className="w-full mb-2 sm:mb-4">
           <WordCounter wordTestState={wordTestState} />
         </div>
@@ -321,93 +198,49 @@ export function TypingTest({
       {/* Text display */}
       <TextDisplay 
         text={content}
-        currentPosition={currentPosition}
-        errors={errors}
-        testState={testState}
+        currentPosition={state.currentPosition}
+        errors={state.errors}
+        testState={state.testState}
         capsLockOn={capsLockOn}
         maxVisibleWords={wordCount && wordCount >= 50 ? 25 : 20} // Show more words for longer tests
-       // className="bg-card/10 shadow-sm border border-muted/10"
       />
       
       {/* Stats display - only shown when test is completed */}
-      {testState === "completed" && (
+      {state.testState === "completed" && (
         <StatsDisplay 
-          wpm={wpm}
-          accuracy={accuracy}
-          timeRemaining={timeRemaining}
-          //className="mt-4 sm:mt-6 bg-card/5 p-3 rounded-md shadow-sm border border-muted/10"
+          wpm={state.wpm}
+          accuracy={state.accuracy}
+          timeRemaining={state.timeRemaining}
         />
       )}
       
-      {/* Test completed view */}
-      {testState === "completed" && (
-        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-card/90 p-4 sm:p-6 max-w-md w-full rounded-md">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-medium text-primary mb-4 sm:mb-6 text-center">Test Complete</h2>
-            
-            <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
-              <div className="flex flex-col items-center">
-                <p className="text-primary text-3xl sm:text-4xl md:text-5xl font-mono">{wpm}</p>
-                <p className="text-muted-foreground text-sm uppercase tracking-wider mt-1">wpm</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <p className="text-foreground text-3xl sm:text-4xl md:text-5xl font-mono">{accuracy}%</p>
-                <p className="text-muted-foreground text-sm uppercase tracking-wider mt-1">accuracy</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <p className="text-foreground text-3xl sm:text-4xl md:text-5xl font-mono">
-                  {testMode === "words" 
-                    ? `${elapsedTime}s`
-                    : `${Math.round(((endTime || 0) - (startTime || 0)) / 100) / 10}s`
-                  }
-                </p>
-                <p className="text-muted-foreground text-sm uppercase tracking-wider mt-1">time</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <p className="text-foreground text-3xl sm:text-4xl md:text-5xl font-mono">{userInput.length}</p>
-                <p className="text-muted-foreground text-sm uppercase tracking-wider mt-1">chars</p>
-              </div>
-            </div>
-            
-            <div className="flex gap-2 sm:gap-3">
-              <button
-                onClick={() => {
-                  setTestState("idle")
-                  setUserInput("")
-                  setCurrentPosition(0)
-                  setErrors([])
-                  setKeystrokes([])
-                  setStartTime(null)
-                  setEndTime(null)
-                  setTimeRemaining(timeLimit || null)
-                  setWpm(0)
-                  setAccuracy(100)
-                  setFocused(false) // Ensure focus mode is off when resetting
-                  
-                  // Reset word test and elapsed timer for word-based tests
-                  if (testMode === "words") {
-                    resetWordTest()
-                    resetTimer()
-                  }
-                  
-                  inputRef.current?.focus()
-                }}
-                className="flex-1 py-1.5 sm:py-2 px-2 sm:px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-sm sm:text-base transition-colors rounded"
-              >
-                Try Again
-              </button>
-              <button
-                onClick={() => {
-                  // TODO: Navigate to new test
-                }}
-                className="flex-1 py-1.5 sm:py-2 px-2 sm:px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-sm sm:text-base transition-colors rounded"
-              >
-                New Test
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Test completion modal */}
+      <TestCompletionModal
+        isOpen={state.testState === "completed"}
+        wpm={state.wpm}
+        accuracy={state.accuracy}
+        timeSpent={testMode === "words" 
+          ? elapsedTime 
+          : Math.round(((state.endTime || 0) - (state.startTime || 0)) / 1000)
+        }
+        charactersTyped={state.userInput.length}
+        testMode={testMode}
+        onTryAgain={() => {
+          actions.resetTest(timeLimit)
+          setFocused(false)
+          
+          // Reset word test and elapsed timer for word-based tests
+          if (testMode === "words") {
+            resetWordTest()
+            resetTimer()
+          }
+          
+          inputRef.current?.focus()
+        }}
+        onNewTest={() => {
+          // TODO: Navigate to new test
+        }}
+      />
     </div>
   )
 }
