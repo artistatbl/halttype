@@ -73,12 +73,37 @@ export function generateText(options: TextGenerationOptions): GeneratedText {
 
   // Punctuation marks to randomly add
   const punctuation = ['.', ',', '!', '?', ';', ':'];
-  const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  
+  // Common words to improve readability
+  const commonWords = {
+    articles: ['the', 'a', 'an'],
+    conjunctions: ['and', 'but', 'or', 'because', 'if', 'when', 'while'],
+    prepositions: ['in', 'on', 'at', 'with', 'by', 'for', 'from', 'to', 'of'],
+    pronouns: ['I', 'you', 'he', 'she', 'it', 'we', 'they', 'my', 'your', 'his', 'her', 'our', 'their']
+  };
 
   for (let i = 0; i < wordCount; i++) {
-    // Select a random word
-    const randomIndex = random.nextInt(0, words.length - 1);
-    let word = words[randomIndex];
+    let word = '';
+    
+    // Every 3-4 words, add a common word to improve readability
+    if (i > 0 && i % random.nextInt(3, 4) === 0) {
+      // Select a random category of common words
+      const categories = Object.keys(commonWords) as Array<keyof typeof commonWords>;
+      // Ensure we have a valid index
+      const categoryIndex = Math.min(random.nextInt(0, categories.length - 1), categories.length - 1);
+      // Ensure category is not undefined
+      const category = categories[categoryIndex] as keyof typeof commonWords;
+      
+      // Select a random word from that category
+      const commonWordsArray = commonWords[category];
+      // Ensure we have a valid index
+      const wordIndex = Math.min(random.nextInt(0, commonWordsArray.length - 1), commonWordsArray.length - 1);
+      word = commonWordsArray[wordIndex] || '';
+    } else {
+      // Select a random word from the difficulty list
+      const randomIndex = Math.min(random.nextInt(0, words.length - 1), words.length - 1);
+      word = words[randomIndex] || '';
+    }
     
     // Ensure we have a valid word
     if (!word) {
@@ -87,11 +112,22 @@ export function generateText(options: TextGenerationOptions): GeneratedText {
 
     // Occasionally add numbers if enabled
     if (includeNumbers && random.next() < 0.1) { // 10% chance
-      const numberCount = random.nextInt(1, 3);
-      const randomNumbers = Array.from({ length: numberCount }, () => 
-        numbers[random.nextInt(0, numbers.length - 1)]
-      ).join('');
-      word = word + randomNumbers;
+      // Add numbers in more meaningful ways
+      const numberType = random.nextInt(1, 3);
+      
+      if (numberType === 1) {
+        // Add a year (e.g., 2023, 1995)
+        const year = random.nextInt(1950, 2030);
+        word = word + ' ' + year;
+      } else if (numberType === 2) {
+        // Add a small quantity (1-100)
+        const quantity = random.nextInt(1, 100);
+        word = word + ' ' + quantity;
+      } else {
+        // Add a small number (1-9)
+        const smallNumber = random.nextInt(1, 9);
+        word = word + ' ' + smallNumber;
+      }
     }
 
     // Add punctuation if enabled
@@ -102,7 +138,8 @@ export function generateText(options: TextGenerationOptions): GeneratedText {
       }
       // Add period at the end of sentences (20% chance, but not at the very end)
       else if (i < wordCount - 1 && random.next() < 0.2) {
-        const punct = punctuation[random.nextInt(0, punctuation.length - 1)];
+        const punctIndex = Math.min(random.nextInt(0, punctuation.length - 1), punctuation.length - 1);
+        const punct = punctuation[punctIndex];
         if (punct) {
           word += punct;
           // Capitalize next word if it's a sentence-ending punctuation
