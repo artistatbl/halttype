@@ -85,7 +85,7 @@ function TestConfigInternal({
         </button>
 
         {/* Separator */}
-        <div className="w-1 h-4 rounded-2xl bg-white"></div>
+        <div className="w-1 h-4 rounded-2xl bg-accent-foreground"></div>
 
         {/* Test Mode */}
         <div className="flex items-center gap-1">
@@ -130,7 +130,7 @@ function TestConfigInternal({
         </div>
 
         {/* Separator */}
-        <div className="w-1 h-4 rounded-2xl bg-white"></div>
+        <div className="w-1 h-4 rounded-2xl bg-accent-foreground"></div>
 
 
         {/* Time/Word/Quote Options */}
