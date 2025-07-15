@@ -10,6 +10,7 @@ export interface WordTestState {
 export interface UseWordTestReturn {
   wordTestState: WordTestState;
   updateWordsCompleted: (completedWords: number) => void;
+  countCompletedWords: (userInput: string) => number;
   resetWordTest: () => void;
 }
 
@@ -40,6 +41,15 @@ export function useWordTest(targetWordCount: number): UseWordTestReturn {
     });
   }, []);
 
+  // Count completed words based on spaces typed
+  const countCompletedWords = useCallback((userInput: string) => {
+    // Count words that are followed by a space (completed words)
+    const words = userInput.split(' ');
+    // If input ends with space, all words are completed
+    // If input doesn't end with space, exclude the last word as it's still being typed
+    return userInput.endsWith(' ') ? words.length - 1 : Math.max(0, words.length - 1);
+  }, []);
+
   // Reset word test state
   const resetWordTest = useCallback(() => {
     setWordTestState({
@@ -62,6 +72,7 @@ export function useWordTest(targetWordCount: number): UseWordTestReturn {
   return {
     wordTestState,
     updateWordsCompleted,
+    countCompletedWords,
     resetWordTest
   };
 }

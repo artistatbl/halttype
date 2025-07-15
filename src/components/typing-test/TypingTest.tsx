@@ -65,7 +65,7 @@ export function TypingTest({
   const capsLockOn = useCapsLock()
   
   // Word test hook for word-based tests
-  const { wordTestState, updateWordsCompleted, resetWordTest } = useWordTest(wordCount || 25)
+  const { wordTestState, updateWordsCompleted, countCompletedWords, resetWordTest } = useWordTest(wordCount || 25)
   
   // Elapsed time hook for word-based tests
   const { elapsedTime, startTimer, stopTimer, resetTimer } = useElapsedTime()
@@ -184,7 +184,7 @@ export function TypingTest({
     
     // Update word counter for word-based tests
     if (testMode === "words") {
-      const completedWords = input.trim().split(/\s+/).filter(word => word.length > 0).length
+      const completedWords = countCompletedWords(input)
       updateWordsCompleted(completedWords)
     }
     
@@ -209,7 +209,7 @@ export function TypingTest({
       // Complete if in words mode and reached word count
       (testMode === "words" && 
        wordCount && 
-       input.trim().split(/\s+/).filter(word => word.length > 0).length >= wordCount)
+       countCompletedWords(input) >= wordCount)
     ) {
       completeTest()
     }
