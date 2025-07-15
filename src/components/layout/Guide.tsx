@@ -25,17 +25,12 @@ export function Guide({ className }: GuideProps) {
               <kbd className="px-2 py-1 bg-accent rounded text-xs ">Enter</kbd>
               <span className="text-primary font-extralight">restart test</span>
             </div>
-            <div className="flex items-center gap-2">
-              <kbd className="px-2 py-1 bg-accent rounded text-xs ">Esc</kbd>
-              <span className="text-primary">focus mode</span>
-            </div>
+          
             <div className="flex items-center gap-2">
               <kbd className="px-2 py-1 bg-accent rounded text-xs ">Ctrl</kbd>
               <span className="text-primary">+</span>     
-              <kbd className="px-2 py-1 bg-accent rounded text-xs ">Shift</kbd>
-              <span className="text-primary">+</span>
-              <kbd className="px-2 py-1 bg-accent rounded text-xs ">P</kbd>
-              <span className="text-primary">pause</span>
+              <kbd className="px-2 py-1 bg-accent rounded text-xs ">k</kbd>
+              <span className="text-primary">Command</span>
             </div>
           </div>
         </div>
