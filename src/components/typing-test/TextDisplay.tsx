@@ -92,8 +92,8 @@ export function TextDisplay({
               >
                 {char}
                  {isActive && (
-                    <span className="absolute -left-0.5 top-0 w-0.5 h-full bg-primary/80" />
-                  )}
+                   <span className="absolute -right-0.5 top-0 w-0.5 h-full bg-primary/80" />
+                 )}
               </span>
             )
           })}
