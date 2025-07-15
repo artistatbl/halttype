@@ -32,7 +32,10 @@ export default function Home() {
   const [userSettings, setUserSettings] =
     useState<UserSettings>(defaultSettings);
   const [showSettings, setShowSettings] = useState(false);
+  // Generate a unique ID for each page load to ensure new text on refresh
   const [testId] = useState(() => nanoid());
+  // Add a refresh key that changes on each page load
+  const [refreshKey] = useState(() => Date.now());
 
   // Get focus state
   const { isFocused } = useFocus();
@@ -44,7 +47,9 @@ export default function Home() {
     difficulty: testConfig.difficulty as 'easy' | 'medium' | 'hard',
     punctuation: testConfig.punctuation || false,
     numbers: testConfig.numbers || false,
-  }), [testConfig.mode, testConfig.wordCount, testConfig.difficulty, testConfig.punctuation, testConfig.numbers]);
+    // Include the refresh key to ensure new text on page refresh
+    refreshKey: refreshKey,
+  }), [testConfig.mode, testConfig.wordCount, testConfig.difficulty, testConfig.punctuation, testConfig.numbers, refreshKey]);
 
   // Generate text based on current configuration
   const { currentText, regenerateText, isGenerating, error } = useTextGeneration(textGenerationConfig);

@@ -8,6 +8,7 @@ export interface TextGenerationConfig {
   punctuation: boolean;
   numbers: boolean;
   customText?: string; // For quote mode or custom content
+  refreshKey?: number; // Used to generate new text on page refresh
 }
 
 export interface UseTextGenerationReturn {
@@ -59,29 +60,21 @@ export function useTextGeneration(config: TextGenerationConfig): UseTextGenerati
               difficulty: config.difficulty,
               includePunctuation: true, // Quotes typically have punctuation
               includeNumbers: config.numbers,
-              seed: `quote-${config.difficulty}-${regenerationKey}`
+              seed: `quote-${config.difficulty}-${config.numbers}-${config.refreshKey || Date.now()}-${regenerationKey}`
             });
           }
           break;
 
         case 'words':
           // Use preset generators for word mode
-          switch (config.wordCount) {
-            case 10:
-              result = textPresets.words10(config.difficulty, config.punctuation, config.numbers);
-              break;
-            case 25:
-              result = textPresets.words25(config.difficulty, config.punctuation, config.numbers);
-              break;
-            case 50:
-              result = textPresets.words50(config.difficulty, config.punctuation, config.numbers);
-              break;
-            case 100:
-              result = textPresets.words100(config.difficulty, config.punctuation, config.numbers);
-              break;
-            default:
-              result = textPresets.words25(config.difficulty, config.punctuation, config.numbers);
-          }
+          // Instead of using presets, generate text directly with a seed that includes the refresh key
+          result = generateText({
+            wordCount: config.wordCount,
+            difficulty: config.difficulty,
+            includePunctuation: config.punctuation,
+            includeNumbers: config.numbers,
+            seed: `words-${config.wordCount}-${config.difficulty}-${config.punctuation}-${config.numbers}-${config.refreshKey || Date.now()}-${regenerationKey}`
+          });
           break;
 
         case 'time':
@@ -94,7 +87,7 @@ export function useTextGeneration(config: TextGenerationConfig): UseTextGenerati
             difficulty: config.difficulty,
             includePunctuation: config.punctuation,
             includeNumbers: config.numbers,
-            seed: `time-${config.difficulty}-${regenerationKey}`
+            seed: `time-${config.difficulty}-${config.punctuation}-${config.numbers}-${config.refreshKey || Date.now()}-${regenerationKey}`
           });
           break;
       }
@@ -106,7 +99,7 @@ export function useTextGeneration(config: TextGenerationConfig): UseTextGenerati
     } finally {
       setIsGenerating(false);
     }
-  }, [config.mode, config.wordCount, config.difficulty, config.punctuation, config.numbers, config.customText, regenerationKey]);
+  }, [config.mode, config.wordCount, config.difficulty, config.punctuation, config.numbers, config.customText, config.refreshKey, regenerationKey]);
 
   // Generate text when configuration changes
   useEffect(() => {
