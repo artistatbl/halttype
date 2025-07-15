@@ -34,7 +34,7 @@ export function TextDisplay({
     let currentWordIndex = 0
     
     for (let i = 0; i < words.length; i++) {
-      const wordLength = words[i].length + (i < words.length - 1 ? 1 : 0) // +1 for space
+      const wordLength = (words[i]?.length || 0) + (i < words.length - 1 ? 1 : 0) // +1 for space
       if (charCount + wordLength > currentPosition) {
         currentWordIndex = i
         break
@@ -55,7 +55,7 @@ export function TextDisplay({
     // Calculate the character index where visible text starts in the original text
     let visibleStartIndex = 0
     for (let i = 0; i < startWordIndex; i++) {
-      visibleStartIndex += words[i].length + (i < words.length - 1 ? 1 : 0)
+      visibleStartIndex += (words[i]?.length || 0) + (i < words.length - 1 ? 1 : 0)
     }
     
     return { visibleText, visibleStartIndex }
@@ -97,14 +97,6 @@ export function TextDisplay({
               </span>
             )
           })}
-        </div>
-        
-        {/* Progress indicator showing how much text is remaining */}
-        <div className="mt-4 w-full bg-muted/20 rounded-full h-1 overflow-hidden">
-          <div 
-            className="h-full bg-primary/60 transition-all duration-300 ease-out"
-            style={{ width: `${(currentPosition / text.length) * 100}%` }}
-          />
         </div>
       </div>
     </div>
