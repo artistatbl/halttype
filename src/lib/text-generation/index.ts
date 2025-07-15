@@ -15,6 +15,13 @@ export {
 } from './text-generator';
 
 export {
+  textGenerationService,
+  TextGenerationService,
+  type TextGenerationRequest,
+  type TextGenerationSession
+} from './text-generation-service';
+
+export {
   getWordsByDifficulty,
   commonWords,
   mediumWords,

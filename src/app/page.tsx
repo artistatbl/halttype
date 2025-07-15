@@ -4,38 +4,27 @@ import { useState, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { Layout } from "@/components/layout/Layout";
 import { TypingTest } from "@/components/typing-test/TypingTest";
-import {
-  TestConfig,
-  TestConfigOptions,
-} from "@/components/typing-test/TestConfig";
-import {
-  Settings,
-  UserSettings,
-  defaultSettings,
-} from "@/components/typing-test/Settings";
+import { TestConfig } from "@/components/typing-test/TestConfig";
+import { Settings } from "@/components/typing-test/Settings";
 import { SettingsIcon } from "@/components/icons/settings";
 import { useFocus } from "@/components/typing-test/FocusContext";
-import { useTextGeneration } from "@/components/typing-test/useTextGeneration";
+import { useTextGeneration } from "@/hooks/useTextGeneration";
+import { useConfigStorage } from "@/hooks/useConfigStorage";
 import { nanoid } from "nanoid";
 
 export default function Home() {
-  const [testConfig, setTestConfig] = useState<TestConfigOptions>({
-    mode: "time",
-    timeLimit: 30,
-    wordCount: 25,
-    quoteLength: "medium",
-    difficulty: "medium",
-    punctuation: false,
-    numbers: false,
-  });
+  // Use configuration storage hook for persistent settings
+  const {
+    testConfig,
+    userSettings,
+    updateTestConfig,
+    updateUserSettings,
+    isLoaded
+  } = useConfigStorage();
 
-  const [userSettings, setUserSettings] =
-    useState<UserSettings>(defaultSettings);
   const [showSettings, setShowSettings] = useState(false);
   // Generate a unique ID for each page load to ensure new text on refresh
   const [testId] = useState(() => nanoid());
-  // Add a refresh key that changes on each page load
-  const [refreshKey] = useState(() => Date.now());
 
   // Get focus state
   const { isFocused } = useFocus();
@@ -47,12 +36,22 @@ export default function Home() {
     difficulty: testConfig.difficulty as 'easy' | 'medium' | 'hard',
     punctuation: testConfig.punctuation || false,
     numbers: testConfig.numbers || false,
-    // Include the refresh key to ensure new text on page refresh
-    refreshKey: refreshKey,
-  }), [testConfig.mode, testConfig.wordCount, testConfig.difficulty, testConfig.punctuation, testConfig.numbers, refreshKey]);
+    sessionId: testId, // Use testId as session identifier
+  }), [testConfig.mode, testConfig.wordCount, testConfig.difficulty, testConfig.punctuation, testConfig.numbers, testId]);
 
   // Generate text based on current configuration
   const { currentText, regenerateText, isGenerating, error } = useTextGeneration(textGenerationConfig);
+
+  // Show loading state while configuration is being loaded
+  if (!isLoaded) {
+    return (
+      <Layout>
+        <div className="flex items-center justify-center min-h-[50vh]">
+          <div className="text-muted-foreground">Loading configuration...</div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -87,7 +86,7 @@ export default function Home() {
           >
             <Settings
               settings={userSettings}
-              onSettingsChange={setUserSettings}
+              onSettingsChange={updateUserSettings}
               className="rounded-md shadow-sm"
             />
           </div>
@@ -100,7 +99,7 @@ export default function Home() {
           )}
         >
           <TestConfig
-            onConfigChange={setTestConfig}
+            onConfigChange={updateTestConfig}
             initialConfig={testConfig}
           />
         </div>
