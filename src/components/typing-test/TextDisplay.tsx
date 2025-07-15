@@ -72,7 +72,7 @@ export function TextDisplay({
         <CapsLockWarning isOn={capsLockOn} />
         
         {/* Text content with improved styling and readability */}
-        <div className="w-full leading-[1.7] tracking-[0.04em] [word-spacing:0.18em] sm:leading-[1.8] sm:tracking-[0.05em] sm:[word-spacing:0.2em] md:leading-[1.9] md:tracking-[0.06em] md:[word-spacing:0.22em] transition-all duration-300 ease-in-out">
+        <div className="w-full leading-[1.7] tracking-[0.04em] [word-spacing:0.18em] sm:leading-[1.8] sm:tracking-[0.05em] sm:[word-spacing:0.2em] md:leading-[1.9] md:tracking-[0.06em] md:[word-spacing:0.22em] transition-opacity duration-200 ease-out">
           {visibleText.split('').map((char, index) => {
             const absoluteIndex = visibleStartIndex + index
             const isActive = absoluteIndex === currentPosition
@@ -83,17 +83,17 @@ export function TextDisplay({
               <span
                 key={`${absoluteIndex}-${char}`}
                 className={cn(
-                  "transition-colors duration-100 ease-out",
-                  isActive && "text-primary font-medium relative", 
-                  isPast && !isError && "text-primary/50",
-                  isPast && isError && "text-destructive bg-destructive/15 px-0.5 rounded-sm",
-                  !isPast && !isActive && "text-muted-foreground"
-                )}
+                   "transition-colors duration-100 ease-out",
+                   isActive && "text-primary font-medium relative", 
+                   isPast && !isError && "text-primary/50",
+                   isPast && isError && "text-red-500",
+                   !isPast && !isActive && "text-muted-foreground"
+                 )}
               >
                 {char}
-                {/* {isActive && (
-                  <span className="absolute -right-0.5 top-0 w-0.5 h-full bg-primary/80" />
-                )} */}
+                 {isActive && (
+                    <span className="absolute -left-0.5 top-0 w-0.5 h-full bg-primary/80" />
+                  )}
               </span>
             )
           })}
