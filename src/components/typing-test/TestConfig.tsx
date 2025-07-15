@@ -4,29 +4,35 @@ import { ConfigSeparator } from "./ConfigButton"
 import { FeatureToggles } from "./FeatureToggles"
 import { TestModeSelector } from "./TestModeSelector"
 import { TestOptionsSelector } from "./TestOptionsSelector"
+import { 
+  type TestMode, 
+  type WordCount, 
+  type QuoteLength, 
+  type Difficulty 
+} from "@/lib/typing-test/constants"
 
 export interface TestConfigOptions {
-  mode: "time" | "words" | "quote"
+  mode: TestMode
   timeLimit: number
-  wordCount: 10 | 25 | 50 | 100
-  quoteLength: "short" | "medium" | "long"
-  difficulty: "easy" | "medium" | "hard"
+  wordCount: WordCount
+  quoteLength: QuoteLength
+  difficulty: Difficulty
   punctuation?: boolean
   numbers?: boolean
 }
 
 interface TestConfigProps {
-  testMode: "time" | "words" | "quote"
+  testMode: TestMode
   timeLimit: number
-  wordCount: 10 | 25 | 50 | 100
-  quoteLength: "short" | "medium" | "long"
-  difficulty: "easy" | "medium" | "hard"
+  wordCount: WordCount
+  quoteLength: QuoteLength
+  difficulty: Difficulty
   punctuation: boolean
   numbers: boolean
-  onTestModeChange: (mode: "time" | "words" | "quote") => void
+  onTestModeChange: (mode: TestMode) => void
   onTimeLimitChange: (timeLimit: number) => void
-  onWordCountChange: (wordCount: 10 | 25 | 50 | 100) => void
-  onQuoteLengthChange: (quoteLength: "short" | "medium" | "long") => void
+  onWordCountChange: (wordCount: WordCount) => void
+  onQuoteLengthChange: (quoteLength: QuoteLength) => void
   onPunctuationChange: (punctuation: boolean) => void
   onNumbersChange: (numbers: boolean) => void
 }
@@ -88,7 +94,7 @@ export function TestConfig({
   onConfigChange,
   initialConfig,
 }: TestConfigWrapperProps) {
-  const handleTestModeChange = (mode: "time" | "words" | "quote") => {
+  const handleTestModeChange = (mode: TestMode) => {
     onConfigChange({ ...initialConfig, mode })
   }
 
@@ -96,15 +102,15 @@ export function TestConfig({
     onConfigChange({ ...initialConfig, timeLimit })
   }
 
-  const handleWordCountChange = (wordCount: 10 | 25 | 50 | 100) => {
+  const handleWordCountChange = (wordCount: WordCount) => {
     onConfigChange({ ...initialConfig, wordCount })
   }
 
-  const handleQuoteLengthChange = (quoteLength: "short" | "medium" | "long") => {
+  const handleQuoteLengthChange = (quoteLength: QuoteLength) => {
     onConfigChange({ ...initialConfig, quoteLength })
   }
 
-  const handleDifficultyChange = (difficulty: "easy" | "medium" | "hard") => {
+  const handleDifficultyChange = (difficulty: Difficulty) => {
     onConfigChange({ ...initialConfig, difficulty })
   }
 

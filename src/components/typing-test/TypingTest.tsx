@@ -65,6 +65,7 @@ export function TypingTest({
   // Handle test start
   const handleTestStart = () => {
     setFocused(true)
+    actions.startTest()
     
     // Start elapsed timer for word-based tests
     if (testMode === "words") {

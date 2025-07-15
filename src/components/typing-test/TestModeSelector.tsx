@@ -4,10 +4,11 @@ import { ConfigButton } from "./ConfigButton"
 import { ClockIcon } from "@/components/icons/clock"
 import { TextIcon } from "@/components/icons/text"
 import { QuoteIcon } from "@/components/icons/quote"
+import { type TestMode } from "@/lib/typing-test/constants"
 
 interface TestModeSelectorProps {
-  testMode: "time" | "words" | "quote"
-  onTestModeChange: (mode: "time" | "words" | "quote") => void
+  testMode: TestMode
+  onTestModeChange: (mode: TestMode) => void
 }
 
 export function TestModeSelector({

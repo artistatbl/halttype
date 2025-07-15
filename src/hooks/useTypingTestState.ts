@@ -55,8 +55,9 @@ export function useTypingTestState(initialTimeLimit?: number): UseTypingTestStat
       ...prev,
       testState: "running",
       startTime: Date.now(),
+      timeRemaining: initialTimeLimit || prev.timeRemaining,
     }));
-  }, []);
+  }, [initialTimeLimit]);
 
   const completeTest = useCallback(() => {
     setState(prev => ({

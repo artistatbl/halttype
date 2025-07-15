@@ -16,8 +16,8 @@ export function TestTimer({
   testState,
   className,
 }: TestTimerProps) {
-  // Only show timer for time-based tests when running
-  if (testState !== "running" || testMode !== "time") {
+  // Only show timer for time-based tests
+  if (testMode !== "time") {
     return null
   }
 

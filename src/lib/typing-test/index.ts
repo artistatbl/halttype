@@ -19,7 +19,19 @@ export {
   estimateCompletionTime,
 } from './calculations';
 
-// Re-export types if needed
+export {
+  TIME_OPTIONS,
+  WORD_OPTIONS,
+  QUOTE_LENGTH_OPTIONS,
+  DIFFICULTY_OPTIONS,
+  DEFAULT_CONFIG,
+  TEST_MODE_INFO,
+  QUOTE_LENGTH_INFO,
+} from './constants';
+
 export type {
-  // Add any types that need to be exported
-} from './calculations';
+  TestMode,
+  WordCount,
+  QuoteLength,
+  Difficulty,
+} from './constants';

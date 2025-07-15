@@ -1,20 +1,24 @@
 "use client"
 
 import { OptionButton } from "./ConfigButton"
+import { 
+  TIME_OPTIONS, 
+  WORD_OPTIONS, 
+  QUOTE_LENGTH_OPTIONS,
+  type TestMode,
+  type WordCount,
+  type QuoteLength
+} from "@/lib/typing-test/constants"
 
 interface TestOptionsSelectorProps {
-  testMode: "time" | "words" | "quote"
+  testMode: TestMode
   timeLimit: number
-  wordCount: 10 | 25 | 50 | 100
-  quoteLength: "short" | "medium" | "long"
+  wordCount: WordCount
+  quoteLength: QuoteLength
   onTimeLimitChange: (timeLimit: number) => void
-  onWordCountChange: (wordCount: 10 | 25 | 50 | 100) => void
-  onQuoteLengthChange: (quoteLength: "short" | "medium" | "long") => void
+  onWordCountChange: (wordCount: WordCount) => void
+  onQuoteLengthChange: (quoteLength: QuoteLength) => void
 }
-
-const TIME_OPTIONS = [15, 30, 60, 120]
-const WORD_OPTIONS: (10 | 25 | 50 | 100)[] = [10, 25, 50, 100]
-const QUOTE_LENGTH_OPTIONS: ("short" | "medium" | "long")[] = ["short", "medium", "long"]
 
 export function TestOptionsSelector({
   testMode,
