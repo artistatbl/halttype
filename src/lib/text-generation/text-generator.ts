@@ -69,7 +69,7 @@ export function generateText(options: TextGenerationOptions): GeneratedText {
 
   const words = getWordsByDifficulty(difficulty);
   const random = new SeededRandom(seed);
-  const generatedWords: string[] = [];
+  let generatedWords: string[] = [];
 
   // Punctuation marks to randomly add
   const punctuation = ['.', ',', '!', '?', ';', ':'];
@@ -113,10 +113,12 @@ export function generateText(options: TextGenerationOptions): GeneratedText {
       }
     }
 
-    // Capitalize first word and words after sentence-ending punctuation
-    const previousWord = generatedWords[i - 1];
-    if (i === 0 || (previousWord && /[.!?]$/.test(previousWord))) {
-      word = word.charAt(0).toUpperCase() + word.slice(1);
+    // Capitalize first word and words after sentence-ending punctuation only if punctuation is enabled
+    if (includePunctuation) {
+      const previousWord = generatedWords[i - 1];
+      if (i === 0 || (previousWord && /[.!?]$/.test(previousWord))) {
+        word = word.charAt(0).toUpperCase() + word.slice(1);
+      }
     }
 
     generatedWords.push(word);
@@ -128,6 +130,11 @@ export function generateText(options: TextGenerationOptions): GeneratedText {
     if (lastWord && !/[.!?]$/.test(lastWord)) {
       generatedWords[generatedWords.length - 1] = lastWord + '.';
     }
+  }
+  
+  // If punctuation is not enabled, ensure all text is lowercase
+  if (!includePunctuation && generatedWords.length > 0) {
+    generatedWords = generatedWords.map(word => word.toLowerCase());
   }
 
   const text = generatedWords.join(' ');
