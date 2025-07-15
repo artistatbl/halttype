@@ -191,7 +191,8 @@ export function TypingTest({
     // Record keystroke
     const lastChar = input.charAt(input.length - 1)
     if (lastChar) {
-      const isCorrect = content.charAt(currentPosition) === lastChar
+      const expectedChar = content.charAt(input.length - 1)
+      const isCorrect = expectedChar === lastChar
       setKeystrokes(prev => [
         ...prev,
         {
@@ -292,14 +293,7 @@ export function TypingTest({
         spellCheck="false"
       />
       
-      {/* Improved focus indicator with better visibility */}
-      {testState === "idle" && (
-        <div className="text-primary/70 text-sm sm:text-base md:text-lg mb-2 sm:mb-4 animate-pulse font-medium">
-          click or press any key to start
-        </div>
-      )}
-      
-
+    
       
       {/* Timer display for time-based tests */}
       {testState === "running" && testMode === "time" && timeRemaining !== undefined && timeRemaining !== null && (
