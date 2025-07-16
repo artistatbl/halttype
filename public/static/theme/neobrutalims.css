@@ -1,0 +1,56 @@
+/* Neobrutalims Theme - Bold, high-contrast neobrutalism light */
+.neobrutalims {
+  --background: oklch(1.0000 0 0); /* Pure white background */
+  --foreground: oklch(0.1000 0 0); /* Pure black text */
+  --card: oklch(0.9800 0 0);
+  --card-foreground: oklch(0.1000 0 0);
+  --popover: oklch(0.9800 0 0);
+  --popover-foreground: oklch(0.1000 0 0);
+  --primary: oklch(0.6000 0.3000 330.0000); /* Hot pink */
+  --primary-foreground: oklch(1.0000 0 0);
+  --secondary: oklch(0.6000 0.3000 150.0000); /* Neon green */
+  --secondary-foreground: oklch(1.0000 0 0);
+  --muted: oklch(0.9000 0 0);
+  --muted-foreground: oklch(0.3000 0 0);
+  --accent: oklch(0.7000 0.3500 60.0000); /* Electric yellow */
+  --accent-foreground: oklch(0.1000 0 0);
+  --destructive: oklch(0.6000 0.3000 0.0000); /* Bright red */
+  --destructive-foreground: oklch(1.0000 0 0);
+  --border: oklch(0.1000 0 0); /* Black borders */
+  --input: oklch(0.9500 0 0);
+  --ring: oklch(0.6000 0.3000 330.0000);
+  --chart-1: oklch(0.6000 0.3000 330.0000);
+  --chart-2: oklch(0.6000 0.3000 150.0000);
+  --chart-3: oklch(0.7000 0.3500 60.0000);
+  --chart-4: oklch(0.6000 0.3000 240.0000);
+  --chart-5: oklch(0.6000 0.3000 0.0000);
+  --sidebar: oklch(0.9700 0 0);
+  --sidebar-foreground: oklch(0.1000 0 0);
+  --sidebar-primary: oklch(0.6000 0.3000 330.0000);
+  --sidebar-primary-foreground: oklch(1.0000 0 0);
+  --sidebar-accent: oklch(0.6000 0.3000 150.0000);
+  --sidebar-accent-foreground: oklch(1.0000 0 0);
+  --sidebar-border: oklch(0.1000 0 0);
+  --sidebar-ring: oklch(0.6000 0.3000 330.0000);
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-serif: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --shadow-color: oklch(0.1000 0 0);
+  --shadow-opacity: 0.3;
+  --shadow-blur: 0px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 3px;
+  --shadow-offset-y: 3px;
+  --letter-spacing: 0em;
+  --spacing: 0.25rem;
+  --shadow-2xs: 2px 2px 0px hsl(0 0% 10% / 0.3);
+  --shadow-xs: 2px 2px 0px hsl(0 0% 10% / 0.3);
+  --shadow-sm: 3px 3px 0px hsl(0 0% 10% / 0.3);
+  --shadow: 3px 3px 0px hsl(0 0% 10% / 0.3);
+  --shadow-md: 4px 4px 0px hsl(0 0% 10% / 0.3);
+  --shadow-lg: 5px 5px 0px hsl(0 0% 10% / 0.3);
+  --shadow-xl: 6px 6px 0px hsl(0 0% 10% / 0.3);
+  --shadow-2xl: 8px 8px 0px hsl(0 0% 10% / 0.3);
+  --tracking-normal: 0em;
+  --radius: 0rem; /* Sharp corners for brutalist aesthetic */
+}

@@ -16,7 +16,16 @@ export type ThemeName =
   | 'notebook'
   | 'claude'
   | 'twitter'
-  | 'mono';
+  | 'mono'
+  | 'oaky'
+  | 'neobrutalims-dark'
+  | 'neobrutalims'
+  | 'neo-red'
+  | 'peach'
+  | 'nade'
+  | 'terra'
+  | 'forest'
+  | 'noonlight';
 
 export const themes: Theme[] = [
   {
@@ -58,6 +67,51 @@ export const themes: Theme[] = [
     name: "mono",
     label: "Mono",
     colors: ["#6b7280", "#0f172a", "#9ca3af", "#1e293b"],
+  },
+  {
+    name: "oaky",
+    label: "Oaky",
+    colors: ["#8b4513", "#f5f5dc", "#d2691e", "#deb887"],
+  },
+  {
+    name: "neobrutalims-dark",
+    label: "Neobrutalims Dark",
+    colors: ["#ff0080", "#000000", "#00ff80", "#1a1a1a"],
+  },
+  {
+    name: "neobrutalims",
+    label: "Neobrutalims",
+    colors: ["#ff0080", "#ffffff", "#00ff80", "#f0f0f0"],
+  },
+  {
+    name: "neo-red",
+    label: "Neo Red",
+    colors: ["#dc2626", "#0f0f0f", "#ef4444", "#1f1f1f"],
+  },
+  {
+    name: "peach",
+    label: "Peach",
+    colors: ["#ffab91", "#fff3e0", "#ff8a65", "#fbe9e7"],
+  },
+  {
+    name: "nade",
+    label: "Nade",
+    colors: ["#4caf50", "#1b5e20", "#66bb6a", "#2e7d32"],
+  },
+  {
+    name: "terra",
+    label: "Terra",
+    colors: ["#8d6e63", "#3e2723", "#a1887f", "#5d4037"],
+  },
+  {
+    name: "forest",
+    label: "Forest",
+    colors: ["#2e7d32", "#1b5e20", "#43a047", "#2e7d32"],
+  },
+  {
+    name: "noonlight",
+    label: "Noonlight",
+    colors: ["#fff59d", "#f57f17", "#ffeb3b", "#ff8f00"],
   },
 ] as const;
 
