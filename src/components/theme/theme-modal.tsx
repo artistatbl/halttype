@@ -93,7 +93,7 @@ export function ThemeModal() {
         <Palette className="h-4 w-4" />
         <span className="text-xs font-medium capitalize">{theme || 'halt'}</span>
       </Button>
-      <CommandDialog open={isOpen} onOpenChange={handleDialogClose} className="top-[45%]">
+      <CommandDialog open={isOpen} onOpenChange={handleDialogClose} className="top-[35%]">
         <CommandInput placeholder="Search themes..." />
         <CommandList className="max-h-[600px]">
           <CommandEmpty>No themes found.</CommandEmpty>

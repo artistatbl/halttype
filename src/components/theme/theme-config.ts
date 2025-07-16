@@ -49,7 +49,7 @@ export const themes: Theme[] = [
   {
     name: "caffiene",
     label: "Caffiene",
-    colors: ["#8b5cf6", "#0f172a", "#a78bfa", "#1e293b"],
+    colors: ["#8b4513", "#faf9f7", "#d2691e", "#f5f5f0"],
   },
   {
     name: "nature",
@@ -144,22 +144,22 @@ export const themes: Theme[] = [
   {
     name: "soothers-red",
     label: "Soothers Red",
-    colors: ["#ef4444", "#fef2f2", "#f87171", "#fee2e2"],
+    colors: ["#dc2626", "#fef7f7", "#ef4444", "#fecaca"],
   },
   {
     name: "soothers",
     label: "Soothers",
-    colors: ["#10b981", "#f0fdf4", "#34d399", "#dcfce7"],
+    colors: ["#22c55e", "#0f1419", "#16a34a", "#1a2e1a"],
   },
   {
     name: "bloom",
     label: "Bloom",
-    colors: ["#ec4899", "#fdf2f8", "#f472b6", "#fce7f3"],
+    colors: ["#8b5cf6", "#f3f0ff", "#a855f7", "#e9d5ff"],
   },
   {
     name: "red-stars",
     label: "Red Stars",
-    colors: ["#dc2626", "#0f0f0f", "#ef4444", "#1f1f1f"],
+    colors: ["#dc2626", "#f5f5f5", "#ef4444", "#fecaca"],
   },
 ] as const;
 
