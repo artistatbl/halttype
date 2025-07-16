@@ -13,7 +13,6 @@ interface TextDisplayProps {
   capsLockOn?: boolean
   className?: string
   maxVisibleWords?: number // New prop to control how many words are visible
-  focusMode?: boolean // New prop for enhanced focus mode
 }
 
 export function TextDisplay({
@@ -25,7 +24,6 @@ export function TextDisplay({
   capsLockOn = false,
   className,
   maxVisibleWords = 20, // Default to showing 20 words at a time
-  focusMode = true, // Enable focus mode by default
 }: TextDisplayProps) {
   // Calculate visible text with buffer zone approach for stable UX
   const { visibleText, visibleStartIndex } = useMemo(() => {
@@ -84,8 +82,8 @@ export function TextDisplay({
   return (
     <div 
       className={cn(
-        "w-full max-w-8xl mx-auto text-accent-foreground text-1xl sm:text-2xl md:text-3xl leading-relaxed tracking-wide py-5 sm:py-6 md:py-8 px-4 sm:px-5 md:px-6 rounded-lg transition-all",
-        "min-h-[280px] max-h-[280px] overflow-hidden flex flex-col justify-center", // Fixed height container
+        "w-full max-w-8xl mx-auto text-accent-foreground mt-6 text-1xl sm:text-2xl md:text-3xl leading-relaxed tracking-wide py-5 sm:py-6 md:py-8 px-4 sm:px-5 md:px-6 rounded-lg transition-all",
+
         className
       )}
     >
