@@ -16,72 +16,51 @@ export function Navbar({ className }: NavbarProps) {
   
   return (
     <header className={cn(
-      "w-full  top-0 z-50",
+      "w-full top-0 z-50",
       className
     )}>
-      <div className="max-w-7xl mx-auto px-10 py-5">
+      <div className="max-w-6xl mx-auto px-8 py-6">
         <div className="flex items-center justify-between">
           {/* Logo and Navigation */}
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-12">
             <Link href="/" className="flex items-center gap-1 group">
-              <span className="text-primary font-bold text-3xl tracking-tight">halt</span>
-              <span className="text-foreground font-bold text-3xl tracking-tight group-hover:text-primary transition-colors duration-200">type</span>
+              <span className="text-primary font-extrabold text-3xl tracking-tighter">halt</span>
+              <span className="text-foreground/90 font-extrabold text-3xl tracking-tighter group-hover:text-primary transition-all duration-300">type</span>
             </Link>
             
             {/* Navigation Links - Hidden in focus mode */}
             <nav className={cn(
-              "hidden md:flex items-center gap-2 transition-all duration-300 ease-in-out",
+              "hidden lg:flex items-center gap-8 transition-all duration-300 ease-in-out",
               isFocused ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
             )}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link href="/" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
-                    <Infinity className="w-4 h-4" />
-                    <span className="text-sm font-medium">Practice</span>
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="bottom">
-                  <p>Practice</p>
-                </TooltipContent>
-              </Tooltip>
+              <Link href="/" className="text-muted-foreground hover:text-primary transition-all duration-300 group relative">
+                <span className="text-sm font-semibold tracking-wide">Practice</span>
+                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
+              </Link>
               
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link href="/leaderboard" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
-                    <BarChart3 className="w-4 h-4" />
-                    <span className="text-sm font-medium">Leaderboard</span>
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="bottom">
-                  <p>Leaderboard</p>
-                </TooltipContent>
-              </Tooltip>
+              <Link href="/leaderboard" className="text-muted-foreground hover:text-primary transition-all duration-300 group relative">
+                <span className="text-sm font-semibold tracking-wide">Leaderboard</span>
+                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
+              </Link>
               
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link href="/about" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
-                    <HelpCircle className="w-4 h-4" />
-                    <span className="text-sm font-medium">About</span>
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="bottom">
-                  <p>About</p>
-                </TooltipContent>
-              </Tooltip>
+              <Link href="/about" className="text-muted-foreground hover:text-primary transition-all duration-300 group relative">
+                <span className="text-sm font-semibold tracking-wide">About</span>
+                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
+              </Link>
             </nav>
           </div>
           
           {/* Mobile Navigation + User Menu */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
             {/* Mobile Navigation - Only icons */}
             <nav className={cn(
-              "flex md:hidden items-center gap-1 transition-all duration-300 ease-in-out",
+              "flex lg:hidden items-center gap-3 transition-all duration-300 ease-in-out",
               isFocused ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
             )}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
-                    <Infinity className="w-4 h-4" />
+                  <Link href="/" className="text-muted-foreground hover:text-primary transition-all duration-300 p-2">
+                    <Infinity className="w-5 h-5" />
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent side="bottom">
@@ -91,8 +70,8 @@ export function Navbar({ className }: NavbarProps) {
               
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/leaderboard" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
-                    <BarChart3 className="w-4 h-4" />
+                  <Link href="/leaderboard" className="text-muted-foreground hover:text-primary transition-all duration-300 p-2">
+                    <BarChart3 className="w-5 h-5" />
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent side="bottom">
@@ -102,8 +81,8 @@ export function Navbar({ className }: NavbarProps) {
               
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/about" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center justify-center p-2 rounded-lg hover:bg-muted/50">
-                    <HelpCircle className="w-4 h-4" />
+                  <Link href="/about" className="text-muted-foreground hover:text-primary transition-all duration-300 p-2">
+                    <HelpCircle className="w-5 h-5" />
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent side="bottom">

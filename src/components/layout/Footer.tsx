@@ -16,144 +16,63 @@ export function Footer({ className }: FooterProps) {
   
   return (
     <footer className={cn(
-      "w-full ",
+      "w-full",
       className
     )}>
-      <div className="max-w-7xl mx-auto px-10 py-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          {/* Navigation Links - Left Side - Hidden in focus mode */}
-          <div className={cn(
-            "flex items-center gap-1 transition-all duration-300 ease-in-out",
-            isFocused ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
-          )}>
+      <div className="max-w-6xl mx-auto px-8 py-4">
+        <div className={cn(
+          "transition-all duration-300 ease-in-out",
+          isFocused ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
+        )}>
           
-          {/* Center - Click to focus - Always visible
-          <div className={cn(
-            "flex items-center gap-2 text-sm px-4 py-2 rounded-full border border-border/50 transition-all duration-200 cursor-pointer backdrop-blur-sm",
-            isFocused 
-              ? "text-primary bg-primary/5 border-primary/20 hover:bg-primary/10" 
-              : "text-muted-foreground bg-muted/30 hover:bg-muted/50 hover:text-foreground hover:border-border"
-          )}>
-            <Maximize2 className="w-3.5 h-3.5" />
-            <span className="font-medium">Click to focus</span>
-          </div> */}
-          
-            {/* Desktop Navigation - Text + Icons */}
-            <div className="hidden md:flex items-center gap-2">
-              <Link href="/terms" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
-                 <FileText className="w-4 h-4" />
-                 <span className="text-xs font-medium">Terms</span>
-               </Link>
-              
-              <Link href="/security" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
-                 <Shield className="w-4 h-4" />
-                 <span className="text-xs font-medium">Security</span>
-               </Link>
-              
-              <Link href="/privacy" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
-                 <FileText className="w-4 h-4" />
-                 <span className="text-xs font-medium">Privacy</span>
-               </Link>
-              
-              <div className="w-px h-4 bg-border/50 mx-2" />
-              
-              <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
-                 <Github className="w-4 h-4" />
-                 <span className="text-xs font-medium">GitHub</span>
-               </a>
-              
-              <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
-                 <Twitter className="w-4 h-4" />
-                 <span className="text-xs font-medium">Twitter</span>
-               </a>
-              
-              <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent/80 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted/50">
-                 <MessageSquare className="w-4 h-4" />
-                 <span className="text-xs font-medium">Discord</span>
-               </a>
+          {/* Single Line Minimal Footer */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            {/* Left Side - Social Links */}
+            <div className="flex items-center gap-3">
+              <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/60 hover:text-primary transition-all duration-300 hover:scale-110">
+                <Github className="w-4 h-4" />
+              </a>
+              <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/60 hover:text-primary transition-all duration-300 hover:scale-110">
+                <Twitter className="w-4 h-4" />
+              </a>
+              <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/60 hover:text-primary transition-all duration-300 hover:scale-110">
+                <MessageSquare className="w-4 h-4" />
+              </a>
             </div>
             
-            {/* Mobile Navigation - Icons Only */}
-            <div className="flex md:hidden items-center gap-1">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link href="/terms" className="text-primary hover:text-accent/80 transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
-                    <FileText className="w-4 h-4" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="top">
-                  <p>Terms</p>
-                </TooltipContent>
-              </Tooltip>
-              
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link href="/security" className="text-accent hover:text-accent/80 transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
-                    <Shield className="w-4 h-4" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="top">
-                  <p>Security</p>
-                </TooltipContent>
-              </Tooltip>
-              
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link href="/privacy" className="text-accent hover:text-accent/80 transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
-                    <FileText className="w-4 h-4" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="top">
-                  <p>Privacy</p>
-                </TooltipContent>
-              </Tooltip>
-              
-              <div className="w-px h-4 bg-border/50 mx-1" />
-              
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent/80 transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
-                    <Github className="w-4 h-4" />
-                  </a>
-                </TooltipTrigger>
-                <TooltipContent side="top">
-                  <p>GitHub</p>
-                </TooltipContent>
-              </Tooltip>
-              
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent/80 transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
-                    <Twitter className="w-4 h-4" />
-                  </a>
-                </TooltipTrigger>
-                <TooltipContent side="top">
-                  <p>Twitter</p>
-                </TooltipContent>
-              </Tooltip>
-              
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent/80 transition-colors duration-200 p-2 rounded-lg hover:bg-muted/50">
-                    <MessageSquare className="w-4 h-4" />
-                  </a>
-                </TooltipTrigger>
-                <TooltipContent side="top">
-                  <p>Discord</p>
-                </TooltipContent>
-              </Tooltip>
+            {/* Center - Legal Links & Copyright */}
+            <div className="flex items-center gap-4 text-xs">
+              <Link href="/terms" className="text-muted-foreground/60 hover:text-primary transition-all duration-300">
+                Terms
+              </Link>
+              <span className="text-muted-foreground/30">•</span>
+              <Link href="/privacy" className="text-muted-foreground/60 hover:text-primary transition-all duration-300">
+                Privacy
+              </Link>
+              <span className="text-muted-foreground/30">•</span>
+              <Link href="/security" className="text-muted-foreground/60 hover:text-primary transition-all duration-300">
+                Security
+              </Link>
+              <span className="hidden sm:inline text-muted-foreground/30 mx-2">•</span>
+              <span className="hidden sm:inline text-xs text-muted-foreground/50">© 2024 HaltType</span>
             </div>
+            
+            {/* Right Side - Theme Selector */}
+            <div className="flex items-center">
+              <ThemeModal />
+            </div>
+            
           </div>
           
-          {/* Theme Selector - Right Side - Hidden in focus mode */}
-          <div className={cn(
-            "flex items-center transition-all duration-300 ease-in-out",
-            isFocused ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
-          )}>
-            <ThemeModal />
+          {/* Mobile Copyright */}
+          <div className="sm:hidden text-center mt-2">
+            <span className="text-xs text-muted-foreground/50">© 2024 HaltType</span>
           </div>
         </div>
       </div>
-    </footer>
+      
+
+     </footer>
   )
 }
