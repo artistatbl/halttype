@@ -1,6 +1,5 @@
-#bloom theme
-
-:root {
+/* Bloom Theme */
+.bloom {
   --background: oklch(0.9900 0.0050 320.0000);
   --foreground: oklch(0.2000 0.0100 320.0000);
   --card: oklch(0.9900 0.0050 320.0000);

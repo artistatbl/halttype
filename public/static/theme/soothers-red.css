@@ -1,6 +1,5 @@
-#soothers-red theme
-
-:root {
+/* Soothers Red Theme */
+.soothers-red {
   --background: oklch(0.9900 0.0050 10.0000);
   --foreground: oklch(0.2000 0.0100 10.0000);
   --card: oklch(0.9900 0.0050 10.0000);

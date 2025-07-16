@@ -1,6 +1,5 @@
-#sailor theme
-
-:root {
+/* Sailor Theme */
+.sailor {
   --background: oklch(0.9750 0.0080 220.0000);
   --foreground: oklch(0.2000 0.0150 220.0000);
   --card: oklch(0.9750 0.0080 220.0000);

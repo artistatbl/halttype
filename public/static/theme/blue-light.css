@@ -1,6 +1,5 @@
-#blue-light theme
-
-:root {
+/* Blue Light Theme */
+.blue-light {
   --background: oklch(0.9800 0.0050 240.0000);
   --foreground: oklch(0.2000 0.0100 240.0000);
   --card: oklch(0.9800 0.0050 240.0000);

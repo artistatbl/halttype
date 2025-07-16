@@ -1,6 +1,5 @@
-#red-stars theme
-
-:root {
+/* Red Stars Theme */
+.red-stars {
   --background: oklch(0.9800 0.0100 15.0000);
   --foreground: oklch(0.1500 0.0200 15.0000);
   --card: oklch(0.9800 0.0100 15.0000);

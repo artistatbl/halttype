@@ -1,6 +1,5 @@
-#northern theme
-
-:root {
+/* Northern Theme */
+.northern {
   --background: oklch(0.9700 0.0080 210.0000);
   --foreground: oklch(0.1800 0.0150 210.0000);
   --card: oklch(0.9700 0.0080 210.0000);
