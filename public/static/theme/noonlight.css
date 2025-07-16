@@ -1,0 +1,56 @@
+/* Noonlight Theme - Bright sunny yellow colors */
+.noonlight {
+  --background: oklch(0.9800 0.0300 80.0000); /* Bright sunny background */
+  --foreground: oklch(0.2000 0.0400 60.0000); /* Dark amber text */
+  --card: oklch(0.9900 0.0250 80.0000);
+  --card-foreground: oklch(0.2000 0.0400 60.0000);
+  --popover: oklch(0.9900 0.0250 80.0000);
+  --popover-foreground: oklch(0.2000 0.0400 60.0000);
+  --primary: oklch(0.7000 0.1500 70.0000); /* Golden yellow primary */
+  --primary-foreground: oklch(0.1500 0.0500 60.0000);
+  --secondary: oklch(0.9000 0.0500 75.0000); /* Light yellow secondary */
+  --secondary-foreground: oklch(0.2500 0.0400 65.0000);
+  --muted: oklch(0.9200 0.0400 78.0000);
+  --muted-foreground: oklch(0.4500 0.0300 65.0000);
+  --accent: oklch(0.8000 0.1800 65.0000); /* Bright orange accent */
+  --accent-foreground: oklch(0.1500 0.0500 60.0000);
+  --destructive: oklch(0.6000 0.2000 15.0000);
+  --destructive-foreground: oklch(0.9500 0 0);
+  --border: oklch(0.8500 0.0600 75.0000);
+  --input: oklch(0.9600 0.0350 78.0000);
+  --ring: oklch(0.7000 0.1500 70.0000);
+  --chart-1: oklch(0.7000 0.1500 70.0000);
+  --chart-2: oklch(0.6500 0.1400 67.0000);
+  --chart-3: oklch(0.6000 0.1300 64.0000);
+  --chart-4: oklch(0.5500 0.1200 61.0000);
+  --chart-5: oklch(0.5000 0.1100 58.0000);
+  --sidebar: oklch(0.9700 0.0320 78.0000);
+  --sidebar-foreground: oklch(0.2000 0.0400 60.0000);
+  --sidebar-primary: oklch(0.7000 0.1500 70.0000);
+  --sidebar-primary-foreground: oklch(0.1500 0.0500 60.0000);
+  --sidebar-accent: oklch(0.9000 0.0500 75.0000);
+  --sidebar-accent-foreground: oklch(0.2500 0.0400 65.0000);
+  --sidebar-border: oklch(0.8500 0.0600 75.0000);
+  --sidebar-ring: oklch(0.7000 0.1500 70.0000);
+  --font-sans: 'Poppins', sans-serif;
+  --font-serif: 'Poppins', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --shadow-color: oklch(0.6000 0.1200 65.0000);
+  --shadow-opacity: 0.15;
+  --shadow-blur: 4px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0;
+  --shadow-offset-y: 2px;
+  --letter-spacing: 0em;
+  --spacing: 0.25rem;
+  --shadow-2xs: 0 1px 3px 0px hsl(70 60% 40% / 0.1);
+  --shadow-xs: 0 1px 3px 0px hsl(70 60% 40% / 0.1);
+  --shadow-sm: 0 1px 3px 0px hsl(70 60% 40% / 0.12), 0 1px 2px -1px hsl(70 60% 40% / 0.12);
+  --shadow: 0 1px 3px 0px hsl(70 60% 40% / 0.12), 0 1px 2px -1px hsl(70 60% 40% / 0.12);
+  --shadow-md: 0 1px 3px 0px hsl(70 60% 40% / 0.12), 0 2px 4px -1px hsl(70 60% 40% / 0.12);
+  --shadow-lg: 0 1px 3px 0px hsl(70 60% 40% / 0.12), 0 4px 6px -1px hsl(70 60% 40% / 0.12);
+  --shadow-xl: 0 1px 3px 0px hsl(70 60% 40% / 0.12), 0 8px 10px -1px hsl(70 60% 40% / 0.12);
+  --shadow-2xl: 0 1px 3px 0px hsl(70 60% 40% / 0.25);
+  --tracking-normal: 0em;
+  --radius: 0.75rem;
+}
