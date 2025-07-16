@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useCallback } from "react"
+import { useEffect, useRef } from "react"
 import { cn } from "@/lib/utils"
 import { TextDisplay } from "./TextDisplay"
 import { StatsDisplay } from "./StatsDisplay"
@@ -16,7 +16,7 @@ import { useInputHandler } from "@/hooks/useInputHandler"
 import { useTestCompletion } from "@/hooks/useTestCompletion"
 import { calculateRealTimeWPM, calculateRealTimeAccuracy } from "@/lib/typing-test/calculations"
 import { client } from "@/lib/client"
-import { TypingTestProps, TestResults } from "@/lib/typing-test/types"
+import { TypingTestProps } from "@/lib/typing-test/types"
 
 
 
@@ -24,8 +24,6 @@ export function TypingTest({
   content,
   timeLimit = 30,
   wordCount = 25,
-  difficulty = "medium",
-  language = "english",
   onComplete,
   className,
   testMode = "time",
