@@ -213,7 +213,7 @@ export function TypingTest({
         errors={state.errors}
         testState={state.testState}
         capsLockOn={capsLockOn}
-        maxVisibleWords={wordCount && wordCount >= 50 ? 25 : 20} // Show more words for longer tests
+        maxVisibleWords={wordCount && wordCount >= 50 ? 45 : 20} // Show more words for longer tests
       />
       
       {/* Stats display - only shown when test is completed */}
