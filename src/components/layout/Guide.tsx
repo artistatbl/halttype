@@ -20,16 +20,16 @@ export function Guide({ className }: GuideProps) {
         <div className="text-center text-primary">
           <div className="flex flex-col items-center font-extralight gap-2 text-sm">
             <div className="flex items-center  gap-2">
-              <kbd className="px-2 py-1 bg-accent rounded text-xs ">Tab</kbd>
+              <kbd className="px-2 py-1 bg-accent/20 rounded text-xs ">Tab</kbd>
               <span className="text-primary">+</span>
-              <kbd className="px-2 py-1 bg-accent rounded text-xs ">Enter</kbd>
+              <kbd className="px-2 py-1 bg-accent/20  rounded text-xs ">Enter</kbd>
               <span className="text-primary font-extralight">restart test</span>
             </div>
           
             <div className="flex items-center gap-2">
-              <kbd className="px-2 py-1 bg-accent rounded text-xs ">Ctrl</kbd>
+              <kbd className="px-2 py-1 bg-accent/20  rounded text-xs ">Ctrl</kbd>
               <span className="text-primary">+</span>     
-              <kbd className="px-2 py-1 bg-accent rounded text-xs ">k</kbd>
+              <kbd className="px-2 py-1 bg-accent/20  rounded text-xs ">k</kbd>
               <span className="text-primary">Command</span>
             </div>
           </div>

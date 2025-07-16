@@ -53,7 +53,7 @@ function TestConfigInternal({
 }: TestConfigProps) {
   return (
     <div className="w-full max-w-3xl mx-auto mb-6">
-      <div className="flex flex-wrap items-center bg-accent rounded-md p-2 justify-center gap-4 text-sm">
+      <div className="flex flex-wrap items-center bg-accent/40  rounded-md p-2 justify-center gap-4 text-sm">
         <FeatureToggles
           punctuation={punctuation}
           numbers={numbers}
