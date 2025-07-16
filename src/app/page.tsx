@@ -151,47 +151,52 @@ export default function Home() {
           </div>
         )}
         
-        {isGenerating ? (
-          <div className="w-full flex items-center justify-center py-8">
-            <div className="text-muted-foreground">Generating text...</div>
-          </div>
-        ) : (
-          <div className="mt-8">
-            <TypingTest
-              content={currentText}
-              testMode={testConfig.mode}
-              timeLimit={
-                testConfig.mode === "time" ? testConfig.timeLimit : undefined
-              }
-              wordCount={
-                testConfig.mode === "words" ? testConfig.wordCount : undefined
-              }
-              difficulty={testConfig.difficulty}
-              testId={testId}
-              key={`${testId}-${currentText.slice(0, 20)}`} // Force re-render when text changes
-            />
-          </div>
-        )}
-        
-        {/* Regenerate Text Button - Positioned below the typing test */}
-        <div
-          className={cn(
-            "w-full mt-4 flex justify-center transition-opacity duration-300",
-            isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
+        {/* Fixed height container for typing test and restart button */}
+        <div className="relative w-full">
+          {isGenerating ? (
+            <div className="w-full flex items-center justify-center py-8 min-h-[400px]">
+              <div className="text-muted-foreground">Generating text...</div>
+            </div>
+          ) : (
+            <div className="mt-8 min-h-[400px] flex flex-col">
+              <div className="flex-1">
+                <TypingTest
+                  content={currentText}
+                  testMode={testConfig.mode}
+                  timeLimit={
+                    testConfig.mode === "time" ? testConfig.timeLimit : undefined
+                  }
+                  wordCount={
+                    testConfig.mode === "words" ? testConfig.wordCount : undefined
+                  }
+                  difficulty={testConfig.difficulty}
+                  testId={testId}
+                  key={`${testId}-${currentText.slice(0, 20)}`} // Force re-render when text changes
+                />
+              </div>
+            </div>
           )}
-        >
-          <ActionButton
-             onClick={regenerateText}
-             disabled={isGenerating}
-             className={cn(
-               "p-2 transition-all rounded-md",
-               "text-muted-foreground hover:text-foreground ",
-               "disabled:opacity-50 disabled:cursor-not-allowed"
-             )}
-             tooltip="Restart Test"
-           >
-             <RotateCcw className={cn("w-4 h-4", isGenerating && "animate-spin")} />
-           </ActionButton>
+          
+          {/* Fixed position restart button */}
+          <div
+            className={cn(
+              "absolute bottom-0 left-1/2 transform -translate-x-1/2 transition-opacity duration-300",
+              isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
+            )}
+          >
+            <ActionButton
+               onClick={regenerateText}
+               disabled={isGenerating}
+               className={cn(
+                 "p-2 transition-all rounded-md",
+                 "text-muted-foreground hover:text-foreground ",
+                 "disabled:opacity-50 disabled:cursor-not-allowed"
+               )}
+               tooltip="Restart Test"
+             >
+               <RotateCcw className={cn("w-4 h-4", isGenerating && "animate-spin")} />
+             </ActionButton>
+          </div>
         </div>
       </div>
     </Layout>

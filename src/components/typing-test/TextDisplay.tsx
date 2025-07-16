@@ -68,38 +68,41 @@ export function TextDisplay({
     <div 
       className={cn(
         "w-full max-w-8xl mx-auto text-accent-foreground text-1xl sm:text-2xl md:text-3xl leading-relaxed tracking-wide py-5 sm:py-6 md:py-8 px-4 sm:px-5 md:px-6 rounded-lg transition-all",
+        "min-h-[280px] max-h-[280px] overflow-hidden flex flex-col justify-center", // Fixed height container
         className
       )}
     >
-      <div className="relative w-full">
-        <CapsLockWarning isOn={capsLockOn} />
-        
-        {/* Text content with improved styling and readability */}
-        <div className="w-full leading-[1.7] tracking-[0.04em] [word-spacing:0.18em] sm:leading-[1.8] sm:tracking-[0.05em] sm:[word-spacing:0.2em] md:leading-[1.9] md:tracking-[0.06em] md:[word-spacing:0.22em] transition-opacity duration-200 ease-out">
-          {visibleText.split('').map((char, index) => {
-            const absoluteIndex = visibleStartIndex + index
-            const isActive = absoluteIndex === currentPosition
-            const isPast = absoluteIndex < currentPosition
-            const isError = errorSet.has(absoluteIndex)
-            
-            return (
-              <span
-                key={`${absoluteIndex}-${char}`}
-                className={cn(
-                   "transition-colors duration-100 ease-out",
-                   isActive && "text-primary font-medium relative", 
-                   isPast && !isError && "text-primary/50",
-                   isPast && isError && "text-red-500",
-                   !isPast && !isActive && "text-muted-foreground"
-                 )}
-              >
-                {char}
-                 {isActive && (
-                   <span className="absolute -left-0.5 top-0 w-0.5 h-full bg-primary/80" />
-                 )}
-              </span>
-            )
-          })}
+      <div className="relative w-full flex-1 flex items-center">
+        <div className="w-full">
+          <CapsLockWarning isOn={capsLockOn} />
+          
+          {/* Text content with improved styling and readability */}
+          <div className="w-full leading-[1.7] tracking-[0.04em] [word-spacing:0.18em] sm:leading-[1.8] sm:tracking-[0.05em] sm:[word-spacing:0.2em] md:leading-[1.9] md:tracking-[0.06em] md:[word-spacing:0.22em] transition-opacity duration-200 ease-out">
+            {visibleText.split('').map((char, index) => {
+              const absoluteIndex = visibleStartIndex + index
+              const isActive = absoluteIndex === currentPosition
+              const isPast = absoluteIndex < currentPosition
+              const isError = errorSet.has(absoluteIndex)
+              
+              return (
+                <span
+                  key={`${absoluteIndex}-${char}`}
+                  className={cn(
+                     "transition-colors duration-100 ease-out",
+                     isActive && "text-primary font-medium relative", 
+                     isPast && !isError && "text-primary/50",
+                     isPast && isError && "text-red-500",
+                     !isPast && !isActive && "text-muted-foreground"
+                   )}
+                >
+                  {char}
+                   {isActive && (
+                     <span className="absolute -left-0.5 top-0 w-0.5 h-full bg-primary/80" />
+                   )}
+                </span>
+              )
+            })}
+          </div>
         </div>
       </div>
     </div>
