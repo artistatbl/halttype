@@ -2,10 +2,11 @@
 
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { Github, Twitter, Shield, FileText, ExternalLink, MessageSquare, Maximize2 } from "lucide-react"
+import { Github, Twitter,  MessageSquare } from "lucide-react"
 import { ThemeModal } from "../theme"
 import { useFocus } from "../typing-test/FocusContext"
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
+
+
 
 interface FooterProps {
   className?: string
@@ -51,8 +52,8 @@ export function Footer({ className }: FooterProps) {
                 Privacy
               </Link>
               <span className="text-muted-foreground/30">•</span>
-              <Link href="/security" className="text-muted-foreground/60 hover:text-primary transition-all duration-300">
-                Security
+              <Link href="/privacy" className="text-muted-foreground/60 hover:text-primary transition-all duration-300">
+                Privacy
               </Link>
               <span className="hidden sm:inline text-muted-foreground/30 mx-2">•</span>
               <span className="hidden sm:inline text-xs text-muted-foreground/50">© 2024 HaltType</span>
