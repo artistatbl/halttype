@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useCallback } from "react"
 import { cn } from "@/lib/utils"
 import { TextDisplay } from "./TextDisplay"
 import { StatsDisplay } from "./StatsDisplay"
@@ -62,6 +62,14 @@ export function TypingTest({
     completeTest()
   }
   
+  // Create refs for stable references in timer effect
+  const actionsRef = useRef(actions)
+  const handleTestCompleteRef = useRef(handleTestComplete)
+  
+  // Update refs when values change
+  actionsRef.current = actions
+  handleTestCompleteRef.current = handleTestComplete
+  
   // Input handler hook
   const { handleInput } = useInputHandler({
     content,
@@ -88,26 +96,50 @@ export function TypingTest({
   
   // Timer effect - only for time-based tests
   useEffect(() => {
+    console.log('🔄 Timer effect triggered:', {
+      testState: state.testState,
+      testMode,
+      timeLimit,
+      startTime: state.startTime,
+      timeRemaining: state.timeRemaining
+    })
+    
     let timer: NodeJS.Timeout | null = null
     
     if (state.testState === "running" && testMode === "time" && timeLimit && state.startTime) {
+      console.log('⏰ Starting timer interval')
+      const startTime = state.startTime
+      
       timer = setInterval(() => {
-        const elapsed = Math.floor((Date.now() - state.startTime!) / 1000)
+        const elapsed = Math.floor((Date.now() - startTime) / 1000)
         const remaining = timeLimit - elapsed
         
+        console.log('⏱️ Timer tick:', {
+          elapsed,
+          remaining,
+          startTime,
+          currentTime: Date.now()
+        })
+        
         if (remaining <= 0) {
-          actions.setTimeRemaining(0)
-          handleTestComplete()
+          console.log('⏰ Timer completed!')
+          actionsRef.current.setTimeRemaining(0)
+          handleTestCompleteRef.current()
         } else {
-          actions.setTimeRemaining(remaining)
+          actionsRef.current.setTimeRemaining(remaining)
         }
-      }, 100) // Update more frequently for smoother countdown
+      }, 1000) // Back to 1 second intervals
+    } else {
+      console.log('❌ Timer not started - conditions not met')
     }
     
     return () => {
-      if (timer) clearInterval(timer)
+      if (timer) {
+        console.log('🛑 Clearing timer')
+        clearInterval(timer)
+      }
     }
-  }, [state.testState, testMode, timeLimit, state.startTime, actions, handleTestComplete])
+  }, [state.testState, testMode, timeLimit, state.startTime])
   
   // Calculate WPM and accuracy in real-time
   useEffect(() => {

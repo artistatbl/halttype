@@ -17,8 +17,15 @@ export function TestTimer({
   testState,
   className,
 }: TestTimerProps) {
+  console.log('🖥️ TestTimer render:', {
+    timeRemaining,
+    testMode,
+    testState
+  });
+  
   // Only show timer for time-based tests
   if (testMode !== "time") {
+    console.log('❌ TestTimer hidden - not time mode');
     return null
   }
 
