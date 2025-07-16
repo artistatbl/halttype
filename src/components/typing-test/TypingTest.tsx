@@ -147,9 +147,9 @@ export function TypingTest({
       const currentWpm = calculateRealTimeWPM(state.userInput, state.startTime)
       const currentAccuracy = calculateRealTimeAccuracy(state.userInput, state.errors)
       
-      actions.updateStats(currentWpm, currentAccuracy)
+      actionsRef.current.updateStats(currentWpm, currentAccuracy)
     }
-  }, [state.userInput, state.startTime, state.testState, state.errors, actions])
+  }, [state.userInput, state.startTime, state.testState, state.errors])
   
   // Focus input on mount and when clicked anywhere
   useEffect(() => {

@@ -142,21 +142,20 @@ export function useTypingTestState(initialTimeLimit?: number): UseTypingTestStat
     }));
   }, []);
 
-  // Update timeRemaining when initialTimeLimit changes and test is idle
+  // Update timeRemaining when initialTimeLimit changes
   useEffect(() => {
     console.log('🔄 useEffect for timeRemaining sync:', {
-      testState: state.testState,
       initialTimeLimit
     });
     
-    if (state.testState === "idle" && initialTimeLimit) {
+    if (initialTimeLimit) {
       console.log('✅ Updating timeRemaining to initialTimeLimit:', initialTimeLimit);
       setState(prev => ({
         ...prev,
         timeRemaining: initialTimeLimit,
       }));
     }
-  }, [initialTimeLimit, state.testState]);
+  }, [initialTimeLimit]);
 
   return {
     state,
