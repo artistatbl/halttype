@@ -17,21 +17,9 @@ export function TestTimer({
   testState,
   className,
 }: TestTimerProps) {
-  console.log('🖥️ TestTimer render:', {
-    timeRemaining,
-    testMode,
-    testState
-  });
-  
-  // Only show timer for time-based tests
-  if (testMode !== "time") {
-    console.log('❌ TestTimer hidden - not time mode');
-    return null
-  }
-
   return (
     <div className={cn(
-      "w-full flex justify-start mb-2 sm:mb-4",
+      "w-full flex justify-start",
       className
     )}>
       <div className="text-sm sm:text-base md:text-lg font-mono text-primary/90 font-semibold bg-background/50 px-2 sm:px-3 py-1 rounded-md">

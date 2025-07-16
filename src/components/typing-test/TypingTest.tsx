@@ -191,11 +191,15 @@ export function TypingTest({
     
       
       {/* Timer display for time-based tests */}
-      <TestTimer
-        timeRemaining={state.timeRemaining || 0}
-        testMode={testMode}
-        testState={state.testState}
-      />
+      {state.testState === "running" && testMode === "time" && (
+        <div className="w-full mb-2 sm:mb-4">
+          <TestTimer
+            timeRemaining={state.timeRemaining || 0}
+            testMode={testMode}
+            testState={state.testState}
+          />
+        </div>
+      )}
       
       {/* Word counter for word-based tests */}
       {state.testState === "running" && testMode === "words" && (
