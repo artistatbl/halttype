@@ -35,7 +35,7 @@ export function ThemeButton({ theme, isSelected, onClick }: ThemeButtonProps) {
   return (
     <Button
       variant="ghost"
-      className={`w-full justify-between items-center h-auto p-3 rounded-md hover:bg-muted transition-colors ${isSelected ? 'bg-muted' : ''}`}
+      className={`w-full justify-between items-center h-auto p-3 rounded-md hover:bg-primary transition-colors ${isSelected ? 'bg-accent' : ''}`}
       onClick={onClick}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}

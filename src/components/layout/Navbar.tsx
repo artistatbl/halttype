@@ -19,7 +19,7 @@ export function Navbar({ className }: NavbarProps) {
       "w-full top-0 z-50",
       className
     )}>
-      <div className="max-w-6xl mx-auto px-8 py-6">
+      <div className="max-w-7xl mx-auto px-8 py-6">
         <div className="flex items-center justify-between">
           {/* Logo and Navigation */}
           <div className="flex items-center gap-12">
@@ -33,17 +33,17 @@ export function Navbar({ className }: NavbarProps) {
               "hidden lg:flex items-center gap-8 transition-all duration-300 ease-in-out",
               isFocused ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
             )}>
-              <Link href="/" className="text-muted-foreground hover:text-primary transition-all duration-300 group relative">
+              <Link href="/" className="text-primary hover:text-primary transition-all duration-300 group relative">
                 <span className="text-sm font-semibold tracking-wide">Practice</span>
                 <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
               </Link>
               
-              <Link href="/leaderboard" className="text-muted-foreground hover:text-primary transition-all duration-300 group relative">
+              <Link href="/leaderboard" className="text-primary hover:text-primary transition-all duration-300 group relative">
                 <span className="text-sm font-semibold tracking-wide">Leaderboard</span>
                 <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
               </Link>
               
-              <Link href="/about" className="text-muted-foreground hover:text-primary transition-all duration-300 group relative">
+              <Link href="/about" className="text-primary hover:text-primary transition-all duration-300 group relative">
                 <span className="text-sm font-semibold tracking-wide">About</span>
                 <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></div>
               </Link>
