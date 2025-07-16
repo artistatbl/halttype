@@ -3,6 +3,8 @@
  * Handles persistence of user preferences and test configurations
  */
 
+
+
 export interface StoredTestConfig {
   mode: 'time' | 'words' | 'quote';
   timeLimit: number;
@@ -53,7 +55,7 @@ class ConfigStorageService {
         quoteLength: 'medium',
         difficulty: 'medium',
         punctuation: false,
-        numbers: false
+        numbers: false,
       },
       userSettings: {
         language: 'english',

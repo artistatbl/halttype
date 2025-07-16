@@ -13,6 +13,7 @@ import { RotateCcw } from "lucide-react";
 import { nanoid } from "nanoid";
 import { StructuredData } from "@/components/seo/SEOHead";
 import { getBreadcrumbStructuredData } from "@/components/seo/StructuredData";
+import { LanguageModal } from "@/components/typing-test/LanguageModal";
 
 export default function Home() {
   // Use configuration storage hook for persistent settings
@@ -106,6 +107,20 @@ export default function Home() {
             onConfigChange={updateTestConfig}
             initialConfig={testConfig}
           />
+        </div>
+        
+        {/* Text Display Language Selector - Independent of test config */}
+        <div
+          className={cn(
+            "w-full max-w-3xl mx-auto mb-4 transition-opacity duration-300",
+            isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
+          )}
+        >
+          <div className="flex justify-center">
+            <div className="bg-accent/20 rounded-md p-3 flex items-center gap-2">
+              <LanguageModal />
+            </div>
+          </div>
         </div>
         
         {error && (

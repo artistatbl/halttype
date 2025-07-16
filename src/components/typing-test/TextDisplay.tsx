@@ -25,7 +25,7 @@ export function TextDisplay({
   className,
   maxVisibleWords = 20, // Default to showing 20 words at a time
 }: TextDisplayProps) {
-  // Calculate visible text with buffer zone approach for stable UX
+  // Calculate which words should be visible based on current position
   const { visibleText, visibleStartIndex } = useMemo(() => {
     const words = text.split(' ')
     
@@ -42,26 +42,11 @@ export function TextDisplay({
       charCount += wordLength
     }
     
-    // Buffer zone approach - only shift when cursor gets close to edges
-    // This prevents constant shifting and provides stable reading experience
-    const bufferSize = Math.floor(maxVisibleWords * 0.25) // 25% buffer on each side
-    const minWordsBeforeCursor = bufferSize
-    const maxWordsBeforeCursor = maxVisibleWords - bufferSize
-    
-    // Calculate ideal start position to keep cursor in comfortable zone
-    let startWordIndex = Math.max(0, currentWordIndex - minWordsBeforeCursor)
-    
-    // Only shift if cursor is getting too close to the end of visible area
-    if (currentWordIndex >= startWordIndex + maxWordsBeforeCursor) {
-      startWordIndex = Math.max(0, currentWordIndex - minWordsBeforeCursor)
-    }
-    
-    let endWordIndex = Math.min(words.length, startWordIndex + maxVisibleWords)
-    
-    // Adjust if we're near the end to show full window
-    if (endWordIndex === words.length && words.length > maxVisibleWords) {
-      startWordIndex = Math.max(0, words.length - maxVisibleWords)
-    }
+    // Calculate the window of words to show
+    // Show some words before current position and fill up to maxVisibleWords
+    const wordsBeforeCurrent = Math.min(5, currentWordIndex) // Show up to 5 words before current
+    const startWordIndex = Math.max(0, currentWordIndex - wordsBeforeCurrent)
+    const endWordIndex = Math.min(words.length, startWordIndex + maxVisibleWords)
     
     // Get the visible words
     const visibleWords = words.slice(startWordIndex, endWordIndex)
@@ -82,8 +67,8 @@ export function TextDisplay({
   return (
     <div 
       className={cn(
-        "w-full max-w-8xl mx-auto text-accent-foreground mt-6 text-1xl sm:text-2xl md:text-3xl leading-relaxed tracking-wide py-5 sm:py-6 md:py-8 px-4 sm:px-5 md:px-6 rounded-lg transition-all",
-
+        "w-full max-w-8xl mx-auto text-accent-foreground text-1xl sm:text-2xl md:text-3xl leading-relaxed tracking-wide py-5 sm:py-6 md:py-8 px-4 sm:px-5 md:px-6 rounded-lg transition-all",
+        "min-h-[280px] max-h-[280px] overflow-hidden flex flex-col justify-center", // Fixed height container
         className
       )}
     >
@@ -91,8 +76,8 @@ export function TextDisplay({
         <div className="w-full">
           <CapsLockWarning isOn={capsLockOn} />
           
-          {/* Text content with improved styling and smooth transitions */}
-          <div className="w-full leading-[1.7] tracking-[0.04em] [word-spacing:0.18em] sm:leading-[1.8] sm:tracking-[0.05em] sm:[word-spacing:0.2em] md:leading-[1.9] md:tracking-[0.06em] md:[word-spacing:0.22em] transition-all duration-300 ease-out">
+          {/* Text content with improved styling and readability */}
+          <div className="w-full leading-[1.7] tracking-[0.04em] [word-spacing:0.18em] sm:leading-[1.8] sm:tracking-[0.05em] sm:[word-spacing:0.2em] md:leading-[1.9] md:tracking-[0.06em] md:[word-spacing:0.22em] transition-opacity duration-200 ease-out">
             {visibleText.split('').map((char, index) => {
               const absoluteIndex = visibleStartIndex + index
               const isActive = absoluteIndex === currentPosition

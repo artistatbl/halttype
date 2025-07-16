@@ -79,7 +79,6 @@ export function CapsLockWarning({
     <div 
       className={`absolute top-0 left-0 right-0 z-50 flex justify-center mb-16 ${isOn ? 'block' : 'hidden'}`}
       aria-hidden={!isOn}
-      style={{ marginTop: '-3rem' }}
     >
       <div className="bg-accent text-primany px-4 py-2 rounded-md text-sm font-bold  flex items-center gap-2">
         <LockIcon className="w-4 h-4"/>
