@@ -25,7 +25,15 @@ export type ThemeName =
   | 'nade'
   | 'terra'
   | 'forest'
-  | 'noonlight';
+  | 'noonlight'
+  | 'nord'
+  | 'blue-light'
+  | 'northern'
+  | 'sailor'
+  | 'soothers-red'
+  | 'soothers'
+  | 'bloom'
+  | 'red-stars';
 
 export const themes: Theme[] = [
   {
@@ -112,6 +120,46 @@ export const themes: Theme[] = [
     name: "noonlight",
     label: "Noonlight",
     colors: ["#fff59d", "#f57f17", "#ffeb3b", "#ff8f00"],
+  },
+  {
+    name: "nord",
+    label: "Nord",
+    colors: ["#88c0d0", "#2e3440", "#5e81ac", "#3b4252"],
+  },
+  {
+    name: "blue-light",
+    label: "Blue Light",
+    colors: ["#3b82f6", "#f8fafc", "#60a5fa", "#e2e8f0"],
+  },
+  {
+    name: "northern",
+    label: "Northern",
+    colors: ["#4c9aff", "#0d1421", "#7bb3ff", "#1a2332"],
+  },
+  {
+    name: "sailor",
+    label: "Sailor",
+    colors: ["#1e40af", "#f1f5f9", "#3b82f6", "#cbd5e1"],
+  },
+  {
+    name: "soothers-red",
+    label: "Soothers Red",
+    colors: ["#ef4444", "#fef2f2", "#f87171", "#fee2e2"],
+  },
+  {
+    name: "soothers",
+    label: "Soothers",
+    colors: ["#10b981", "#f0fdf4", "#34d399", "#dcfce7"],
+  },
+  {
+    name: "bloom",
+    label: "Bloom",
+    colors: ["#ec4899", "#fdf2f8", "#f472b6", "#fce7f3"],
+  },
+  {
+    name: "red-stars",
+    label: "Red Stars",
+    colors: ["#dc2626", "#0f0f0f", "#ef4444", "#1f1f1f"],
   },
 ] as const;
 

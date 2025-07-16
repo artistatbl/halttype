@@ -95,7 +95,7 @@ export function ThemeModal() {
       </Button>
       <CommandDialog open={isOpen} onOpenChange={handleDialogClose} className="top-[45%]">
         <CommandInput placeholder="Search themes..." />
-        <CommandList className="max-h-[800px]">
+        <CommandList className="max-h-[600px]">
           <CommandEmpty>No themes found.</CommandEmpty>
           <CommandGroup>
             {themes.map((themeItem) => (
