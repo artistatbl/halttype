@@ -5,8 +5,6 @@ import { cn } from "@/lib/utils";
 import { Layout } from "@/components/layout/Layout";
 import { TypingTest } from "@/components/typing-test/TypingTest";
 import { TestConfig } from "@/components/typing-test/TestConfig";
-import { Settings } from "@/components/typing-test/Settings";
-import { SettingsIcon } from "@/components/icons/settings";
 import { useFocus } from "@/components/typing-test/FocusContext";
 import { ActionButton } from "@/components/typing-test/ActionButton";
 import { useTextGeneration } from "@/hooks/useTextGeneration";
@@ -97,41 +95,6 @@ export default function Home() {
       </div>
       
       <div className="flex flex-col items-center">
-        <div
-          className={cn(
-            "w-full flex justify-end mb-3 transition-opacity duration-300",
-            isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
-          )}
-        >
-          <button
-            onClick={() => setShowSettings(!showSettings)}
-            className={cn(
-              "flex items-center gap-1.5 px-3 py-1.5 text-xs transition-all rounded-md shadow-sm",
-              showSettings
-                ? "text-primary bg-muted/70"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-            )}
-          >
-            <SettingsIcon className="w-3.5 h-3.5" />
-            Settings
-          </button>
-        </div>
-
-        {/* Settings Panel - Hidden in focus mode */}
-        {showSettings && (
-          <div
-            className={cn(
-              "w-full mb-6 transition-opacity duration-300",
-              isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
-            )}
-          >
-            <Settings
-              settings={userSettings}
-              onSettingsChange={updateUserSettings}
-              className="rounded-md shadow-sm"
-            />
-          </div>
-        )}
         
         <div
           className={cn(

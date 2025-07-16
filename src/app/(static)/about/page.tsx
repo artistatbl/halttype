@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { generateSEOMetadata } from '@/components/seo/SEOHead'
-import { Layout } from '@/components/layout/Layout'
+import { StaticLayout } from '@/components/layout/StaticLayout'
 
 export const metadata: Metadata = generateSEOMetadata({
   title: 'About HaltType - Free Online Typing Speed Test',
@@ -10,7 +10,7 @@ export const metadata: Metadata = generateSEOMetadata({
 
 export default function AboutPage() {
   return (
-    <Layout>
+    <StaticLayout>
       <div className="max-w-4xl mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-center">About HaltType</h1>
         
@@ -76,6 +76,6 @@ export default function AboutPage() {
           </section>
         </div>
       </div>
-    </Layout>
+    </StaticLayout>
   )
 }

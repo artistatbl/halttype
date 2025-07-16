@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { generateSEOMetadata } from '@/components/seo/SEOHead'
-import { Layout } from '@/components/layout/Layout'
+import { StaticLayout } from '@/components/layout/StaticLayout'
 
 export const metadata: Metadata = generateSEOMetadata({
   title: 'Privacy Policy - HaltType',
@@ -10,7 +10,7 @@ export const metadata: Metadata = generateSEOMetadata({
 
 export default function PrivacyPage() {
   return (
-    <Layout>
+    <StaticLayout>
       <div className="max-w-4xl mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-center">Privacy Policy</h1>
         
@@ -140,6 +140,6 @@ export default function PrivacyPage() {
           </section>
         </div>
       </div>
-    </Layout>
+    </StaticLayout>
   )
 }
