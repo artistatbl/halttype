@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils"
 import { formatTime } from "@/lib/typing-test/calculations"
+import { ActionButton } from "./ActionButton"
 
 interface TestCompletionModalProps {
   isOpen: boolean
@@ -65,12 +66,14 @@ export function TestCompletionModal({
           <ActionButton
             onClick={onTryAgain}
             className="flex-1"
+            tooltip="Restart the same test with identical settings"
           >
             Try Again
           </ActionButton>
           <ActionButton
             onClick={onNewTest}
             className="flex-1"
+            tooltip="Start a new test with different content"
           >
             New Test
           </ActionButton>
@@ -100,26 +103,5 @@ function StatCard({ value, label, className }: StatCardProps) {
         {label}
       </p>
     </div>
-  )
-}
-
-// Reusable action button component
-interface ActionButtonProps {
-  onClick: () => void
-  children: React.ReactNode
-  className?: string
-}
-
-function ActionButton({ onClick, children, className }: ActionButtonProps) {
-  return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "py-1.5 sm:py-2 px-2 sm:px-3 bg-muted/70 hover:bg-muted/90 text-foreground text-sm sm:text-base transition-colors rounded",
-        className
-      )}
-    >
-      {children}
-    </button>
   )
 }

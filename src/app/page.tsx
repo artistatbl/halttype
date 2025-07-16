@@ -8,6 +8,7 @@ import { TestConfig } from "@/components/typing-test/TestConfig";
 import { Settings } from "@/components/typing-test/Settings";
 import { SettingsIcon } from "@/components/icons/settings";
 import { useFocus } from "@/components/typing-test/FocusContext";
+import { ActionButton } from "@/components/typing-test/ActionButton";
 import { useTextGeneration } from "@/hooks/useTextGeneration";
 import { useConfigStorage } from "@/hooks/useConfigStorage";
 import { RotateCcw } from "lucide-react";
@@ -179,17 +180,18 @@ export default function Home() {
             isFocused ? "opacity-0 pointer-events-none" : "opacity-100"
           )}
         >
-          <button
+          <ActionButton
              onClick={regenerateText}
              disabled={isGenerating}
              className={cn(
                "p-2 transition-all rounded-md",
-               "text-muted-foreground hover:text-foreground hover:bg-muted/50",
+               "text-muted-foreground hover:text-foreground ",
                "disabled:opacity-50 disabled:cursor-not-allowed"
              )}
+             tooltip="Restart Test"
            >
              <RotateCcw className={cn("w-4 h-4", isGenerating && "animate-spin")} />
-           </button>
+           </ActionButton>
         </div>
       </div>
     </Layout>
