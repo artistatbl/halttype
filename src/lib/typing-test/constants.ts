@@ -1,9 +1,3 @@
-/**
- * Test Configuration Constants
- * 
- * Centralized constants for typing test configuration options.
- * Used across TestConfig components for consistency and maintainability.
- */
 
 // Test mode types
 export type TestMode = "time" | "words" | "quote"
@@ -33,6 +27,9 @@ export const DEFAULT_CONFIG = {
   punctuation: false,
   numbers: false,
 } as const
+
+// Punctuation marks for text generation
+export const PUNCTUATION_MARKS = ['.', ',', '!', '?', ';', ':'] as const
 
 // Test mode display names and descriptions
 export const TEST_MODE_INFO = {

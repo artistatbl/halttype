@@ -1,10 +1,3 @@
-/**
- * Typing Test Utilities
- * 
- * This module provides utilities and functions for typing test functionality.
- * Extracted from components to improve testability and reusability.
- */
-
 export {
   calculateWPM,
   calculateAccuracy,
