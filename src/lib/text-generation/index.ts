@@ -10,8 +10,7 @@ export {
   generatePresetText,
   generateSeededText,
   type TextGenerationOptions,
-  type GeneratedText,
-  type WordDifficulty
+  type GeneratedText
 } from './text-generator';
 
 export {
@@ -21,41 +20,36 @@ export {
   type TextGenerationSession
 } from './text-generation-service';
 
-export {
-  getWordsByDifficulty,
-  commonWords,
-  mediumWords,
-  hardWords,
-  programmingWords
-} from './word-lists';
+// Removed word-lists exports (difficulty-related functionality removed)
 
-import { generatePresetText, type WordDifficulty } from './text-generator';
+import { generatePresetText } from './text-generator';
 
 /**
- * Quick generators for common test configurations
+ * Preset text generators for common word counts
+ * These provide convenient shortcuts for generating text with standard configurations
  */
-export const textPresets = {
+export const presets = {
   /**
-   * Generate a 10-word test
+   * Generate 10 words of text
    */
-  words10: async (difficulty: WordDifficulty = 'medium', punctuation = false, numbers = false) => 
-    await generatePresetText(10, difficulty, punctuation, numbers),
-  
+  words10: async (punctuation = false, numbers = false) =>
+    await generatePresetText(10, punctuation, numbers),
+
   /**
-   * Generate a 25-word test
+   * Generate 25 words of text
    */
-  words25: async (difficulty: WordDifficulty = 'medium', punctuation = false, numbers = false) => 
-    await generatePresetText(25, difficulty, punctuation, numbers),
-  
+  words25: async (punctuation = false, numbers = false) =>
+    await generatePresetText(25, punctuation, numbers),
+
   /**
-   * Generate a 50-word test
+   * Generate 50 words of text
    */
-  words50: async (difficulty: WordDifficulty = 'medium', punctuation = false, numbers = false) => 
-    await generatePresetText(50, difficulty, punctuation, numbers),
-  
+  words50: async (punctuation = false, numbers = false) =>
+    await generatePresetText(50, punctuation, numbers),
+
   /**
-   * Generate a 100-word test
+   * Generate 100 words of text
    */
-  words100: async (difficulty: WordDifficulty = 'medium', punctuation = false, numbers = false) => 
-    await generatePresetText(100, difficulty, punctuation, numbers),
+  words100: async (punctuation = false, numbers = false) =>
+    await generatePresetText(100, punctuation, numbers),
 };

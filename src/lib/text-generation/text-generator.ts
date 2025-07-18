@@ -1,13 +1,11 @@
-import { getWordsByDifficulty, WordDifficulty } from './word-lists';
-import { getWordsByLanguageAndDifficulty } from './language-word-lists';
 import type { Language } from '@/lib/language-system';
+import { getWordsByLanguage } from './language-word-lists';
 
-// Re-export WordDifficulty for convenience
-export type { WordDifficulty };
+
 
 export interface TextGenerationOptions {
   wordCount: number;
-  difficulty: WordDifficulty;
+
   includePunctuation?: boolean;
   includeNumbers?: boolean;
   language?: Language;
@@ -17,7 +15,7 @@ export interface TextGenerationOptions {
 export interface GeneratedText {
   text: string;
   wordCount: number;
-  difficulty: WordDifficulty;
+
   options: TextGenerationOptions;
 }
 
@@ -64,14 +62,14 @@ class SeededRandom {
 export async function generateText(options: TextGenerationOptions): Promise<GeneratedText> {
   const {
     wordCount,
-    difficulty,
     includePunctuation = false,
     includeNumbers = false,
     language = 'english',
     seed
   } = options;
 
-  const words = language ? await getWordsByLanguageAndDifficulty(language, difficulty) : getWordsByDifficulty(difficulty);
+  // Load words for the specified language
+  const words = await getWordsByLanguage(language);
   const random = new SeededRandom(seed);
   let generatedWords: string[] = [];
 
@@ -183,7 +181,7 @@ export async function generateText(options: TextGenerationOptions): Promise<Gene
   return {
     text,
     wordCount: generatedWords.length,
-    difficulty,
+
     options
   };
 }
@@ -193,16 +191,14 @@ export async function generateText(options: TextGenerationOptions): Promise<Gene
  */
 export async function generatePresetText(
   wordCount: 10 | 25 | 50 | 100,
-  difficulty: WordDifficulty = 'medium',
   includePunctuation: boolean = false,
   includeNumbers: boolean = false
 ): Promise<GeneratedText> {
   return await generateText({
     wordCount,
-    difficulty,
     includePunctuation,
     includeNumbers,
-    seed: `${wordCount}-${difficulty}-${includePunctuation}-${includeNumbers}-${Date.now()}`
+    seed: `${wordCount}-${includePunctuation}-${includeNumbers}-${Date.now()}`
   });
 }
 
@@ -211,14 +207,12 @@ export async function generatePresetText(
  */
 export async function generateSeededText(
   wordCount: number,
-  difficulty: WordDifficulty,
   seed: string,
   includePunctuation: boolean = false,
   includeNumbers: boolean = false
 ): Promise<GeneratedText> {
   return await generateText({
     wordCount,
-    difficulty,
     includePunctuation,
     includeNumbers,
     seed

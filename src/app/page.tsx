@@ -40,12 +40,11 @@ export default function Home() {
   const textGenerationConfig = useMemo(() => ({
     mode: testConfig.mode,
     wordCount: testConfig.wordCount as 10 | 25 | 50 | 100,
-    difficulty: testConfig.difficulty as 'easy' | 'medium' | 'hard',
     punctuation: testConfig.punctuation || false,
     numbers: testConfig.numbers || false,
     language: currentLanguage,
     sessionId: testId, // Use testId as session identifier
-  }), [testConfig.mode, testConfig.wordCount, testConfig.difficulty, testConfig.punctuation, testConfig.numbers, currentLanguage, testId]);
+  }), [testConfig.mode, testConfig.wordCount, testConfig.punctuation, testConfig.numbers, currentLanguage, testId]);
 
   // Generate text based on current configuration
   const { currentText, regenerateText, isGenerating, error } = useTextGeneration(textGenerationConfig);
@@ -152,9 +151,7 @@ export default function Home() {
                   wordCount={
                     testConfig.mode === "words" ? testConfig.wordCount : undefined
                   }
-                  difficulty={testConfig.difficulty}
-                  testId={testId}
-                  key={`${testId}-${currentText.slice(0, 20)}`} // Force re-render when text changes
+                  
                 />
               </div>
             </div>

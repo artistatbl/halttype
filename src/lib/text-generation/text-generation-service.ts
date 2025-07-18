@@ -1,10 +1,10 @@
-import { generateText, type WordDifficulty, type GeneratedText } from './text-generator';
+import { generateText, type GeneratedText } from './text-generator';
 import type { Language } from '@/lib/language-system';
 
 export interface TextGenerationRequest {
   mode: 'time' | 'words' | 'quote';
   wordCount: 10 | 25 | 50 | 100;
-  difficulty: WordDifficulty;
+
   punctuation: boolean;
   numbers: boolean;
   language?: Language;
@@ -71,8 +71,8 @@ export class TextGenerationService {
    * Generate a unique seed for text generation
    */
   private generateSeed(request: TextGenerationRequest, session: TextGenerationSession): string {
-    const { mode, wordCount, difficulty, punctuation, numbers } = request;
-    return `${mode}-${wordCount}-${difficulty}-${punctuation}-${numbers}-${session.refreshKey}-${session.regenerationCount}`;
+    const { mode, wordCount, punctuation, numbers } = request;
+    return `${mode}-${wordCount}-${punctuation}-${numbers}-${session.refreshKey}-${session.regenerationCount}`;
   }
 
   /**
@@ -89,10 +89,10 @@ export class TextGenerationService {
           return {
             text: request.customText,
             wordCount: request.customText.split(/\s+/).length,
-            difficulty: request.difficulty,
+
             options: {
               wordCount: request.customText.split(/\s+/).length,
-              difficulty: request.difficulty,
+
               includePunctuation: request.punctuation,
               includeNumbers: request.numbers,
               seed
@@ -102,7 +102,7 @@ export class TextGenerationService {
         // Generate a longer text for quote mode (50-100 words)
         return await generateText({
           wordCount: 75,
-          difficulty: request.difficulty,
+          //difficulty: request.difficulty,
           includePunctuation: true, // Quotes typically have punctuation
           includeNumbers: request.numbers,
           language: request.language,
@@ -112,7 +112,7 @@ export class TextGenerationService {
       case 'words':
         return await generateText({
           wordCount: request.wordCount,
-          difficulty: request.difficulty,
+          //difficulty: request.difficulty,
           includePunctuation: request.punctuation,
           includeNumbers: request.numbers,
           language: request.language,
@@ -126,7 +126,7 @@ export class TextGenerationService {
         const estimatedWords = Math.max(50, request.wordCount * 2);
         return await generateText({
           wordCount: estimatedWords,
-          difficulty: request.difficulty,
+          //difficulty: request.difficulty,
           includePunctuation: request.punctuation,
           includeNumbers: request.numbers,
           language: request.language,

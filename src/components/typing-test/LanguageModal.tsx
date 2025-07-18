@@ -149,16 +149,6 @@ export function CompactLanguageModal() {
 
   return (
     <>
-      <Button
-        variant="outline"
-        size="sm"
-        className="h-7 px-2 text-xs"
-        onClick={() => setIsOpen(true)}
-      >
-        <span className="mr-1">{getLanguageIndicator(currentLanguage)}</span>
-        {getLanguageDisplayName(currentLanguage)}
-      </Button>
-      
       <CommandDialog open={isOpen} onOpenChange={setIsOpen} className="top-[35%]">
         <CommandInput placeholder="Search languages..." />
         <CommandList className="max-h-[400px]">

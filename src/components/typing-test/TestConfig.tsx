@@ -16,7 +16,6 @@ export interface TestConfigOptions {
   timeLimit: number
   wordCount: WordCount
   quoteLength: QuoteLength
-  difficulty: Difficulty
   punctuation?: boolean
   numbers?: boolean
 }
@@ -26,7 +25,6 @@ interface TestConfigProps {
   timeLimit: number
   wordCount: WordCount
   quoteLength: QuoteLength
-  difficulty: Difficulty
   punctuation: boolean
   numbers: boolean
   onTestModeChange: (mode: TestMode) => void
@@ -42,7 +40,6 @@ function TestConfigInternal({
   timeLimit,
   wordCount,
   quoteLength,
-  difficulty,
   punctuation,
   numbers,
   onTestModeChange,
@@ -113,9 +110,7 @@ export function TestConfig({
     onConfigChange({ ...initialConfig, quoteLength })
   }
 
-  const handleDifficultyChange = (difficulty: Difficulty) => {
-    onConfigChange({ ...initialConfig, difficulty })
-  }
+
 
 
 
@@ -133,7 +128,7 @@ export function TestConfig({
       timeLimit={initialConfig.timeLimit}
       wordCount={initialConfig.wordCount}
       quoteLength={initialConfig.quoteLength}
-      difficulty={initialConfig.difficulty}
+   
       punctuation={initialConfig.punctuation || false}
       numbers={initialConfig.numbers || false}
       onTestModeChange={handleTestModeChange}

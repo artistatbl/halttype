@@ -4,7 +4,6 @@
  */
 
 import type { Language } from '@/lib/language-system';
-import { WordDifficulty, commonWords, programmingWords } from './word-lists';
 
 // Interface for language JSON files
 interface LanguageFile {
@@ -41,35 +40,11 @@ async function loadLanguageWords(language: string): Promise<string[]> {
     return words;
   } catch (error) {
     console.warn(`Failed to load language ${language}, falling back to English:`, error);
-    return commonWords;
+    return await loadLanguageWords('english');
   }
 }
 
-/**
- * Get words by difficulty from a language's word list
- */
-function getWordsByDifficultyFromList(words: string[], difficulty: WordDifficulty): string[] {
-  const totalWords = words.length;
-  
-  switch (difficulty) {
-    case 'easy':
-      // First 30% of words (most common)
-      return words.slice(0, Math.floor(totalWords * 0.3));
-    case 'medium':
-      // Middle 40% of words
-      const startMedium = Math.floor(totalWords * 0.3);
-      const endMedium = Math.floor(totalWords * 0.7);
-      return words.slice(startMedium, endMedium);
-    case 'hard':
-      // Last 30% of words (least common)
-      return words.slice(Math.floor(totalWords * 0.7));
-    case 'programming':
-      // For programming, return programming words or fallback to hard
-      return programmingWords;
-    default:
-      return words.slice(0, Math.floor(totalWords * 0.3));
-  }
-}
+// Removed difficulty-based word filtering
 
 // All programming languages now load from JSON files in /static/languages/
 
@@ -91,23 +66,19 @@ const supportedProgrammingLanguages: Language[] = [
 ];
 
 /**
- * Get word list based on language and difficulty
+ * Get word list based on language
  */
-export async function getWordsByLanguageAndDifficulty(
-  language: Language,
-  difficulty: WordDifficulty
+export async function getWordsByLanguage(
+  language: Language
 ): Promise<string[]> {
   // All languages (including programming languages) now load from JSON files
   try {
     const words = await loadLanguageWords(language);
-    return getWordsByDifficultyFromList(words, difficulty);
+    return words;
   } catch (error) {
     console.warn(`Failed to load words for ${language}, using fallback:`, error);
-    // Final fallback to English or programming words
-    if (language.startsWith('code_')) {
-      return programmingWords;
-    }
-    return getWordsByDifficultyFromList(commonWords, difficulty);
+    // Final fallback to English
+    return await loadLanguageWords('english');
   }
 }
 

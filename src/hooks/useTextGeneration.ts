@@ -6,7 +6,6 @@ import type { Language } from '@/lib/language-system';
 export interface UseTextGenerationConfig {
   mode: 'time' | 'words' | 'quote';
   wordCount: 10 | 25 | 50 | 100;
-  difficulty: 'easy' | 'medium' | 'hard';
   punctuation: boolean;
   numbers: boolean;
   language?: Language;
@@ -34,12 +33,11 @@ export function useTextGeneration(config: UseTextGenerationConfig): UseTextGener
   const request: TextGenerationRequest = useMemo(() => ({
     mode: config.mode,
     wordCount: config.wordCount,
-    difficulty: config.difficulty,
     punctuation: config.punctuation,
     numbers: config.numbers,
     language: config.language,
     customText: config.customText
-  }), [config.mode, config.wordCount, config.difficulty, config.punctuation, config.numbers, config.language, config.customText]);
+  }), [config.mode, config.wordCount,  config.punctuation, config.numbers, config.language, config.customText]);
 
   // Generate text based on current configuration
   const generateNewText = useCallback(async () => {

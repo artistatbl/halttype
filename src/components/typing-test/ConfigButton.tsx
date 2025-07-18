@@ -22,7 +22,7 @@ export function ConfigButton({
     <button
       onClick={onClick}
       className={cn(
-        "flex items-center gap-1.5 px-2 py-1 rounded transition-colors",
+        "flex items-center gap-1.5 px-2 py-1 rounded transition-colors bg-transparent",
         isActive
           ? "text-primary"
           : "text-muted-foreground hover:text-foreground",
