@@ -78,7 +78,7 @@ export function useTestCompletion({
         keystrokes: state.keystrokes,
       });
     } catch (error) {
-      console.error("Failed to save test result:", error);
+      // Continue with completion even if save fails - this is non-critical
     }
     
     // Call onComplete callback with results

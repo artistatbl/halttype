@@ -52,12 +52,6 @@ export function useTypingTestState(initialTimeLimit?: number): UseTypingTestStat
     const startTime = Date.now();
     const timeRemaining = initialTimeLimit || null;
     
-    console.log('🚀 Starting test:', {
-      initialTimeLimit,
-      timeRemaining,
-      startTime
-    });
-    
     setState(prev => ({
       ...prev,
       testState: "running",
@@ -134,8 +128,6 @@ export function useTypingTestState(initialTimeLimit?: number): UseTypingTestStat
   }, []);
 
   const setTimeRemaining = useCallback((time: number) => {
-    console.log('⏱️ Setting time remaining:', time);
-    
     setState(prev => ({
       ...prev,
       timeRemaining: time,
@@ -144,12 +136,7 @@ export function useTypingTestState(initialTimeLimit?: number): UseTypingTestStat
 
   // Update timeRemaining when initialTimeLimit changes
   useEffect(() => {
-    console.log('🔄 useEffect for timeRemaining sync:', {
-      initialTimeLimit
-    });
-    
     if (initialTimeLimit) {
-      console.log('✅ Updating timeRemaining to initialTimeLimit:', initialTimeLimit);
       setState(prev => ({
         ...prev,
         timeRemaining: initialTimeLimit,

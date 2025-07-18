@@ -121,9 +121,7 @@ export default function Home() {
           )}
         >
           <div className="flex justify-center">
-            <div className="bg-accent/20 rounded-md p-3 flex items-center gap-2">
               <LanguageModal />
-            </div>
           </div>
         </div>
         

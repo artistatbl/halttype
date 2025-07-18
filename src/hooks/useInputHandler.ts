@@ -39,7 +39,6 @@ export function useInputHandler({
     
     // Start test if not already started
     if (state.testState === "idle") {
-      console.log('🎯 Starting test from input handler');
       actions.startTest();
       onTestStart?.();
     }

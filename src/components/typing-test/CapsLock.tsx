@@ -31,8 +31,7 @@ export function useCapsLock(): boolean {
         }
       } catch (error) {
         // If KeyboardEvent constructor is not supported, we'll wait for user input
-        console.log("Initial Caps Lock state will be detected on first keypress")
-      }
+    }
     }
 
     // Run the initial check

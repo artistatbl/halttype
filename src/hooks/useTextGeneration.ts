@@ -49,7 +49,6 @@ export function useTextGeneration(config: UseTextGenerationConfig): UseTextGener
       setGeneratedData(result);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to generate text');
-      console.error('Text generation error:', err);
     } finally {
       setIsGenerating(false);
     }

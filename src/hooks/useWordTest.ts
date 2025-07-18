@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { countCompletedWords as calculateCompletedWords } from '@/lib/typing-test/calculations';
 
 export interface WordTestState {
   wordsCompleted: number;
@@ -41,13 +42,9 @@ export function useWordTest(targetWordCount: number): UseWordTestReturn {
     });
   }, []);
 
-  // Count completed words based on spaces typed
+  // Use the centralized word counting logic
   const countCompletedWords = useCallback((userInput: string) => {
-    // Count words that are followed by a space (completed words)
-    const words = userInput.split(' ');
-    // If input ends with space, all words are completed
-    // If input doesn't end with space, exclude the last word as it's still being typed
-    return userInput.endsWith(' ') ? words.length - 1 : Math.max(0, words.length - 1);
+    return calculateCompletedWords(userInput);
   }, []);
 
   // Reset word test state
