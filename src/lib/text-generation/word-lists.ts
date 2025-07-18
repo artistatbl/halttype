@@ -1,7 +1,3 @@
-/**
- * Common English words for typing tests
- * Organized by frequency and difficulty
- */
 
 // Most common English words (easy difficulty)
 export const commonWords = [

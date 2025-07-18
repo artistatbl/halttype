@@ -1,4 +1,5 @@
 import { generateText, type WordDifficulty, type GeneratedText } from './text-generator';
+import type { Language } from '@/lib/language-system';
 
 export interface TextGenerationRequest {
   mode: 'time' | 'words' | 'quote';
@@ -6,6 +7,7 @@ export interface TextGenerationRequest {
   difficulty: WordDifficulty;
   punctuation: boolean;
   numbers: boolean;
+  language?: Language;
   customText?: string;
 }
 
@@ -76,7 +78,7 @@ export class TextGenerationService {
   /**
    * Generate text based on request and session
    */
-  generateText(request: TextGenerationRequest, sessionId: string): GeneratedText {
+  async generateText(request: TextGenerationRequest, sessionId: string): Promise<GeneratedText> {
     const session = this.getSession(sessionId);
     const seed = this.generateSeed(request, session);
 
@@ -98,20 +100,22 @@ export class TextGenerationService {
           };
         }
         // Generate a longer text for quote mode (50-100 words)
-        return generateText({
+        return await generateText({
           wordCount: 75,
           difficulty: request.difficulty,
           includePunctuation: true, // Quotes typically have punctuation
           includeNumbers: request.numbers,
+          language: request.language,
           seed
         });
 
       case 'words':
-        return generateText({
+        return await generateText({
           wordCount: request.wordCount,
           difficulty: request.difficulty,
           includePunctuation: request.punctuation,
           includeNumbers: request.numbers,
+          language: request.language,
           seed
         });
 
@@ -120,11 +124,12 @@ export class TextGenerationService {
         // For time mode, generate enough text to last the duration
         // Estimate: average typing speed is 40 WPM, so generate 2x the expected words
         const estimatedWords = Math.max(50, request.wordCount * 2);
-        return generateText({
+        return await generateText({
           wordCount: estimatedWords,
           difficulty: request.difficulty,
           includePunctuation: request.punctuation,
           includeNumbers: request.numbers,
+          language: request.language,
           seed
         });
     }

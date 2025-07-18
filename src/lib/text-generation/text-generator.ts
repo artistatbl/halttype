@@ -1,4 +1,6 @@
 import { getWordsByDifficulty, WordDifficulty } from './word-lists';
+import { getWordsByLanguageAndDifficulty } from './language-word-lists';
+import type { Language } from '@/lib/language-system';
 
 // Re-export WordDifficulty for convenience
 export type { WordDifficulty };
@@ -8,6 +10,7 @@ export interface TextGenerationOptions {
   difficulty: WordDifficulty;
   includePunctuation?: boolean;
   includeNumbers?: boolean;
+  language?: Language;
   seed?: string; // For reproducible results
 }
 
@@ -58,16 +61,17 @@ class SeededRandom {
 /**
  * Generate random text for typing tests
  */
-export function generateText(options: TextGenerationOptions): GeneratedText {
+export async function generateText(options: TextGenerationOptions): Promise<GeneratedText> {
   const {
     wordCount,
     difficulty,
     includePunctuation = false,
     includeNumbers = false,
+    language = 'english',
     seed
   } = options;
 
-  const words = getWordsByDifficulty(difficulty);
+  const words = language ? await getWordsByLanguageAndDifficulty(language, difficulty) : getWordsByDifficulty(difficulty);
   const random = new SeededRandom(seed);
   let generatedWords: string[] = [];
 
@@ -187,13 +191,13 @@ export function generateText(options: TextGenerationOptions): GeneratedText {
 /**
  * Generate text with preset configurations for common test types
  */
-export function generatePresetText(
+export async function generatePresetText(
   wordCount: 10 | 25 | 50 | 100,
   difficulty: WordDifficulty = 'medium',
   includePunctuation: boolean = false,
   includeNumbers: boolean = false
-): GeneratedText {
-  return generateText({
+): Promise<GeneratedText> {
+  return await generateText({
     wordCount,
     difficulty,
     includePunctuation,
@@ -205,14 +209,14 @@ export function generatePresetText(
 /**
  * Generate reproducible text with a specific seed
  */
-export function generateSeededText(
+export async function generateSeededText(
   wordCount: number,
   difficulty: WordDifficulty,
   seed: string,
   includePunctuation: boolean = false,
   includeNumbers: boolean = false
-): GeneratedText {
-  return generateText({
+): Promise<GeneratedText> {
+  return await generateText({
     wordCount,
     difficulty,
     includePunctuation,

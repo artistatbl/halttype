@@ -7,14 +7,24 @@ import { Language, DEFAULT_LANGUAGE, getLanguageDisplayName, LANGUAGE_GROUPS } f
  * Hook to manage text display language (independent of test configuration)
  */
 export function useLanguage() {
-  const [currentLanguage, setCurrentLanguage] = useState<Language>(DEFAULT_LANGUAGE)
+  const [currentLanguage, setCurrentLanguage] = useState<Language>(() => {
+    // Initialize from localStorage if available, otherwise use default
+    if (typeof window !== 'undefined') {
+      const savedLanguage = localStorage.getItem('textDisplayLanguage')
+      if (savedLanguage) {
+        return savedLanguage as Language
+      }
+    }
+    return DEFAULT_LANGUAGE
+  })
   
   useEffect(() => {
+    // Sync with localStorage on mount (for SSR compatibility)
     const savedLanguage = localStorage.getItem('textDisplayLanguage')
-    if (savedLanguage) {
+    if (savedLanguage && savedLanguage !== currentLanguage) {
       setCurrentLanguage(savedLanguage as Language)
     }
-  }, [])
+  }, [currentLanguage])
   
   const changeLanguage = (language: Language) => {
     setCurrentLanguage(language)

@@ -19,10 +19,20 @@ export type Language =
   | 'russian'
   | 'arabic'
   | 'hindi'
+  | 'code_bash'
+  | 'code_csharp'
+  | 'code_css'
+  | 'code_dart'
+  | 'code_elixir'
+  | 'code_html'
+  | 'code_java'
+  | 'code_kotlin'
+  | 'code_latex'
+  | 'code_lua'
+  | 'code_pascal'
   | 'code_python'
   | 'code_javascript'
   | 'code_typescript'
-  | 'code_java'
   | 'code_c'
   | 'code_cpp'
   | 'code_rust'
@@ -52,10 +62,20 @@ export const LANGUAGE_LIST: Language[] = [
   'russian',
   'arabic',
   'hindi',
+  'code_bash',
+  'code_csharp',
+  'code_css',
+  'code_dart',
+  'code_elixir',
+  'code_html',
+  'code_java',
+  'code_kotlin',
+  'code_latex',
+  'code_lua',
+  'code_pascal',
   'code_python',
   'code_javascript',
   'code_typescript',
-  'code_java',
   'code_c',
   'code_cpp',
   'code_rust',
@@ -73,7 +93,7 @@ export const LANGUAGE_GROUPS: Record<string, Language[]> = {
   asian: ['korean', 'chinese_simplified', 'chinese_traditional', 'japanese_hiragana', 'japanese_katakana', 'japanese_romaji'],
   european: ['english', 'spanish', 'french', 'german', 'russian'],
   middle_eastern: ['arabic', 'hindi'],
-  code: ['code_python', 'code_javascript', 'code_typescript', 'code_java', 'code_c', 'code_cpp', 'code_rust', 'code_go']
+  code: ['code_bash', 'code_csharp', 'code_css', 'code_dart', 'code_elixir', 'code_html', 'code_java', 'code_kotlin', 'code_latex', 'code_lua', 'code_pascal', 'code_python', 'code_javascript', 'code_typescript', 'code_c', 'code_cpp', 'code_rust', 'code_go']
 };
 
 export type LanguageGroupName = keyof typeof LANGUAGE_GROUPS;
@@ -114,10 +134,20 @@ export const LANGUAGE_DISPLAY_NAMES: Record<Language, string> = {
   hindi: 'Hindi',
   
   // Code languages
+  code_bash: 'Bash',
+  code_csharp: 'C#',
+  code_css: 'CSS',
+  code_dart: 'Dart',
+  code_elixir: 'Elixir',
+  code_html: 'HTML',
+  code_java: 'Java',
+  code_kotlin: 'Kotlin',
+  code_latex: 'LaTeX',
+  code_lua: 'Lua',
+  code_pascal: 'Pascal',
   code_python: 'Python',
   code_javascript: 'JavaScript',
   code_typescript: 'TypeScript',
-  code_java: 'Java',
   code_c: 'C',
   code_cpp: 'C++',
   code_rust: 'Rust',
@@ -306,7 +336,7 @@ export const TextDisplay = {
    */
   getLanguageInfo(language: Language): { code: Language; name: string; group?: string } {
     const group = Object.keys(LANGUAGE_GROUPS).find(groupName => 
-      LANGUAGE_GROUPS[groupName].includes(language)
+      LANGUAGE_GROUPS[groupName]?.includes(language)
     );
     
     return {

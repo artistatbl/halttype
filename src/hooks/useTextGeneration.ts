@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { textGenerationService, type TextGenerationRequest } from '@/lib/text-generation/text-generation-service';
 import type { GeneratedText } from '@/lib/text-generation';
+import type { Language } from '@/lib/language-system';
 
 export interface UseTextGenerationConfig {
   mode: 'time' | 'words' | 'quote';
@@ -8,6 +9,7 @@ export interface UseTextGenerationConfig {
   difficulty: 'easy' | 'medium' | 'hard';
   punctuation: boolean;
   numbers: boolean;
+  language?: Language;
   customText?: string;
   sessionId: string;
 }
@@ -35,16 +37,17 @@ export function useTextGeneration(config: UseTextGenerationConfig): UseTextGener
     difficulty: config.difficulty,
     punctuation: config.punctuation,
     numbers: config.numbers,
+    language: config.language,
     customText: config.customText
-  }), [config.mode, config.wordCount, config.difficulty, config.punctuation, config.numbers, config.customText]);
+  }), [config.mode, config.wordCount, config.difficulty, config.punctuation, config.numbers, config.language, config.customText]);
 
   // Generate text based on current configuration
-  const generateNewText = useCallback(() => {
+  const generateNewText = useCallback(async () => {
     setIsGenerating(true);
     setError(null);
 
     try {
-      const result = textGenerationService.generateText(request, config.sessionId);
+      const result = await textGenerationService.generateText(request, config.sessionId);
       setGeneratedData(result);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to generate text');

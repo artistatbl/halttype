@@ -9,6 +9,7 @@ import { useFocus } from "@/components/typing-test/FocusContext";
 import { ActionButton } from "@/components/typing-test/ActionButton";
 import { useTextGeneration } from "@/hooks/useTextGeneration";
 import { useConfigStorage } from "@/hooks/useConfigStorage";
+import { useLanguage } from "@/hooks/useLanguage";
 import { RotateCcw } from "lucide-react";
 import { nanoid } from "nanoid";
 import { StructuredData } from "@/components/seo/SEOHead";
@@ -31,6 +32,9 @@ export default function Home() {
 
   // Get focus state
   const { isFocused } = useFocus();
+  
+  // Get current language
+  const { currentLanguage } = useLanguage();
 
   // Memoize the text generation config to prevent infinite loops
   const textGenerationConfig = useMemo(() => ({
@@ -39,8 +43,9 @@ export default function Home() {
     difficulty: testConfig.difficulty as 'easy' | 'medium' | 'hard',
     punctuation: testConfig.punctuation || false,
     numbers: testConfig.numbers || false,
+    language: currentLanguage,
     sessionId: testId, // Use testId as session identifier
-  }), [testConfig.mode, testConfig.wordCount, testConfig.difficulty, testConfig.punctuation, testConfig.numbers, testId]);
+  }), [testConfig.mode, testConfig.wordCount, testConfig.difficulty, testConfig.punctuation, testConfig.numbers, currentLanguage, testId]);
 
   // Generate text based on current configuration
   const { currentText, regenerateText, isGenerating, error } = useTextGeneration(textGenerationConfig);
