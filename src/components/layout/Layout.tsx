@@ -18,7 +18,7 @@ export function Layout({ children }: LayoutProps) {
     <div className="flex flex-col min-h-screen bg-background">
       <Navbar />
       <main className="flex-1 flex items-start justify-center">
-        <div className="w-full max-w-7xl mx-auto px-10 py-8 md:py-12">
+        <div className="w-full max-w-7xl mx-auto px-6 py-6 md:py-8">
             {children}
         </div>
       </main>

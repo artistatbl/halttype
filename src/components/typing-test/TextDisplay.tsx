@@ -67,13 +67,13 @@ export function TextDisplay({
   return (
     <div 
       className={cn(
-        "w-full max-w-8xl mx-auto text-accent-foreground text-1xl sm:text-2xl md:text-3xl leading-relaxed tracking-wide py-5 sm:py-6 md:py-8 px-4 sm:px-5 md:px-6 rounded-lg transition-all",
-        "min-h-[280px] max-h-[280px] overflow-hidden flex flex-col justify-center", // Fixed height container
+        "w-full max-w-8xl mx-auto text-accent-foreground text-xl sm:text-2xl md:text-3xl leading-relaxed tracking-wide py-3 sm:py-4 md:py-5 px-4 sm:px-6 md:px-8 rounded-lg transition-all",
+        "min-h-[200px] max-h-[200px] overflow-hidden flex flex-col justify-center", // Fixed height container
         className
       )}
     >
       <div className="relative w-full flex-1 flex items-center">
-        <div className="w-full">
+        <div className="w-full text-left">
           <CapsLockWarning isOn={capsLockOn} />
           
           {/* Text content with improved styling and readability */}

@@ -137,11 +137,11 @@ export default function Home() {
         {/* Fixed height container for typing test and restart button */}
         <div className="relative w-full">
           {isGenerating ? (
-            <div className="w-full flex items-center justify-center py-8 min-h-[400px]">
+            <div className="w-full flex items-center justify-center py-6 min-h-[300px]">
               <div className="text-muted-foreground">Generating text...</div>
             </div>
           ) : (
-            <div className="mt-8 min-h-[400px] flex flex-col">
+            <div className="mt-6 min-h-[300px] flex flex-col">
               <div className="flex-1">
                 <TypingTest
                   content={currentText}
