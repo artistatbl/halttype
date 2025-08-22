@@ -48,6 +48,13 @@ export default function RootLayout({
         <StructuredData data={getWebsiteStructuredData()} />
         <StructuredData data={getTypingTestStructuredData()} />
         <StructuredData data={getEducationalStructuredData()} />
+        <script 
+          src="https://cdn.databuddy.cc/databuddy.js" 
+          data-client-id="FQfvRLmMlfxGg_MTSR2bw" 
+          data-enable-batching="true" 
+          crossOrigin="anonymous" 
+          async 
+        />
       </head>
       <body className="antialiased min-h-screen bg-background text-foreground">
         <Providers>{children}</Providers>
