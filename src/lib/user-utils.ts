@@ -7,7 +7,7 @@ export interface DisplayUser {
 export interface User {
   name?: string;
   email?: string;
-  image?: string;
+  image?: string | null;
 }
 
 export function getDisplayUser(user: User | null | undefined): DisplayUser {

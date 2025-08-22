@@ -1,7 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
 import { configStorage } from '@/lib/storage';
 import type { TestConfigOptions } from '@/components/typing-test/TestConfig';
-import type { UserSettings } from '@/components/typing-test/Settings';
+
+// Local UserSettings interface for the hook
+export interface UserSettings {
+  language: string;
+  keyboardLayout: string;
+  wpmDisplay: 'live' | 'end' | 'both';
+  theme: string;
+  soundEnabled: boolean;
+}
 
 export interface UseConfigStorageReturn {
   testConfig: TestConfigOptions;
@@ -24,7 +32,6 @@ export function useConfigStorage(): UseConfigStorageReturn {
       timeLimit: stored.timeLimit,
       wordCount: stored.wordCount,
       quoteLength: stored.quoteLength,
-      difficulty: stored.difficulty,
       punctuation: stored.punctuation,
       numbers: stored.numbers
     };
@@ -55,7 +62,6 @@ export function useConfigStorage(): UseConfigStorageReturn {
         timeLimit: storedTestConfig.timeLimit,
         wordCount: storedTestConfig.wordCount,
         quoteLength: storedTestConfig.quoteLength,
-        difficulty: storedTestConfig.difficulty,
         punctuation: storedTestConfig.punctuation,
         numbers: storedTestConfig.numbers
       });
@@ -86,7 +92,6 @@ export function useConfigStorage(): UseConfigStorageReturn {
         timeLimit: updated.timeLimit,
         wordCount: updated.wordCount,
         quoteLength: updated.quoteLength,
-        difficulty: updated.difficulty,
         punctuation: updated.punctuation,
         numbers: updated.numbers
       });
@@ -125,7 +130,6 @@ export function useConfigStorage(): UseConfigStorageReturn {
       timeLimit: defaultTestConfig.timeLimit,
       wordCount: defaultTestConfig.wordCount,
       quoteLength: defaultTestConfig.quoteLength,
-      difficulty: defaultTestConfig.difficulty,
       punctuation: defaultTestConfig.punctuation,
       numbers: defaultTestConfig.numbers
     });
