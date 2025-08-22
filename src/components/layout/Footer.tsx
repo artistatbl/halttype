@@ -2,8 +2,9 @@
 
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { Github, Twitter,  MessageSquare } from "lucide-react"
+import { Github, Twitter, MessageSquare, Keyboard, Globe } from "lucide-react"
 import { ThemeModal } from "../theme"
+import { LanguageModal } from "../typing-test/LanguageModal"
 import { useFocus } from "../typing-test/FocusContext"
 
 
@@ -26,53 +27,82 @@ export function Footer({ className }: FooterProps) {
           isFocused ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
         )}>
           
-          {/* Single Line Minimal Footer */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Minimal Footer */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             
             {/* Left Side - Social Links */}
-            <div className="flex items-center gap-3">
-              <a href="https://github.com/halttype" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary transition-all duration-300 hover:scale-110">
+            <div className="flex items-center gap-4">
+              <a 
+                href="https://github.com/halttype" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-1"
+                title="GitHub"
+              >
                 <Github className="w-4 h-4" />
               </a>
-              <a href="https://twitter.com/halttype" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary transition-all duration-300 hover:scale-110">
+              <a 
+                href="https://twitter.com/halttype" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-1"
+                title="Twitter"
+              >
                 <Twitter className="w-4 h-4" />
               </a>
-              <a href="https://discord.gg/halttype" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary transition-all duration-300 hover:scale-110">
+              <a 
+                href="https://discord.gg/halttype" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-1"
+                title="Discord"
+              >
                 <MessageSquare className="w-4 h-4" />
               </a>
             </div>
             
-            {/* Center - About & Legal Links & Copyright */}
-            <div className="flex items-center gap-4 text-xs">
-              <Link href="/about" className="text-primary hover:text-primary transition-all duration-300">
-                About
+            {/* Center - Navigation Links */}
+            <div className="flex items-center gap-6 text-sm">
+              <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
+                about
               </Link>
-              <span className="text-primary/30">•</span>
-              <Link href="/terms" className="text-primary hover:text-primary transition-all duration-300">
-                Terms
+              <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
+                terms
               </Link>
-              <span className="text-primary/30">•</span>
-              <Link href="/privacy" className="text-primary hover:text-primary transition-all duration-300">
-                Privacy
+              <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
+                privacy
               </Link>
-              <span className="text-primary/30">•</span>
-              <Link href="/contact" className="text-primary hover:text-primary transition-all duration-300">
-                Contact
+              <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
+                contact
               </Link>
-              <span className="hidden sm:inline text-primary/30 mx-2">•</span>
-              <span className="hidden sm:inline text-xs text-primary/50">© 2024 HaltType</span>
             </div>
             
-            {/* Right Side - Theme Selector */}
-            <div className="flex items-center">
+            {/* Right Side - Settings & Options */}
+            <div className="flex items-center gap-3">
+              {/* Language Selector */}
+              <div className="flex items-center gap-1">
+                <Globe className="w-4 h-4 text-muted-foreground" />
+                <LanguageModal />
+              </div>
+              
+              {/* Keyboard Layout - Placeholder for future implementation */}
+              <button 
+                className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors duration-200 p-1"
+                title="Keyboard Layout (Coming Soon)"
+                disabled
+              >
+                <Keyboard className="w-4 h-4" />
+              </button>
+              
+              {/* Theme Selector */}
               <ThemeModal />
             </div>
             
           </div>
           
           {/* Mobile Copyright */}
-          <div className="sm:hidden text-center mt-2">
-            <span className="text-xs text-primary/50">© 2024 HaltType</span>
+          <div className="sm:hidden text-center mt-4 pt-4 border-t border-border/50">
+            <span className="text-xs text-muted-foreground">© 2024 HaltType</span>
           </div>
         </div>
       </div>

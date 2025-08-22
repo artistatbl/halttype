@@ -10,7 +10,6 @@ interface TestCompletionModalProps {
   accuracy: number
   timeSpent: number
   charactersTyped: number
-  testMode: "time" | "words" | "quote"
   onTryAgain: () => void
   onNewTest: () => void
   className?: string
@@ -22,7 +21,6 @@ export function TestCompletionModal({
   accuracy,
   timeSpent,
   charactersTyped,
-  testMode,
   onTryAgain,
   onNewTest,
   className,
