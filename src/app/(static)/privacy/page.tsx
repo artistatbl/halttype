@@ -22,7 +22,7 @@ export default function PrivacyPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
             <p className="text-muted-foreground leading-relaxed">
-              HaltType ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy 
+              HaltType (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to protecting your privacy. This Privacy Policy 
               explains how we collect, use, disclose, and safeguard your information when you visit our 
               website and use our typing speed test service.
             </p>
@@ -115,7 +115,7 @@ export default function PrivacyPage() {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Children's Privacy</h2>
+            <h2 className="text-2xl font-semibold mb-4">Children&rsquo;s Privacy</h2>
             <p className="text-muted-foreground leading-relaxed">
               Our service is not directed to children under the age of 13. We do not knowingly collect 
               personal information from children under 13. If you are a parent or guardian and believe 
@@ -127,7 +127,7 @@ export default function PrivacyPage() {
             <h2 className="text-2xl font-semibold mb-4">Changes to This Privacy Policy</h2>
             <p className="text-muted-foreground leading-relaxed">
               We may update this Privacy Policy from time to time. We will notify you of any changes 
-              by posting the new Privacy Policy on this page and updating the "Last updated" date.
+              by posting the new Privacy Policy on this page and updating the &ldquo;Last updated&rdquo; date.
             </p>
           </section>
 

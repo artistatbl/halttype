@@ -19,8 +19,6 @@ export function TextDisplay({
   text,
   currentPosition,
   errors,
-  timeRemaining,
-  testState = "idle",
   capsLockOn = false,
   className,
   maxVisibleWords = 20, // Default to showing 20 words at a time

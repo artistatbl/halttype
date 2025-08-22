@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { TestResults, TestMode } from '@/lib/typing-test/types';
+import { TestMode } from '@/lib/typing-test/types';
 import { UseTypingTestStateReturn } from './useTypingTestState';
 
 export interface UseInputHandlerProps {

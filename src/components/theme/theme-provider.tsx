@@ -30,9 +30,7 @@ interface ThemeProviderProps {
 export function ThemeProvider({
   children,
   themes,
-  defaultTheme = 'halt',
-  attribute = 'class',
-  ...props
+  defaultTheme = 'halt'
 }: ThemeProviderProps) {
   const { userSettings, updateUserSettings, isLoaded } = useConfigStorage()
   const [mounted, setMounted] = React.useState(false)

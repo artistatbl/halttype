@@ -4,7 +4,13 @@ export interface DisplayUser {
   image: string;
 }
 
-export function getDisplayUser(user: any): DisplayUser {
+export interface User {
+  name?: string;
+  email?: string;
+  image?: string;
+}
+
+export function getDisplayUser(user: User | null | undefined): DisplayUser {
   if (!user) {
     return {
       name: "Guest",
@@ -18,7 +24,7 @@ export function getDisplayUser(user: any): DisplayUser {
   const firstName = fullName.split(" ")[0];
 
   return {
-    name: firstName,
+    name: firstName || "",
     email: user.email || "",
     image: user.image || "",
   };

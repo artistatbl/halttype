@@ -2,19 +2,15 @@
 
 import { cn } from "@/lib/utils"
 import { formatTime } from "@/lib/typing-test/calculations"
-import { TestMode, TestState } from "@/lib/typing-test/types"
+import { TestState } from "@/lib/typing-test/types"
 
 interface TestTimerProps {
   timeRemaining: number
-  testMode: TestMode
-  testState: TestState
   className?: string
 }
 
 export function TestTimer({
   timeRemaining,
-  testMode,
-  testState,
   className,
 }: TestTimerProps) {
   return (

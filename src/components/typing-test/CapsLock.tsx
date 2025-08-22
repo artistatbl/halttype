@@ -29,7 +29,7 @@ export function useCapsLock(): boolean {
         if (testEvent.getModifierState) {
           setCapsLockOn(testEvent.getModifierState("CapsLock"))
         }
-      } catch (error) {
+      } catch {
         // If KeyboardEvent constructor is not supported, we'll wait for user input
     }
     }
@@ -50,7 +50,7 @@ export function useCapsLock(): boolean {
         if (testEvent.getModifierState) {
           setCapsLockOn(testEvent.getModifierState("CapsLock"))
         }
-      } catch (error) {
+      } catch {
         // Ignore errors
       }
     }

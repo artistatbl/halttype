@@ -77,7 +77,7 @@ export function useTestCompletion({
         incorrectWords: state.errors.length,
         keystrokes: state.keystrokes,
       });
-    } catch (error) {
+    } catch {
       // Continue with completion even if save fails - this is non-critical
     }
     

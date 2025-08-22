@@ -18,25 +18,8 @@ interface TextDisplayLanguageProps {
  */
 export function TextDisplayLanguage({
   className,
-  onLanguageChange,
   showDisplay = true
 }: TextDisplayLanguageProps) {
-  const [selectedLanguage, setSelectedLanguage] = useState<Language>(DEFAULT_LANGUAGE)
-
-  // Load saved language from localStorage on mount
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem('textDisplayLanguage')
-    if (savedLanguage) {
-      setSelectedLanguage(savedLanguage as Language)
-    }
-  }, [])
-
-  // Save language to localStorage and notify parent when language changes
-  const handleLanguageChange = (language: Language) => {
-    setSelectedLanguage(language)
-    localStorage.setItem('textDisplayLanguage', language)
-    onLanguageChange?.(language)
-  }
 
   return (
     <div className={cn("flex flex-col gap-3", className)}>
@@ -56,23 +39,8 @@ export function TextDisplayLanguage({
  * Compact version for smaller spaces
  */
 export function CompactTextDisplayLanguage({
-  className,
-  onLanguageChange
+  className
 }: Omit<TextDisplayLanguageProps, 'showDisplay'>) {
-  const [selectedLanguage, setSelectedLanguage] = useState<Language>(DEFAULT_LANGUAGE)
-
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem('textDisplayLanguage')
-    if (savedLanguage) {
-      setSelectedLanguage(savedLanguage as Language)
-    }
-  }, [])
-
-  const handleLanguageChange = (language: Language) => {
-    setSelectedLanguage(language)
-    localStorage.setItem('textDisplayLanguage', language)
-    onLanguageChange?.(language)
-  }
 
   return (
     <div className={cn("flex items-center gap-2", className)}>

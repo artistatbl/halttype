@@ -1,38 +1,37 @@
-"use client"
+"use client";
 
-import { ConfigSeparator } from "./ConfigButton"
-import { FeatureToggles } from "./FeatureToggles"
-import { TestModeSelector } from "./TestModeSelector"
-import { TestOptionsSelector } from "./TestOptionsSelector"
-import { 
-  type TestMode, 
-  type WordCount, 
-  type QuoteLength, 
-  type Difficulty 
-} from "@/lib/typing-test/constants"
+import { ConfigSeparator } from "./ConfigButton";
+import { FeatureToggles } from "./FeatureToggles";
+import { TestModeSelector } from "./TestModeSelector";
+import { TestOptionsSelector } from "./TestOptionsSelector";
+import {
+  type TestMode,
+  type WordCount,
+  type QuoteLength,
+} from "@/lib/typing-test/constants";
 
 export interface TestConfigOptions {
-  mode: TestMode
-  timeLimit: number
-  wordCount: WordCount
-  quoteLength: QuoteLength
-  punctuation?: boolean
-  numbers?: boolean
+  mode: TestMode;
+  timeLimit: number;
+  wordCount: WordCount;
+  quoteLength: QuoteLength;
+  punctuation?: boolean;
+  numbers?: boolean;
 }
 
 interface TestConfigProps {
-  testMode: TestMode
-  timeLimit: number
-  wordCount: WordCount
-  quoteLength: QuoteLength
-  punctuation: boolean
-  numbers: boolean
-  onTestModeChange: (mode: TestMode) => void
-  onTimeLimitChange: (timeLimit: number) => void
-  onWordCountChange: (wordCount: WordCount) => void
-  onQuoteLengthChange: (quoteLength: QuoteLength) => void
-  onPunctuationChange: (punctuation: boolean) => void
-  onNumbersChange: (numbers: boolean) => void
+  testMode: TestMode;
+  timeLimit: number;
+  wordCount: WordCount;
+  quoteLength: QuoteLength;
+  punctuation: boolean;
+  numbers: boolean;
+  onTestModeChange: (mode: TestMode) => void;
+  onTimeLimitChange: (timeLimit: number) => void;
+  onWordCountChange: (wordCount: WordCount) => void;
+  onQuoteLengthChange: (quoteLength: QuoteLength) => void;
+  onPunctuationChange: (punctuation: boolean) => void;
+  onNumbersChange: (numbers: boolean) => void;
 }
 
 function TestConfigInternal({
@@ -52,24 +51,18 @@ function TestConfigInternal({
   return (
     <div className="w-full max-w-3xl mx-auto mb-6">
       <div className="flex flex-wrap items-center bg-accent/40  rounded-md p-2 justify-center gap-4 text-sm">
-
-
         <FeatureToggles
           punctuation={punctuation}
           numbers={numbers}
           onPunctuationChange={onPunctuationChange}
           onNumbersChange={onNumbersChange}
         />
-
         <ConfigSeparator />
-
         <TestModeSelector
           testMode={testMode}
           onTestModeChange={onTestModeChange}
         />
-
         <ConfigSeparator />
-
         <TestOptionsSelector
           testMode={testMode}
           timeLimit={timeLimit}
@@ -81,13 +74,13 @@ function TestConfigInternal({
         />
       </div>
     </div>
-  )
+  );
 }
 
 // Wrapper component that matches the expected API from page.tsx
 interface TestConfigWrapperProps {
-  onConfigChange: (config: TestConfigOptions) => void
-  initialConfig: TestConfigOptions
+  onConfigChange: (config: TestConfigOptions) => void;
+  initialConfig: TestConfigOptions;
 }
 
 export function TestConfig({
@@ -95,32 +88,28 @@ export function TestConfig({
   initialConfig,
 }: TestConfigWrapperProps) {
   const handleTestModeChange = (mode: TestMode) => {
-    onConfigChange({ ...initialConfig, mode })
-  }
+    onConfigChange({ ...initialConfig, mode });
+  };
 
   const handleTimeLimitChange = (timeLimit: number) => {
-    onConfigChange({ ...initialConfig, timeLimit })
-  }
+    onConfigChange({ ...initialConfig, timeLimit });
+  };
 
   const handleWordCountChange = (wordCount: WordCount) => {
-    onConfigChange({ ...initialConfig, wordCount })
-  }
+    onConfigChange({ ...initialConfig, wordCount });
+  };
 
   const handleQuoteLengthChange = (quoteLength: QuoteLength) => {
-    onConfigChange({ ...initialConfig, quoteLength })
-  }
-
-
-
-
+    onConfigChange({ ...initialConfig, quoteLength });
+  };
 
   const handlePunctuationChange = (punctuation: boolean) => {
-    onConfigChange({ ...initialConfig, punctuation })
-  }
+    onConfigChange({ ...initialConfig, punctuation });
+  };
 
   const handleNumbersChange = (numbers: boolean) => {
-    onConfigChange({ ...initialConfig, numbers })
-  }
+    onConfigChange({ ...initialConfig, numbers });
+  };
 
   return (
     <TestConfigInternal
@@ -128,7 +117,6 @@ export function TestConfig({
       timeLimit={initialConfig.timeLimit}
       wordCount={initialConfig.wordCount}
       quoteLength={initialConfig.quoteLength}
-   
       punctuation={initialConfig.punctuation || false}
       numbers={initialConfig.numbers || false}
       onTestModeChange={handleTestModeChange}
@@ -138,5 +126,5 @@ export function TestConfig({
       onPunctuationChange={handlePunctuationChange}
       onNumbersChange={handleNumbersChange}
     />
-  )
+  );
 }

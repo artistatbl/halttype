@@ -165,7 +165,7 @@ export function LoginForm({
         {/* Privacy Disclaimer */}
         <div className="mt-10 text-center text-xs text-muted-foreground">
           <p>
-            By clicking "Continue with Google" or "Continue with GitHub", you agree to our{" "}
+            By clicking &ldquo;Continue with Google&rdquo; or &ldquo;Continue with GitHub&rdquo;, you agree to our{" "}
             <a href="/terms" className="text-blue-600 hover:underline cursor-pointer">Terms of Conditions</a>{" "}
             and{" "}
             <a href="/privacy" className="text-blue-600 hover:underline cursor-pointer">Privacy Policy</a>.

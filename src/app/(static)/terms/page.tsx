@@ -22,7 +22,7 @@ export default function TermsPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Agreement to Terms</h2>
             <p className="text-muted-foreground leading-relaxed">
-              By accessing and using HaltType ("the Service"), you accept and agree to be bound by the 
+              By accessing and using HaltType (&ldquo;the Service&rdquo;), you accept and agree to be bound by the 
               terms and provision of this agreement. If you do not agree to abide by the above, please 
               do not use this service.
             </p>
@@ -56,7 +56,7 @@ export default function TermsPage() {
             <h2 className="text-2xl font-semibold mb-4">User Conduct</h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
               You agree to use the Service only for lawful purposes and in a way that does not infringe 
-              the rights of, restrict or inhibit anyone else's use and enjoyment of the Service. 
+              the rights of, restrict or inhibit anyone else&rsquo;s use and enjoyment of the Service. 
               Prohibited behavior includes:
             </p>
             <ul className="list-disc list-inside space-y-2 text-muted-foreground">
@@ -91,10 +91,10 @@ export default function TermsPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Disclaimer</h2>
             <p className="text-muted-foreground leading-relaxed">
-              The information on this website is provided on an "as is" basis. To the fullest extent 
+              The information on this website is provided on an &ldquo;as is&rdquo; basis. To the fullest extent 
               permitted by law, this Company excludes all representations, warranties, conditions and 
-              terms whether express or implied, statutory or otherwise. The Service is provided "as is" 
-              and "as available" without any warranty or representations of any kind.
+              terms whether express or implied, statutory or otherwise. The Service is provided &ldquo;as is&rdquo; 
+              and &ldquo;as available&rdquo; without any warranty or representations of any kind.
             </p>
           </section>
 

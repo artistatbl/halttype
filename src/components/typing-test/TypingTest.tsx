@@ -137,7 +137,7 @@ export function TypingTest({
         clearInterval(timer)
       }
     }
-  }, [state.testState, testMode, timeLimit, state.startTime])
+  }, [state.testState, testMode, timeLimit, state.startTime, state.timeRemaining])
   
   // Calculate WPM and accuracy in real-time
   useEffect(() => {
@@ -193,8 +193,6 @@ export function TypingTest({
         <div className="w-full mb-2 sm:mb-4">
           <TestTimer
             timeRemaining={state.timeRemaining || 0}
-            testMode={testMode}
-            testState={state.testState}
           />
         </div>
       )}
@@ -235,7 +233,6 @@ export function TypingTest({
           : Math.round(((state.endTime || 0) - (state.startTime || 0)) / 1000)
         }
         charactersTyped={state.userInput.length}
-        testMode={testMode}
         onTryAgain={() => {
           actions.resetTest(timeLimit)
           setFocused(false)
