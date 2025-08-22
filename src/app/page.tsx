@@ -20,14 +20,9 @@ export default function Home() {
   // Use configuration storage hook for persistent settings
   const {
     testConfig,
-    userSettings,
     updateTestConfig,
-    updateUserSettings,
-    isLoaded
   } = useConfigStorage();
 
-  const [showSettings, setShowSettings] = useState(false);
-  // Generate a unique ID for each page load to ensure new text on refresh
   const [testId] = useState(() => nanoid());
 
   // Get focus state
@@ -49,16 +44,6 @@ export default function Home() {
   // Generate text based on current configuration
   const { currentText, regenerateText, isGenerating, error } = useTextGeneration(textGenerationConfig);
 
-  // Show loading state while configuration is being loaded
-  if (!isLoaded) {
-    return (
-      <Layout>
-        <div className="flex items-center justify-center min-h-[50vh]">
-          <div className="text-muted-foreground">Loading configuration...</div>
-        </div>
-      </Layout>
-    );
-  }
 
   // Breadcrumb structured data for SEO
   const breadcrumbData = getBreadcrumbStructuredData([
@@ -68,39 +53,8 @@ export default function Home() {
 
   return (
     <Layout>
-      <StructuredData data={breadcrumbData} />
-      
-      {/* SEO Content - Hidden but crawlable */}
-      <div className="sr-only">
-        <h1>Free Online Typing Speed Test - Measure Your WPM and Accuracy</h1>
-        <p>
-          Welcome to HaltType, the best free online typing speed test. Test your typing speed 
-          and accuracy with our comprehensive typing test that measures your WPM (words per minute), 
-          tracks your typing accuracy, and provides detailed statistics to help you improve your 
-          typing skills. Perfect for students, professionals, and anyone looking to enhance their 
-          keyboard proficiency.
-        </p>
-        <h2>Features of Our Typing Test:</h2>
-        <ul>
-          <li>Real-time WPM (words per minute) calculation</li>
-          <li>Accurate typing accuracy measurement</li>
-          <li>Multiple test modes: time-based, word count, and quotes</li>
-          <li>Difficulty levels from beginner to advanced</li>
-          <li>Detailed typing statistics and progress tracking</li>
-          <li>Clean, distraction-free interface</li>
-          <li>No registration required - start typing immediately</li>
-        </ul>
-        <h2>Why Use HaltType for Typing Practice?</h2>
-        <p>
-          Our typing test is designed to provide accurate measurements of your typing speed 
-          and help you improve your keyboard skills. Whether you're preparing for a job that 
-          requires fast typing, studying for school, or just want to improve your computer 
-          skills, HaltType provides the tools you need to succeed.
-        </p>
-      </div>
-      
-      <div className="flex flex-col items-center">
-        
+      <StructuredData data={breadcrumbData} />      
+      <div className="flex flex-col items-center"> 
         <div
           className={cn(
             "w-full mb-6 transition-opacity duration-300",

@@ -42,8 +42,12 @@ export function Footer({ className }: FooterProps) {
               </a>
             </div>
             
-            {/* Center - Legal Links & Copyright */}
+            {/* Center - About & Legal Links & Copyright */}
             <div className="flex items-center gap-4 text-xs">
+              <Link href="/about" className="text-primary hover:text-primary transition-all duration-300">
+                About
+              </Link>
+              <span className="text-primary/30">•</span>
               <Link href="/terms" className="text-primary hover:text-primary transition-all duration-300">
                 Terms
               </Link>
