@@ -146,7 +146,7 @@ export function generateOrganizationSchema() {
     name: siteConfig.name,
     description: siteConfig.description,
     url: siteConfig.url,
-    logo: `${siteConfig.url}/logo.png`,
+    logo: `${siteConfig.url}/logo.svg`,
     sameAs: [
       'https://github.com/halttype',
       'https://twitter.com/halttype'

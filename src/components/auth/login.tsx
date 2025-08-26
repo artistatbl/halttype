@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { signIn, signOut, useSession } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { GoogleIcon } from "@/components/icons/google";
@@ -65,9 +66,16 @@ export function LoginForm({
         <div className="w-full max-w-md">
           {/* Logo */}
           <div className="flex justify-center mb-8">
-            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center cursor-pointer">
-              <span className="text-primary-foreground font-bold text-sm">H</span>
-            </div>
+            <Link href="/" className="flex items-center space-x-2">
+              <Image
+                src="/logo.svg"
+                alt="HaltType"
+                width={40}
+                height={40}
+                className="w-10 h-10 object-contain"
+              />
+              <span className="text-2xl font-bold">halttype</span>
+            </Link>
           </div>
 
           <div className="flex flex-col items-center gap-6">
@@ -118,11 +126,18 @@ export function LoginForm({
     >
       <div className="w-full max-w-md">
         {/* Logo */}
-        <div className="flex justify-center mb-8">
-          <div className="w-8 h-8 bg-primary rounded flex items-center justify-center cursor-pointer">
-            <span className="text-primary-foreground font-bold text-sm">H</span>
+          <div className="flex justify-center mb-8">
+            <Link href="/" className="flex items-center space-x-2">
+              <Image
+                src="/logo.svg"
+                alt="HaltType"
+                width={40}
+                height={40}
+                className="w-10 h-10 object-contain"
+              />
+              <span className="text-2xl font-bold">halttype</span>
+            </Link>
           </div>
-        </div>
 
         <h1 className="text-center text-3xl font-bold text-foreground mb-10">
           Log in

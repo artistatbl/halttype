@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { UserDropdown } from "./users/UserDropdown"
 import { useFocus } from "../typing-test/FocusContext"
@@ -23,8 +24,18 @@ export function Navbar({ className }: NavbarProps) {
           {/* Logo and Navigation */}
           <div className="flex items-center gap-12">
             <Link href="/" className="flex items-center gap-1 group">
-              <span className="text-primary font-extrabold text-3xl tracking-tighter">halt</span>
-              <span className="text-foreground/90 font-extrabold text-3xl tracking-tighter group-hover:text-primary transition-all duration-300">type</span>
+              <Image
+                src="/logo.svg"
+                alt="HaltType"
+                width={40}
+                height={40}
+                className="w-10 h-10 object-contain"
+                priority
+              />
+              <span className="text-xl font-bold">
+          <span className="text-foreground">halt</span>
+          <span className="text-muted-foreground">type</span>
+        </span>
             </Link>
             
             {/* Navigation Links - Removed as requested */}
