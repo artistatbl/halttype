@@ -34,7 +34,7 @@ export function TypingTest({
   const capsLockOn = useCapsLock()
   const { wordTestState, updateWordsCompleted, countCompletedWords, resetWordTest } = useWordTest(wordCount || 25)
   const { elapsedTime, startTimer, stopTimer, resetTimer } = useElapsedTime()
-  const { setFocused } = useFocus()
+  const { setFocused, resetInactivityTimer } = useFocus()
   const inputRef = useRef<HTMLInputElement>(null)
   
   // Handle test start
@@ -79,6 +79,7 @@ export function TypingTest({
     onTestComplete: handleTestComplete,
     countCompletedWords,
     updateWordsCompleted,
+    resetInactivityTimer,
   })
   
   // Test completion hook
@@ -154,13 +155,21 @@ export function TypingTest({
     inputRef.current?.focus()
     
     const handleClick = () => {
+      resetInactivityTimer()
+      inputRef.current?.focus()
+    }
+    
+    const handleKeyDown = () => {
+      resetInactivityTimer()
       inputRef.current?.focus()
     }
     
     document.addEventListener("click", handleClick)
+    document.addEventListener("keydown", handleKeyDown)
     
     return () => {
       document.removeEventListener("click", handleClick)
+      document.removeEventListener("keydown", handleKeyDown)
     }
   }, [])
   
@@ -212,6 +221,7 @@ export function TypingTest({
         testState={state.testState}
         capsLockOn={capsLockOn}
         maxVisibleWords={wordCount && wordCount >= 50 ? 25 : 20} // Show more words for longer tests
+        onFocus={() => inputRef.current?.focus()}
       />
       
       {/* Stats display - only shown when test is completed */}

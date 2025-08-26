@@ -21,7 +21,7 @@ export default function Home() {
   const [testId] = useState(() => nanoid());
 
   // Get focus state
-  const { isFocused } = useFocus();
+  const { isFocused, resetInactivityTimer } = useFocus();
 
   // Get current language
   const { currentLanguage } = useLanguage();
@@ -49,6 +49,12 @@ export default function Home() {
   // Generate text based on current configuration
   const { currentText, regenerateText, isGenerating, error } =
     useTextGeneration(textGenerationConfig);
+
+  // Wrap regenerateText to also reset inactivity timer
+  const handleRestart = () => {
+    resetInactivityTimer();
+    regenerateText();
+  };
 
   return (
     <Layout>
@@ -113,7 +119,7 @@ export default function Home() {
             )}
           >
             <ActionButton
-              onClick={regenerateText}
+              onClick={handleRestart}
               disabled={isGenerating}
               className={cn(
                 "p-2 transition-all rounded-md",

@@ -12,6 +12,7 @@ export interface UseInputHandlerProps {
   onTestComplete?: () => void;
   countCompletedWords?: (input: string) => number;
   updateWordsCompleted?: (count: number) => void;
+  resetInactivityTimer?: () => void;
 }
 
 export interface UseInputHandlerReturn {
@@ -32,10 +33,14 @@ export function useInputHandler({
   onTestComplete,
   countCompletedWords,
   updateWordsCompleted,
+  resetInactivityTimer,
 }: UseInputHandlerProps): UseInputHandlerReturn {
   
   const handleInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
+    
+    // Reset inactivity timer on any input
+    resetInactivityTimer?.();
     
     // Start test if not already started
     if (state.testState === "idle") {
@@ -106,6 +111,7 @@ export function useInputHandler({
     onTestComplete,
     countCompletedWords,
     updateWordsCompleted,
+    resetInactivityTimer,
   ]);
   
   return {

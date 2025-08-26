@@ -2,7 +2,9 @@
 
 import { cn } from "@/lib/utils"
 import { CapsLockWarning } from "./CapsLock"
+import { FocusOverlay } from "./FocusOverlay"
 import { useMemo } from "react"
+import { useFocus } from "./FocusContext"
 
 interface TextDisplayProps {
   text: string
@@ -13,6 +15,7 @@ interface TextDisplayProps {
   capsLockOn?: boolean
   className?: string
   maxVisibleWords?: number // New prop to control how many words are visible
+  onFocus?: () => void
 }
 
 export function TextDisplay({
@@ -22,6 +25,7 @@ export function TextDisplay({
   capsLockOn = false,
   className,
   maxVisibleWords = 20, // Default to showing 20 words at a time
+  onFocus,
 }: TextDisplayProps) {
   // Calculate which words should be visible based on current position
   const { visibleText, visibleStartIndex } = useMemo(() => {
@@ -62,20 +66,37 @@ export function TextDisplay({
   // Convert errors array to Set for O(1) lookup performance
   const errorSet = useMemo(() => new Set(errors), [errors])
 
+  const { showBlurOverlay, resetInactivityTimer } = useFocus()
+
+  const handleOverlayClick = () => {
+    resetInactivityTimer()
+    onFocus?.()
+  }
+
   return (
     <div 
       className={cn(
-        "w-full max-w-8xl mx-auto text-accent-foreground text-xl sm:text-2xl md:text-3xl leading-relaxed tracking-wide py-3 sm:py-4 md:py-5 px-4 sm:px-6 md:px-8 rounded-lg transition-all",
+        "w-full max-w-8xl mx-auto text-accent-foreground text-xl sm:text-2xl md:text-3xl leading-relaxed tracking-wide py-3 sm:py-4 md:py-5 px-4 sm:px-6 md:px-8 rounded-lg transition-all relative",
         "min-h-[200px] max-h-[200px] overflow-hidden flex flex-col justify-center", // Fixed height container
         className
       )}
     >
-      <div className="relative w-full flex-1 flex items-center">
+      {/* Focus overlay when inactive for 2 seconds */}
+      <FocusOverlay 
+        isVisible={showBlurOverlay}
+        onClick={handleOverlayClick}
+      />
+      
+      <div className={cn(
+        "relative w-full flex-1 flex items-center",
+        "transition-all duration-500 ease-out",
+        showBlurOverlay && "blur-sm scale-95"
+      )}>
         <div className="w-full text-left">
           <CapsLockWarning isOn={capsLockOn} />
           
           {/* Text content with improved styling and readability */}
-          <div className="w-full leading-[1.7] tracking-[0.04em] [word-spacing:0.18em] sm:leading-[1.8] sm:tracking-[0.05em] sm:[word-spacing:0.2em] md:leading-[1.9] md:tracking-[0.06em] md:[word-spacing:0.22em] transition-opacity duration-200 ease-out">
+          <div className="w-full leading-[1.7] tracking-[0.04em] [word-spacing:0.18em] sm:leading-[1.8] sm:tracking-[0.05em] sm:[word-spacing:0.2em] md:leading-[1.9] md:tracking-[0.06em] md:[word-spacing:0.22em] transition-all duration-300 ease-out">
             {visibleText.split('').map((char, index) => {
               const absoluteIndex = visibleStartIndex + index
               const isActive = absoluteIndex === currentPosition
@@ -86,16 +107,20 @@ export function TextDisplay({
                 <span
                   key={`${absoluteIndex}-${char}`}
                   className={cn(
-                     "transition-colors duration-100 ease-out",
-                     isActive && "text-primary font-medium relative", 
-                     isPast && !isError && "text-primary/50",
-                     isPast && isError && "text-red-500",
-                     !isPast && !isActive && "text-muted-foreground"
+                     "relative transition-all duration-200 ease-out transform",
+                     isActive && "text-primary font-medium scale-105 drop-shadow-sm", 
+                     isPast && !isError && "text-primary/60 scale-100",
+                     isPast && isError && "text-red-500 scale-110 animate-pulse",
+                     !isPast && !isActive && "text-muted-foreground scale-95 opacity-70"
                    )}
                 >
                   {char}
                    {isActive && (
-                     <span className="absolute -left-0.5 top-0 w-0.5 h-full bg-primary/80" />
+                     <span className={cn(
+                       "absolute -left-0.5 top-0 w-0.5 h-full bg-primary",
+                       "animate-pulse shadow-lg shadow-primary/50",
+                       "transition-all duration-300 ease-out"
+                     )} />
                    )}
                 </span>
               )
