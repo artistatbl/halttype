@@ -1,4 +1,8 @@
 import { StaticLayout } from '@/components/layout/StaticLayout'
+import { pageMetadata } from '@/lib/seo'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = pageMetadata.privacy()
 
 export default function PrivacyPage() {
   return (
