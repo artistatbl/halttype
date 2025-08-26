@@ -33,8 +33,8 @@ export function Navbar({ className }: NavbarProps) {
                 priority
               />
               <span className="text-xl font-bold">
-          <span className="text-foreground">halt</span>
-          <span className="text-muted-foreground">type</span>
+          <span className="text-foreground">Halt</span>
+            <span className="text-accent-foreground">type</span>
         </span>
             </Link>
             

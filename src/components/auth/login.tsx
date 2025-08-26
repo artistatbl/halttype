@@ -74,7 +74,10 @@ export function LoginForm({
                 height={40}
                 className="w-10 h-10 object-contain"
               />
-              <span className="text-2xl font-bold">halttype</span>
+              <span className="text-2xl font-bold">
+                <span className="text-foreground">Halt</span>
+                <span className="text-accent-foreground">type</span>
+              </span>
             </Link>
           </div>
 
@@ -135,7 +138,10 @@ export function LoginForm({
                 height={40}
                 className="w-10 h-10 object-contain"
               />
-              <span className="text-2xl font-bold">halttype</span>
+              <span className="text-2xl font-bold">
+                <span className="text-foreground">Halt</span>
+                <span className="text-accent-foreground">type</span>
+              </span>
             </Link>
           </div>
 

@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import { Github, Twitter, MessageSquare, Keyboard, Globe } from "lucide-react"
+import { Github, Twitter, MessageSquare } from "lucide-react"
 import { ThemeModal } from "../theme"
 import { LanguageModal } from "../typing-test/LanguageModal"
 import { useFocus } from "../typing-test/FocusContext"
@@ -39,7 +39,10 @@ export function Footer({ className }: FooterProps) {
                   height={32}
                   className="w-8 h-8 object-contain"
                 />
-                <span className="text-xl font-bold">halttype</span>
+                <span className="text-xl font-bold">
+            <span className="text-foreground">Halt</span>
+            <span className="text-accent-foreground">type</span>
+          </span>
               </Link>
               <div className="flex items-center gap-4 text-xs">
                 <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -97,17 +100,7 @@ export function Footer({ className }: FooterProps) {
 
               {/* Settings */}
               <div className="flex items-center gap-2 border-l border-border/20 pl-3">
-                <div className="flex items-center gap-1">
-                  <Globe className="w-4 h-4 text-muted-foreground" />
-                  <LanguageModal />
-                </div>
-                <button 
-                  className="text-muted-foreground hover:text-foreground transition-colors p-1 opacity-50"
-                  title="Keyboard Layout (Coming Soon)"
-                  disabled
-                >
-                  <Keyboard className="w-4 h-4" />
-                </button>
+                <LanguageModal />
                 <ThemeModal />
               </div>
             </div>

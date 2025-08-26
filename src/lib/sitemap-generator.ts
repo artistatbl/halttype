@@ -137,8 +137,6 @@ export class SitemapGenerator {
 
     // Add typing test variations
     const testModes = ['words', 'time', 'quote']
-    const testDurations = [15, 30, 60, 120]
-    const wordCounts = [10, 25, 50, 100]
 
     testModes.forEach(mode => {
       generator.addUrl({
