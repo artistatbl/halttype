@@ -1,12 +1,4 @@
-import { Metadata } from 'next'
-import { generateSEOMetadata } from '@/components/seo/SEOHead'
 import { StaticLayout } from '@/components/layout/StaticLayout'
-
-export const metadata: Metadata = generateSEOMetadata({
-  title: 'About HaltType - Free Online Typing Speed Test',
-  description: 'Learn about HaltType, the free online typing speed test designed to help you improve your typing skills, measure your WPM, and track your progress.',
-  canonicalUrl: '/about'
-})
 
 export default function AboutPage() {
   return (

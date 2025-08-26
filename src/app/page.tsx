@@ -12,8 +12,7 @@ import { useConfigStorage } from "@/hooks/useConfigStorage";
 import { useLanguage } from "@/hooks/useLanguage";
 import { RotateCcw } from "lucide-react";
 import { nanoid } from "nanoid";
-import { StructuredData } from "@/components/seo/SEOHead";
-import { getBreadcrumbStructuredData } from "@/components/seo/StructuredData";
+
 import { LanguageModal } from "@/components/typing-test/LanguageModal";
 
 export default function Home() {
@@ -45,15 +44,10 @@ export default function Home() {
   const { currentText, regenerateText, isGenerating, error } = useTextGeneration(textGenerationConfig);
 
 
-  // Breadcrumb structured data for SEO
-  const breadcrumbData = getBreadcrumbStructuredData([
-    { name: 'Home', url: '/' },
-    { name: 'Typing Test', url: '/typing-test' }
-  ]);
+
 
   return (
-    <Layout>
-      <StructuredData data={breadcrumbData} />      
+    <Layout>      
       <div className="flex flex-col items-center"> 
         <div
           className={cn(

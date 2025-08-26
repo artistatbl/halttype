@@ -1,12 +1,4 @@
-import { Metadata } from 'next'
-import { generateSEOMetadata } from '@/components/seo/SEOHead'
 import { StaticLayout } from '@/components/layout/StaticLayout'
-
-export const metadata: Metadata = generateSEOMetadata({
-  title: 'Privacy Policy - HaltType',
-  description: 'Read HaltType\'s privacy policy to understand how we collect, use, and protect your personal information when using our typing speed test.',
-  canonicalUrl: '/privacy'
-})
 
 export default function PrivacyPage() {
   return (

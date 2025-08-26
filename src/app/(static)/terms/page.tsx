@@ -1,12 +1,4 @@
-import { Metadata } from 'next'
-import { generateSEOMetadata } from '@/components/seo/SEOHead'
 import { StaticLayout } from '@/components/layout/StaticLayout'
-
-export const metadata: Metadata = generateSEOMetadata({
-  title: 'Terms of Service - HaltType',
-  description: 'Read HaltType\'s terms of service to understand the rules and guidelines for using our free online typing speed test service.',
-  canonicalUrl: '/terms'
-})
 
 export default function TermsPage() {
   return (
